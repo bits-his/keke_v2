@@ -1,20 +1,40 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Card,
-  Col,
-  Row,
-  Form,
-  FormGroup,
-  Label,
-  Input,
+  // Card,
+  // Col,
+  // Row,
+  // Form,
+  // FormGroup,
+  // Label,
+  // Input,
   FormFeedback,
 } from "reactstrap";
-import { stateLga } from "../../assets/state_and_lgas";
 import toast from "react-hot-toast";
-import useQuery, { _post } from "../../lib/Helper";
 import { useSelector } from "react-redux";
 import SuperAgentDropdown from "./SuperAgentDropdown";
+import { stateLga } from "../../assets/stateLga";
+import useQuery, { _post } from "../../lib/Helper";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 
 export default function Agent() {
   const query = useQuery();
@@ -29,18 +49,21 @@ export default function Agent() {
     lga: "",
     address: "",
     email: "",
-    super_agent: super_name,
+    super_agent: "",
     service_location: "",
   };
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState(_form);
   const [errors, setErrors] = useState({});
 
+  const handleChangeSelect = (name, value) => {
+    setForm((p) => ({ ...p, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+  };
   const handleChange = ({ target: { name, value } }) => {
     setForm((p) => ({ ...p, [name]: value }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
-  // console.log(form)
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -48,6 +71,7 @@ export default function Agent() {
 
     const newErrors = validateForm(form);
     setErrors(newErrors);
+    // console.log(form)
 
     if (Object.keys(newErrors).length === 0) {
       setLoading(true);
@@ -59,7 +83,7 @@ export default function Agent() {
           setLoading(false); // Set loading to false when submission is successful
           toast.success("Agent created successfully");
           // setSubmittedData([...submittedData, res]);
-          navigate("/agenttable");
+          // navigate("/agenttable");
         },
         (err) => {
           console.log(err);
@@ -102,227 +126,179 @@ export default function Agent() {
   };
 
   return (
-    <div>
-      <Card className="app_card dashboard_card m-0 p-0">
-        <Row>
-          <Col md={12}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <button
-                className="app_button"
-                style={{
-                  width: "10rem",
-                  padding: 10,
-                  color: "#000",
-                  borderRadius: 10,
-                }}
-                onClick={() => navigate("/agenttable")}
-              >
-                Back
-              </button>
-              <h4 className="app_title vendor_title">Agent Registration</h4>
-            </div>
-            <hr />
-          </Col>
-          <Col md={12}>
-            <Form className="mx-auto">
-              {/* {JSON.stringify(  )} */}
-              <>
-                <Row className="margin-bottom-input">
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="super_agent">Super Agent</Label>
+    <>
+      <Card>
+        {/* {JSON.stringify({ form })} */}
+        <CardHeader>
+          {/* <Button
 
-                      <SuperAgentDropdown
-                        handleChange={handleChange}
-                        selectedVendorValue={form.super_id}
-                        invalid={!!errors.super_agent}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>
-                          {errors.super_agent}
-                        </span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="name">Name</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="name"
-                        name="name"
-                        value={form.name}
-                        placeholder="John Doe"
-                        type="text"
-                        className="app_input"
-                        invalid={!!errors.name}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.name}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-input">
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="phone">Phone</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="phone"
-                        name="phone"
-                        value={form.phone}
-                        type="tel"
-                        className="app_input"
-                        invalid={!!errors.phone_no}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.phone_no}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="email">Email</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        placeholder="organization@fake.com"
-                        type="email"
-                        className="app_input"
-                        invalid={!!errors.email}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.email}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-input">
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="state">State</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="state"
-                        name="state"
-                        value={form.state}
-                        type="select"
-                        className="app_input"
-                        invalid={!!errors.state}
-                      >
-                        <option value={""}>Select State</option>
-                        {stateLga.map((item, idx) => (
-                          <option key={idx}>{item.state}</option>
-                        ))}
-                      </Input>
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.state}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="lga">LGA</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="lga"
-                        name="lga"
-                        value={form.lga}
-                        type="select"
-                        className="app_input"
-                        invalid={!!errors.lga}
-                      >
-                        <option value={""}>--Select LGA--</option>
-                        {stateLga
-                          .filter((item) => item.state === form.state)[0]
-                          ?.lgas?.map((lga, idx) => (
-                            <option key={idx}>{lga}</option>
-                          ))}
-                      </Input>
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.lga}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-input">
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="address">Contact address</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="address"
-                        name="address"
-                        value={form.address}
-                        type="textarea"
-                        className="app_input"
-                        rows="1.5"
-                        invalid={!!errors.address}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.address}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="service_location">Service Location</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="service_location"
-                        name="service_location"
-                        value={form.service_location}
-                        placeholder="Bata"
-                        type="text"
-                        className="app_input"
-                        invalid={!!errors.service_location}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>
-                          {errors.service_location}
-                        </span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </>
-              <Row>
-                <Col
-                  md={12}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
+          // onClick={() => navigate("/superagenttable")}
+          >
+            Back
+          </Button> */}
+          <CardTitle className="text-center">Agent Registration</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form className="mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label for="vendor">Super Agent</Label>
+                <SuperAgentDropdown
+                  handleChange={handleChange}
+                  selectedSuperAgentValue={form.super_agent}
+                  invalid={!!errors.super_agent}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.super_agent}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="name">Name</Label>
+                <Input
+                  onChange={handleChange}
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  placeholder="John Doe"
+                  type="text"
+                  className="app_input"
+                  invalid={!!errors.name}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.name}</span>
+                </FormFeedback>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label for="phone">Phone</Label>
+                <Input
+                  onChange={handleChange}
+                  id="phone"
+                  name="phone"
+                  value={form.phone_no}
+                  type="tel"
+                  pattern="[0-9]{11}"
+                  placeholder="081XXXXXXXX"
+                  className="app_input"
+                  invalid={!!errors.phone_no}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.phone_no}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="email">Email</Label>
+                <Input
+                  onChange={handleChange}
+                  id="email"
+                  name="email"
+                  value={form.email}
+                  placeholder="organization@fake.com"
+                  type="email"
+                  className="app_input"
+                  invalid={!!errors.email}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.email}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="address">Contact address</Label>
+                <Input
+                  onChange={handleChange}
+                  id="address"
+                  name="address"
+                  vlaue={form.address}
+                  type="text"
+                  className="app_input"
+                  invalid={!!errors.address}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.address}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="state">State</Label>
+                <Select
+                  onValueChange={(value) => handleChangeSelect("state", value)}
+                  value={form.state}
                 >
-                  {" "}
-                  <button
-                    className="app_button"
-                    style={{
-                      width: 150,
-                      padding: 10,
-                      color: "",
-                      cursor: "pointer",
-                      borderRadius: 7,
-                    }}
-                    onClick={handleSubmit}
-                    disabled={loading}
-                  >
-                    {loading ? "Submitting..." : "Submit"}
-                  </button>
-                </Col>
-              </Row>
-            </Form>
-          </Col>
-        </Row>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select State" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {stateLga.map((item, idx) => (
+                        <SelectItem key={idx} value={item.state}>
+                          {item.state}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.state}</span>
+                </FormFeedback>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label for="lga">LGA</Label>
+                <Select
+                  onValueChange={(value) => handleChangeSelect("lga", value)}
+                  value={form.lga}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select LGA" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {stateLga
+                      .find((item) => item.state === form.state)
+                      ?.lgas.map((lga, idx) => (
+                        <SelectItem key={idx} value={lga}>
+                          {lga}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.lga}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="service_location">Service Location</Label>
+                <Input
+                  onChange={handleChange}
+                  id="service_location"
+                  name="service_location"
+                  value={form.service_location}
+                  placeholder="Bata"
+                  type="text"
+                  className="app_input"
+                  invalid={!!errors.service_location}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>
+                    {errors.service_location}
+                  </span>
+                </FormFeedback>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-end">
+          {/* <Button variant="outline">Cancel</Button> */}
+          <Button className="float-right" type="submit" onClick={handleSubmit}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              "Submit"
+            )}
+          </Button>
+        </CardFooter>
       </Card>
-    </div>
+    </>
   );
 }

@@ -246,5 +246,6 @@ export default function OwnerReg() {
         </Col>
       </Row>
     </Card>
+    
   );
 }

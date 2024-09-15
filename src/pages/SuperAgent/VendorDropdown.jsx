@@ -14,8 +14,8 @@ function VendorDropdown({ handleChange, selectedVendorValue }) {
       if (resp.success && resp.results) {
         // Extract only the name and id properties from the response
         const formattedData = resp.results.map((vendor) => ({
-          value: vendor.vendor_id,
-          label: vendor.vendor_name,
+          value: vendor.account_id,
+          label: vendor.name,
         }));
         setData(formattedData);
       }
@@ -25,7 +25,6 @@ function VendorDropdown({ handleChange, selectedVendorValue }) {
   useEffect(() => {
     getVendors();
   }, [getVendors]);
-  console.log(selectedVendor);
   const handleSelectChange = (selectedOption) => {
     setSelectedVendor(selectedOption);
     handleChange({ target: { name: "vendor", value: selectedOption.value } });

@@ -1,21 +1,39 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Card,
-  Col,
-  Row,
-  Form,
-  FormGroup,
-  Label,
-  Button,
-  Input,
+  // Card,
+  // Col,
+  // Row,
+  // Form,
+  // FormGroup,
+  // Label,
+  // Button,
+  // Input,
   FormFeedback,
 } from "reactstrap";
-import VendorDropdown from "./VendorDropdown";
-import { stateLga } from "../../assets/state_and_lgas";
-import { _post } from "../../lib/Helper";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-import keke from "../../assets/keke_napep.png";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import VendorDropdown from "./VendorDropdown";
+import { stateLga } from "../../assets/stateLga";
+import { _post } from "../../lib/Helper";
 
 export default function SuperAgent() {
   // const user = "nazif";
@@ -35,18 +53,24 @@ export default function SuperAgent() {
   const [submittedData, setSubmittedData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const handleChange = ({ target: { name, value } }) => {
-    setForm((p) => ({ ...p, [name]: value }));
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-  };
+
+ const handleChangeSelect = (name, value) => {
+   setForm((p) => ({ ...p, [name]: value }));
+   setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+ };
+ const handleChange = ({ target: { name, value } }) => {
+   setForm((p) => ({ ...p, [name]: value }));
+   setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+ };
+
   const navigate = useNavigate();
   const handleSubmit = (e) => {
+    // console.log(form);
     if (loading) return;
     e.preventDefault();
 
     const newErrors = validateForm(form);
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length === 0) {
       setLoading(true);
       _post(
@@ -56,7 +80,7 @@ export default function SuperAgent() {
           setLoading(true);
           toast.success("super agent created successfully");
           setSubmittedData([...submittedData, res]);
-          navigate("/superagenttable");
+          // navigate("/superagenttable");
         },
         () => {
           setLoading(false);
@@ -98,258 +122,175 @@ export default function SuperAgent() {
 
   return (
     <div>
-      {/* <button className="app_button" onClick={() => navigate("/agent")}>
-        Create agent
-      </button> */}
-      <Card className="app_card dashboard_card m-0 p-0">
+      <Card>
         {/* {JSON.stringify({ form })} */}
-        <Row>
-          <Col md={12}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              {/* Back Button */}
+        <CardHeader>
+          {/* <Button
 
-              <Button
-                className="app_button"
-                style={{
-                  width: 150,
-                  padding: 10,
-                  marginLeft: 15,
-                  color: "#000",
-                  borderRadius: 10,
-                }}
-                onClick={() => navigate("/superagenttable")}
-              >
-                Back
-              </Button>
+          // onClick={() => navigate("/superagenttable")}
+          >
+            Back
+          </Button> */}
+          <CardTitle className="text-center">Create Super Agent</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form className="mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label for="vendor">Vendor</Label>
+                <VendorDropdown
+                  handleChange={handleChange}
+                  selectedVendorValue={form.vendor}
+                  invalid={!!errors.vendor}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.vendor}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="name">Name</Label>
+                <Input
+                  onChange={handleChange}
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  placeholder="John Doe"
+                  type="text"
+                  className="app_input"
+                  invalid={!!errors.name}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.name}</span>
+                </FormFeedback>
+              </div>
 
-              {/* Title */}
-              <h4 className="app_title">Create Super Agent</h4>
-
-              {/* User DP */}
-              <img
-                src={keke}
-                alt="User DP"
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  marginRight: 10,
-                }}
-              />
-            </div>
-            <hr />
-          </Col>
-          <Col md={12}>
-            <Form className="mx-auto">
-              <>
-                <Row className="margin-bottom-input">
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="vendor">Vendor</Label>
-                      <VendorDropdown
-                        handleChange={handleChange}
-                        selectedVendorValue={form.vendor}
-                        invalid={!!errors.vendor}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.vendor}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="name">Name</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="name"
-                        name="name"
-                        value={form.name}
-                        placeholder="John Doe"
-                        type="text"
-                        className="app_input"
-                        invalid={!!errors.name}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.name}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-
-                <Row className="margin-bottom-input">
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="phone">Phone</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="phone"
-                        name="phone"
-                        value={form.phone}
-                        type="tel"
-                        pattern="[0-9]{11}"
-                        placeholder="081XXXXXXXX"
-                        className="app_input"
-                        invalid={!!errors.phone}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.phone}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="email">Email</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        placeholder="organization@fake.com"
-                        type="email"
-                        className="app_input"
-                        invalid={!!errors.email}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.email}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-input">
-                  <Col md={12} className="first-col">
-                    <FormGroup>
-                      <Label for="address">Contact address</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="address"
-                        name="address"
-                        vlaue={form.address}
-                        type="text"
-                        className="app_input"
-                        invalid={!!errors.address}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.address}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-input">
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="state">State</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="state"
-                        name="state"
-                        type="select"
-                        className="app_input"
-                        invalid={!!errors.state}
-                      >
-                        <option value={""}>Select State</option>
-                        {stateLga.map((item) => (
-                          <option>{item.state}</option>
-                        ))}
-                      </Input>
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.state}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-
-                  <Col md={6} className="first-col">
-                    <FormGroup>
-                      <Label for="lga">LGA</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="lga"
-                        name="lga"
-                        type="select"
-                        className="app_input"
-                        invalid={!!errors.lga}
-                      >
-                        <option value={""}>--Select LGA--</option>
-                        {stateLga
-                          .filter((item) => item.state === form.state)[0]
-                          ?.lgas?.map((lga, idx) => (
-                            <option key={idx}>{lga}</option>
-                          ))}
-                      </Input>
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.lga}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-input">
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="nin">NIN</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="nin"
-                        name="nin"
-                        value={form.nin}
-                        placeholder="NIN"
-                        type="text"
-                        className="app_input"
-                        invalid={!!errors.nin}
-                      />
-                      <FormFeedback>
-                        <span style={{ color: "red" }}>{errors.nin}</span>
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  {/* <Col md={6}>
-                    <FormGroup>
-                      <Label for="password">Password</Label>
-                      <Input
-                        onChange={handleChange}
-                        id="Password"
-                        name="password"
-                        value={form.password}
-                        placeholder="Select Password"
-                        type="password"
-                        className="app_input"
-                      />
-                    </FormGroup>
-                  </Col> */}
-                </Row>
-              </>
-              <Row>
-                <Col
-                  md={12}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
+              <div className="flex flex-col space-y-1.5">
+                <Label for="phone">Phone</Label>
+                <Input
+                  onChange={handleChange}
+                  id="phone"
+                  name="phone"
+                  value={form.phone}
+                  type="tel"
+                  pattern="[0-9]{11}"
+                  placeholder="081XXXXXXXX"
+                  className="app_input"
+                  invalid={!!errors.phone}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.phone}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="email">Email</Label>
+                <Input
+                  onChange={handleChange}
+                  id="email"
+                  name="email"
+                  value={form.email}
+                  placeholder="organization@fake.com"
+                  type="email"
+                  className="app_input"
+                  invalid={!!errors.email}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.email}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="address">Contact address</Label>
+                <Input
+                  onChange={handleChange}
+                  id="address"
+                  name="address"
+                  vlaue={form.address}
+                  type="text"
+                  className="app_input"
+                  invalid={!!errors.address}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.address}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="state">State</Label>
+                <Select
+                  onValueChange={(value) => handleChangeSelect("state", value)}
+                  value={form.state}
                 >
-                  {" "}
-                  <button
-                    className="app_button"
-                    style={{
-                      width: 150,
-                      padding: 10,
-                      color: "",
-                      cursor: "pointer",
-                      borderRadius: 7,
-                    }}
-                    onClick={handleSubmit}
-                    disabled={loading}
-                  >
-                    {loading ? "Submitting..." : "Submit"}
-                  </button>
-                </Col>
-              </Row>
-            </Form>
-          </Col>
-        </Row>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select State" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {stateLga.map((item, idx) => (
+                        <SelectItem key={idx} value={item.state}>
+                          {item.state}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.state}</span>
+                </FormFeedback>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label for="lga">LGA</Label>
+                <Select
+                  onValueChange={(value) => handleChangeSelect("lga", value)}
+                  value={form.lga}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select LGA" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {stateLga
+                      .find((item) => item.state === form.state)
+                      ?.lgas.map((lga, idx) => (
+                        <SelectItem key={idx} value={lga}>
+                          {lga}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.lga}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label for="nin">NIN</Label>
+                <Input
+                  onChange={handleChange}
+                  id="nin"
+                  name="nin"
+                  value={form.nin}
+                  placeholder="NIN"
+                  type="text"
+                  className="app_input"
+                  invalid={!!errors.nin}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.nin}</span>
+                </FormFeedback>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-end">
+          {/* <Button variant="outline">Cancel</Button> */}
+          <Button className="float-right" type="submit" onClick={handleSubmit}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              "Submit"
+            )}
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   );

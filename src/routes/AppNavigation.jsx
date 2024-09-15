@@ -3,14 +3,14 @@ import { useRoutes } from "react-router-dom";
 import AppIndex from "./AppIndex";
 // import Registration from "../pages/Registration";
 // // import RegistrationTable from "../pages/RegistrationTable";
-// import Vendor from "../pages/Vendor/Vendor";
+import Vendor from "../pages/Vendor/Vendor";
 import Login from "../pages/SignIn/Login";
 // import VehicleOwner from "../pages/vehicleOwner/VehicleOwner";
 // import VehicleReg from "../pages/vehicleReg/VehicleReg";
-// import SuperAgent from "../pages/SuperAgent/SuperAgent";
+import SuperAgent from "../pages/SuperAgent/SuperAgent";
 // import SuperAgentTable from "../pages/SuperAgent/SuperAgentTable";
 // import SuperAgentTopUp from "../pages/SuperAgent/SuperAgentTopUp";
-// import Agent from "../pages/SuperAgent/Agent";
+import Agent from "../pages/SuperAgent/Agent";
 // import AgentTable from "../pages/SuperAgent/AgentTable";
 // import AgentTopUp from "../pages/SuperAgent/AgentTopUp";
 // import VendorTable from "../pages/Vendor/VendorTable";
@@ -31,7 +31,7 @@ import Dashboard from "../pages/Dashboard/index";
 // import SuperAgentHistory from "../pages/SuperAgent/componentview/SuperAgentHistory";
 // import AgentHistory from "../pages/SuperAgent/componentview/AgentHistory";
 // import VehicleHistory from "../pages/vehicleOwner/VehicleHistory";
-// import ReportStolen from "../pages/ReportStolen/ReportStolen";
+import ReportStolen from "../pages/ReportStolen/ReportStolen";
 // import UserList from "../pages/user-admin/UserList";
 // import NewUsers from "../pages/user-admin/NewUsers";
 // // import CollectionPointData from "../pages/SignIn/CollectionPointData";
@@ -60,14 +60,14 @@ export default function AppNavigation() {
         //   path: "registration",
         //   element: <Registration />,
         // },
-        // {
-        //   path: "superagent",
-        //   element: <SuperAgent />,
-        // },
-        // {
-        //   path: "agent",
-        //   element: <Agent />,
-        // },
+        {
+          path: "superagent",
+          element: <SuperAgent />,
+        },
+        {
+          path: "agent",
+          element: <Agent />,
+        },
         // {
         //   path: "superagenttable",
         //   element: <SuperAgentTable />,
@@ -114,14 +114,14 @@ export default function AppNavigation() {
         //   element: <AgentSetup />,
         // },
 
-        // {
-        //   path: "vendor",
-        //   element: <Vendor />,
-        // },
-        // {
-        //   path: "report_stolen",
-        //   element: <ReportStolen />,
-        // },
+        {
+          path: "vendor",
+          element: <Vendor />,
+        },
+        {
+          path: "report_stolen",
+          element: <ReportStolen />,
+        },
         // {
         //   path: "vendorReg/",
         //   element: <VendorTable />,
