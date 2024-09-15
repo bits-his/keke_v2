@@ -1,0 +1,39 @@
+.idc{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-form{
+    width: 40%;
+    height: 60%;
+    padding: 15px;
+    background-color: #f5c005;
+    opacity: .8;
+    & .logo{
+        width: 100px;
+        height: 100px;
+        margin-inline: auto;
+        border-radius: 50%;
+        background-color: white;
+        display: grid;
+        place-content: center;
+        & img{
+            width: 90px;
+            height: 90px;
+        }
+    }
+    & .mar-b{
+        margin-bottom: 25px;
+    }
+}
+
+@media (width <768px ){
+    .login-form{
+        width: 95%;
+        height:50%;
+        & .mar-b{
+            margin-bottom: 15px;
+        }
+    }
+}

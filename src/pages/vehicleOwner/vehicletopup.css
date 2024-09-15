@@ -1,0 +1,93 @@
+ .btn-table{
+    display: flex;
+    & button{
+        margin-left: 2px;
+    }
+}
+.ve-t-u{
+    margin-top: 55px;
+}
+.account-info{
+    margin-left: -1px;
+    margin-right: -1px;
+    width: 100%;
+    & .info-input{
+        margin-bottom: 10px;
+        & h4{
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+    &  select{
+        width: 100%;
+    }
+    &p{
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+.transaction-details{
+    width: 98%;
+    margin-inline: auto;
+    & h3{
+        text-align: center;
+    }
+    & .details{
+        display: flex;
+        /* flex-wrap: wrap; */
+        justify-content: space-between;
+        border-radius: 8px ;
+        border: 1px solid #dedede;
+        padding: 10px;
+        height: 100px;
+        border-left: 5px solid #f5c005;
+    }
+   
+    & p {
+        width: 45%;
+        align-items: flex-start;
+        display: inline-flex;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    & span {
+        margin-left: 10px;
+    }
+}
+.top-up-submit{
+    margin-top: 20px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+   & button {
+    margin-inline: auto;
+    background-color: #f5c005;
+    width: 28rem;
+    box-shadow: 1px 2px grey;
+    height: 40px;
+   }
+} 
+
+@media (width < 768px){
+
+    .transaction-details{
+        & .details {
+            height: 150px;
+        }
+        & p {
+            width: 30%;
+        }
+        & span {
+            margin-left: 1rem;
+        }
+    }
+    .ve-t-u{
+        margin-top: 20px;
+    }
+    .account-info{
+        & .col-md-6{
+            padding: 0;
+        }
+    }
+    }
+        
