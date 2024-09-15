@@ -1,7 +1,28 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { Card, Col, Row, Spinner, Table } from "reactstrap";
+import { useState, useEffect, useCallback } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import { _get } from "../../lib/Helper";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+
+
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -29,77 +50,48 @@ export default function AdminDashboard() {
 
     fetchData();
   }, []);
-  //   const getData = useCallback(() => {
-  //     fetch('http://localhost:44405/get-all-users')
-  //     _get(`get-all-users`, (resp) => {
-  //       if (resp.success && resp.results) {
-  //         setData(resp.results[0]);
-  //       }
-  //     });
-  //   }, []);
 
-  //   useEffect(() => {
-  //     getData();
-  //   }, [getData]);
 
   return (
-    <Card className="app_card dashboard_card shadow p-4 m-2 mt-2">
-      <Row>
-        <Col
-          md={12}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h4 className="app_title">Admin Dashboard</h4>
-          <button
-            className="app_button"
-            style={{
-              width: 150,
-              padding: 10,
-              marginLeft: 15,
-              color: "#000",
-              borderRadius: 7,
-            }}
-            onClick={() => navigate("/user-admin-new")}
-          >
-            Create New User
-          </button>
-        </Col>
-      </Row>
-      <hr style={{ width: "100%" }} />
-      {loading ? (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Spinner color="primary" />
-        </div>
-      ) : error ? (
-        <div style={{ textAlign: "center", marginTop: "20px", color: "red" }}>
-          {error}
-        </div>
-      ) : (
-        <Table bordered responsive>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "center" }}>S/N</th>
-              <th style={{ textAlign: "center" }}>Name</th>
-              <th style={{ textAlign: "center" }}>User Name</th>
-              <th style={{ textAlign: "center" }}>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={item.id}>
-                <td style={{ textAlign: "center" }}>{index + 1}</td>
-                <td style={{ textAlign: "center" }}>{item.name}</td>
-                <td style={{ textAlign: "center" }}>{item.username}</td>
-                <td style={{ textAlign: "center" }}>{item.email}</td>
-              </tr>
+    <>
+      <Card className="px-2">
+        <CardHeader className="flex justify-between flex-row align-center item-center">
+          <CardTitle>User List</CardTitle>
+          <Button onClick={() => navigate("new")}>Add User</Button>
+        </CardHeader>
+        <Outlet />
+        <Table className="p-2">
+          <TableCaption className="pb-3">A list of your All User.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">User ID</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>User Name</TableHead>
+              <TableHead className="">Email</TableHead>
+              <TableHead className="">Role</TableHead>
+              <TableHead className="">Status</TableHead>
+              <TableHead className="">Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((admin) => (
+              <TableRow key={admin.id}>
+                <TableCell className="font-medium">{admin.id}</TableCell>
+                <TableCell>{admin.name}</TableCell>
+                <TableCell>{admin.username}</TableCell>
+                <TableCell className="">{admin.email}</TableCell>
+                <TableCell className="">{admin.role}</TableCell>
+                <TableCell className="">{admin.status}</TableCell>
+                <TableCell className="">
+                  <Button>edit</Button>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
+          </TableBody>
+          <TableFooter></TableFooter>
         </Table>
-      )}
-    </Card>
+      </Card>
+    </>
   );
 }
+

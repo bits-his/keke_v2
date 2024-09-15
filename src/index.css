@@ -30,7 +30,7 @@ body{
     --ring: 20 14.3% 4.1%;
     --radius: 0.5rem;
     /* --chart-1: 12 76% 61%; */
-    --chart-1: 43 76% 61%;
+    --chart-1: 44 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
@@ -98,7 +98,10 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
+h3{
+  font-size: 1.5em;
+  margin-top: 5px;
+}
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;

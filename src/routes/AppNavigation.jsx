@@ -8,19 +8,19 @@ import Login from "../pages/SignIn/Login";
 // import VehicleOwner from "../pages/vehicleOwner/VehicleOwner";
 // import VehicleReg from "../pages/vehicleReg/VehicleReg";
 // import SuperAgent from "../pages/SuperAgent/SuperAgent";
-// import SuperAgentTable from "../pages/SuperAgent/SuperAgentTable";
+import SuperAgentTable from "../pages/SuperAgent/SuperAgentTable";
 // import SuperAgentTopUp from "../pages/SuperAgent/SuperAgentTopUp";
 // import Agent from "../pages/SuperAgent/Agent";
-// import AgentTable from "../pages/SuperAgent/AgentTable";
+import AgentTable from "../pages/SuperAgent/AgentTable";
 // import AgentTopUp from "../pages/SuperAgent/AgentTopUp";
-// import VendorTable from "../pages/Vendor/VendorTable";
-// import VendorReg from "../pages/Vendor/VendorReg";
-// import VehicleOwnerTable from "../pages/vehicleOwner/VehicleOwnerTable";
+import VendorTable from "../pages/Vendor/VendorTable";
+import VendorReg from "../pages/Vendor/VendorReg";
+import VehicleOwnerTable from "../pages/vehicleOwner/VehicleOwnerTable";
 // import TopUp from "../pages/SignIn/signUp/CollectionPoint";
 import Dashboard from "../pages/Dashboard/index";
 // import VendorTopUp from "../pages/Vendor/VendorTopUp";
 // import VehicleView from "../pages/vehicleOwner/VehicleView";
-// import Vehicle from "../pages/vehicleOwner/Vehicle";
+import Vehicle from "../pages/vehicleOwner/Vehicle";
 // import VehicleTopUp from "../pages/vehicleOwner/VehicleTopUp";
 // import LicensViever from "../pages/SignIn/signUp/LicensViever";
 // import VehicleOwnerView from "../pages/vehicleOwner/VehicleOwnerView";
@@ -32,8 +32,8 @@ import Dashboard from "../pages/Dashboard/index";
 // import AgentHistory from "../pages/SuperAgent/componentview/AgentHistory";
 // import VehicleHistory from "../pages/vehicleOwner/VehicleHistory";
 // import ReportStolen from "../pages/ReportStolen/ReportStolen";
-// import UserList from "../pages/user-admin/UserList";
-// import NewUsers from "../pages/user-admin/NewUsers";
+import UserList from "../pages/user-admin/UserList";
+import NewUsers from "../pages/user-admin/NewUsers";
 // // import CollectionPointData from "../pages/SignIn/CollectionPointData";
 // import VendorSetup from "../pages/Vendor/VendorSetup";
 // import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
@@ -50,10 +50,11 @@ export default function AppNavigation() {
     //   element: <Funding />
     // },
     {
+      path: "/*",
       element: <AppIndex />,
       children: [
         {
-          path: "/dashboard",
+          path: "dashboard",
           element: <Dashboard />,
         },
         // {
@@ -68,10 +69,10 @@ export default function AppNavigation() {
         //   path: "agent",
         //   element: <Agent />,
         // },
-        // {
-        //   path: "superagenttable",
-        //   element: <SuperAgentTable />,
-        // },
+        {
+          path: "superagenttable",
+          element: <SuperAgentTable />,
+        },
         // {
         //   path: "superagenttable/view/:id",
         //   element: <SuperAgentView />,
@@ -80,10 +81,10 @@ export default function AppNavigation() {
         //   path: "superagenthistory/history/:id",
         //   element: <SuperAgentHistory />,
         // },
-        // {
-        //   path: "agenttable",
-        //   element: <AgentTable />,
-        // },
+        {
+          path: "agenttable",
+          element: <AgentTable />,
+        },
         // {
         //   path: "agenttable/view/:id",
         //   element: <AgentView />,
@@ -122,16 +123,16 @@ export default function AppNavigation() {
         //   path: "report_stolen",
         //   element: <ReportStolen />,
         // },
-        // {
-        //   path: "vendorReg/",
-        //   element: <VendorTable />,
-        //   children: [
-        //     {
-        //       path: "",
-        //       element: <VendorReg />,
-        //     },
-        //   ],
-        // },
+        {
+          path: "vendorReg/",
+          element: <VendorTable />,
+          children: [
+            {
+              path: "",
+              element: <VendorReg />,
+            },
+          ],
+        },
         // {
         //   path: "vendorReg/view/:id",
         //   element: <VendorView />,
@@ -144,24 +145,24 @@ export default function AppNavigation() {
         //   path: "/vehicleOwner",
         //   element: <VehicleOwner />,
         // },
-        // {
-        //   path: "vehicleownertable",
-        //   element: <Vehicle />,
-        //   children: [
-        //     {
-        //       path: "",
-        //       element: <VehicleOwnerTable />,
-        //     },
-        //     {
-        //       path: ":id",
-        //       element: <VehicleView />,
-        //     },
-        //     {
-        //       path: "view/:id",
-        //       element: <VehicleOwnerView />,
-        //     },
-        //   ],
-        // },
+        {
+          path: "vehicleownertable",
+          element: <Vehicle />,
+          children: [
+            {
+              path: "",
+              element: <VehicleOwnerTable />,
+            },
+            // {
+            //   path: ":id",
+            //   element: <VehicleView />,
+            // },
+            // {
+            //   path: "view/:id",
+            //   element: <VehicleOwnerView />,
+            // },
+          ],
+        },
         // {
         //   path: "vehicleregistration/:id",
         //   element: <VehicleReg />,
@@ -195,14 +196,14 @@ export default function AppNavigation() {
         //   path: "/vehicletopup",
         //   element: <VehicleTopUp />,
         // },
-        // {
-        //   path: "/user-admin",
-        //   element: <UserList />,
-        // },
-        // {
-        //   path: "user-admin-new",
-        //   element: <NewUsers />,
-        // },
+        {
+          path: "user-admin",
+          element: <UserList />,
+        },
+        {
+          path: "user-admin/new",
+          element: <NewUsers />,
+        },
         // {
         //   path: "collection-point",
         //   // element: <CollectionPointData />,

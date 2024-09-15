@@ -5,8 +5,7 @@ import AppNavigation from "./AppNavigation";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
-  Bell,
-  CircleUser,
+
   Home,
   LineChart,
   Menu,
@@ -21,25 +20,25 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+  // CardDescription,
+  // CardHeader,
+  // CardTitle,
 } from "@/components/ui/card";
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  // DropdownMenuContent,
+  // DropdownMenuItem,
+  // DropdownMenuLabel,
+  // DropdownMenuSeparator,
+  // DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import { sidebarModules } from "../pages/user-admin/modules";
-import DropdownLink from "../pages/UI/DropDownLink";
+// import DropdownLink from "../pages/UI/DropDownLink";
 
 
 export const description =
@@ -57,8 +56,8 @@ export default function AppIndex() {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-yellow-400 md:block">
-        <div className="flex h-full max-h-screen flex-col gap-2">
-          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+        <div className="flex h-full sticky top-0  flex-col gap-2">
+          <div className="flex h-14 items-center sticky top-0  border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <img src="" className="h-6 w-6" />
               <h4 className="text-muted">Keke App</h4>
@@ -68,7 +67,7 @@ export default function AppIndex() {
               <span className="sr-only">Toggle notifications</span>
             </Button> */}
           </div>
-          <div className="flex-1">
+          <div className="flex-1 sticky top-0 ">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-2">
               {sidebarModules.map((module, index) => {
                 // Check if the user has access to the module
@@ -162,7 +161,7 @@ export default function AppIndex() {
               </Link> */}
             </nav>
           </div>
-          <div className="mt-auto p-0">
+          <div className="mt-auto p-0 sticky bottom-0 ">
             <Card x-chunk="dashboard-02-chunk-0" className="bg-muted/40">
               <CardContent className="p-2 pt-0 md:p-4 ">
                 <Button size="sm" className="w-full" onClick={logOut}>
@@ -174,7 +173,7 @@ export default function AppIndex() {
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 ">
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -195,6 +194,58 @@ export default function AppIndex() {
                   <Package2 className="h-6 w-6" />
                   <span className="sr-only">Keke App</span>
                 </Link>
+                {sidebarModules.map((module, index) => {
+                  // Check if the user has access to the module
+                  if (true) {
+                    // If the module has a submenu
+                    if (module.subMenu) {
+                      return (
+                        <DropdownMenu
+                          key={index}
+                          mainPath={module.route}
+                          mainLabel={module.title}
+                          icon={module.icon}
+                          subPaths={
+                            // Filter the submenu to only include items the user has access to
+                            module.subMenu.filter(
+                              (subItem) =>
+                                user.functionalities &&
+                                user.functionalities.includes(subItem.label)
+                            )
+                          }
+                          isOpen={activeDropdown === module.title}
+                        />
+                      );
+                    } else {
+                      return (
+                        <NavLink
+                          key={index}
+                          to={module.route}
+                          className={({ isActive }) =>
+                            `flex items-center gap-4 rounded-lg p-4 transition-all hover:text-primary hover:bg-muted ${
+                              isActive ? "bg-muted text-primary" : "text-muted"
+                            }`
+                          }
+                        >
+                          {module.icon && <module.icon />}
+                          {module.title}
+                        </NavLink>
+                        // <div
+                        //   key={index}
+                        //   onClick={() => navigate(module.route)}
+                        //   className={`navbar-link-item ${
+                        //     location.pathname === module.route &&
+                        //     "navbar-active-side-menu"
+                        //   }`}
+                        // >
+                        //   <module.icon className="icon shadow" />
+                        //   {module.title}
+                        // </div>
+                      );
+                    }
+                  }
+                  return null; // Return null if the user doesn't have access
+                })}
                 <Link
                   href="#"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"

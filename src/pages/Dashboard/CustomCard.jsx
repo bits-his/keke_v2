@@ -3,6 +3,17 @@ import { Link } from "react-router-dom";
 import { _get } from "../../lib/Helper";
 
 import DashboardCard from "./Card";
+import {
+
+  Home,
+  LineChart,
+  Menu,
+  Package,
+  Package2,
+  Search,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
 
 const QuickActivityWrap = () => {
   const [data, setData] = useState(false);
@@ -69,7 +80,6 @@ const QuickActivityWrap = () => {
       }
     );
   }, []);
-
   // const data = data.length ? data[0] : {}
   return (
     // <div className="quick_activity_wrap">
@@ -141,10 +151,10 @@ const QuickActivityWrap = () => {
     //   </Row>
     // </div>
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 pt-5">
-      <DashboardCard />
-      <DashboardCard />
-      <DashboardCard />
-      <DashboardCard />
+      <DashboardCard title={"Total No. of vendors"} Icon={Home} data={data.vendors_count} />
+      <DashboardCard title={"Total No. of Super Agent"} Icon={Home} data={data.super_agents_count} />
+      <DashboardCard title={"Total No. of vendors"} Icon={Home} data={data.agents_count} />
+      <DashboardCard title={"Total No. of vendors"} Icon={Home} data={data.vehicles_count} />
     </div>
   );
 };

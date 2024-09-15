@@ -1,8 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
+import { useCallback, useEffect, useState } from "react";
+// import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Col, Row, Table, Spinner } from "reactstrap";
 import { _get } from "../../lib/Helper";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+
+import CustomTable from "../Component/CustomTable";
 
 export default function VehicleOwnerTable() {
   const navigate = useNavigate();
@@ -24,19 +28,19 @@ export default function VehicleOwnerTable() {
         setLoading(false);
       }
     });
-  }, [query]);
+  }, [filter, query]);
   useEffect(() => {
     if (!filter) {
       setQuery("select-all");
     }
-  });
+  },[filter, query]);
   useEffect(() => {
     getReg();
   }, [getReg]);
 
   return (
     <>
-      <Row>
+      {/* <Row>
         <Col md={12}>
           <div
             style={{
@@ -179,7 +183,12 @@ export default function VehicleOwnerTable() {
             </Table>
           </div>
         )}
-      </Row>
+      </Row> */}
+      <CustomTable 
+       page={'Vehicle'}
+       addLink={'/'}
+       data={data}
+      />
     </>
   );
 }

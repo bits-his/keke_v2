@@ -146,14 +146,14 @@ const chartConfig = {
 }
   return (
     <>
-      <Tabs defaultValue="all">
-        <TabsList className='p-3'>
-          <TabsTrigger value="all">Daily</TabsTrigger>
-          <TabsTrigger value="active">Weekly</TabsTrigger>
-          <TabsTrigger value="draft">Monthly</TabsTrigger>
-          <TabsTrigger value="draft">Quaterly</TabsTrigger>
-          <TabsTrigger value="draft">Annually</TabsTrigger>
-          <TabsTrigger value="draft">Custom</TabsTrigger>
+      <Tabs defaultValue="daily">
+        <TabsList className='p-1'>
+          <TabsTrigger value="daily">Daily</TabsTrigger>
+          <TabsTrigger value="weekly">Weekly</TabsTrigger>
+          <TabsTrigger value="monthly">Monthly</TabsTrigger>
+          <TabsTrigger value="quaterly">Quaterly</TabsTrigger>
+          <TabsTrigger value="annually">Annually</TabsTrigger>
+          <TabsTrigger value="custom">Custom</TabsTrigger>
           <TabsTrigger value="archived" className="hidden sm:flex">
             Archived
           </TabsTrigger>
@@ -248,7 +248,7 @@ const chartConfig = {
                 <TrendingUp className="h-4 w-4" />
               </div>
               <div className="leading-none text-muted-foreground">
-                Showing total visitors for the last 6 months
+                Showing total transaction for the last 6 months
               </div>
             </CardFooter>
           </Card>
