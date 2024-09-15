@@ -43,7 +43,7 @@ export default function Login() {
 
     return foundRoute;
   };
-  console.log(form,user)
+  console.log(form, user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -120,7 +120,10 @@ export default function Login() {
                   onChange={handleChange}
                 />
               </div>
-              <Button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-300" >
+              <Button
+                type="submit"
+                className="w-full bg-yellow-400 hover:bg-yellow-300"
+              >
                 {loading ? "..." : "Sign In"}
               </Button>
               <p className="mt-3 text-danger text-center">

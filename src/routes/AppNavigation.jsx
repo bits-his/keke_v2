@@ -3,7 +3,7 @@ import { useRoutes } from "react-router-dom";
 import AppIndex from "./AppIndex";
 // import Registration from "../pages/Registration";
 // // import RegistrationTable from "../pages/RegistrationTable";
-// import Vendor from "../pages/Vendor/Vendor";
+import Vendor from "../pages/Vendor/Vendor";
 import Login from "../pages/SignIn/Login";
 // import VehicleOwner from "../pages/vehicleOwner/VehicleOwner";
 // import VehicleReg from "../pages/vehicleReg/VehicleReg";
@@ -12,11 +12,16 @@ import SuperAgentTable from "../pages/SuperAgent/SuperAgentTable";
 // import SuperAgentTopUp from "../pages/SuperAgent/SuperAgentTopUp";
 // import Agent from "../pages/SuperAgent/Agent";
 import AgentTable from "../pages/SuperAgent/AgentTable";
+import SuperAgent from "../pages/SuperAgent/SuperAgent";
+// import SuperAgentTable from "../pages/SuperAgent/SuperAgentTable";
+// import SuperAgentTopUp from "../pages/SuperAgent/SuperAgentTopUp";
+import Agent from "../pages/SuperAgent/Agent";
+// import AgentTable from "../pages/SuperAgent/AgentTable";
 // import AgentTopUp from "../pages/SuperAgent/AgentTopUp";
 import VendorTable from "../pages/Vendor/VendorTable";
 import VendorReg from "../pages/Vendor/VendorReg";
 import VehicleOwnerTable from "../pages/vehicleOwner/VehicleOwnerTable";
-// import TopUp from "../pages/SignIn/signUp/CollectionPoint";
+import TopUp from "../pages/SignIn/signUp/CollectionPoint";
 import Dashboard from "../pages/Dashboard/index";
 // import VendorTopUp from "../pages/Vendor/VendorTopUp";
 // import VehicleView from "../pages/vehicleOwner/VehicleView";
@@ -34,7 +39,10 @@ import Vehicle from "../pages/vehicleOwner/Vehicle";
 // import ReportStolen from "../pages/ReportStolen/ReportStolen";
 import UserList from "../pages/user-admin/UserList";
 import NewUsers from "../pages/user-admin/NewUsers";
-// // import CollectionPointData from "../pages/SignIn/CollectionPointData";
+import ReportStolen from "../pages/ReportStolen/ReportStolen";
+// import UserList from "../pages/user-admin/UserList";
+// import NewUsers from "../pages/user-admin/NewUsers";
+import CollectionPointData from "../pages/SignIn/CollectionPointData";
 // import VendorSetup from "../pages/Vendor/VendorSetup";
 // import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
 // import AgentSetup from "../pages/SuperAgent/AgentSetup";
@@ -73,6 +81,18 @@ export default function AppNavigation() {
           path: "superagenttable",
           element: <SuperAgentTable />,
         },
+        {
+          path: "superagent",
+          element: <SuperAgent />,
+        },
+        {
+          path: "agent",
+          element: <Agent />,
+        },
+        // {
+        //   path: "superagenttable",
+        //   element: <SuperAgentTable />,
+        // },
         // {
         //   path: "superagenttable/view/:id",
         //   element: <SuperAgentView />,
@@ -133,6 +153,24 @@ export default function AppNavigation() {
             },
           ],
         },
+        {
+          path: "vendor",
+          element: <Vendor />,
+        },
+        {
+          path: "report_stolen",
+          element: <ReportStolen />,
+        },
+        // {
+        //   path: "vendorReg/",
+        //   element: <VendorTable />,
+        //   children: [
+        //     {
+        //       path: "",
+        //       element: <VendorReg />,
+        //     },
+        //   ],
+        // },
         // {
         //   path: "vendorReg/view/:id",
         //   element: <VendorView />,
@@ -167,19 +205,19 @@ export default function AppNavigation() {
         //   path: "vehicleregistration/:id",
         //   element: <VehicleReg />,
         // },
-        // {
-        //   path: "vehicles",
-        //   children: [
-        //     {
-        //       path: "",
-        //       element: <TopUp />,
-        //     },
-        //     {
-        //       path: ":id",
-        //       element: <VehicleHistory />,
-        //     },
-        //   ],
-        // },
+        {
+          path: "vehicles",
+          children: [
+            {
+              path: "",
+              element: <TopUp />,
+            },
+            // {
+            //   path: ":id",
+            //   element: <VehicleHistory />,
+            // },
+          ],
+        },
         // {
         //   path: "/superagenttopup",
         //   element: <SuperAgentTopUp />,
@@ -206,7 +244,7 @@ export default function AppNavigation() {
         },
         // {
         //   path: "collection-point",
-        //   // element: <CollectionPointData />,
+        //   element: <CollectionPointData />,
         // },
       ],
     },

@@ -120,7 +120,7 @@ export default function CustomTable({page, addLink,data=[]}) {
       <Card className="px-2">
         <CardHeader className="flex justify-between flex-row align-center item-center">
           <CardTitle>{page} List</CardTitle>
-          <Button onClick={() => navigate({ addLink })}>Add {page}</Button>
+          <Button onClick={() => navigate(`${ addLink }`)}>Add {page}</Button>
         </CardHeader>
         <Table className="p-2">
           <TableCaption className="pb-3">

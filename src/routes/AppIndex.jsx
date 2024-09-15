@@ -1,11 +1,6 @@
 import { useState } from "react";
-// import Sidebar from "../component/sidebar/Sidebar";
-import AppNavigation from "./AppNavigation";
-
-
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
-
   Home,
   LineChart,
   Menu,
@@ -38,6 +33,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import { sidebarModules } from "../pages/user-admin/modules";
+import keke from "../assets/keke_napep.png"
 // import DropdownLink from "../pages/UI/DropDownLink";
 
 
@@ -59,7 +55,7 @@ export default function AppIndex() {
         <div className="flex h-full sticky top-0  flex-col gap-2">
           <div className="flex h-14 items-center sticky top-0  border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
-              <img src="" className="h-6 w-6" />
+              <img src={keke} className="h-6 w-6" />
               <h4 className="text-muted">Keke App</h4>
             </Link>
             {/* <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -97,7 +93,7 @@ export default function AppIndex() {
                         key={index}
                         to={module.route}
                         className={({ isActive }) =>
-                          `flex items-center gap-4 rounded-lg p-4 transition-all hover:text-primary hover:bg-muted ${
+                          `flex items-center gap-4 rounded-lg p-2 transition-all hover:text-primary hover:bg-muted ${
                             isActive ? "bg-muted text-primary" : "text-muted"
                           }`
                         }
@@ -162,7 +158,7 @@ export default function AppIndex() {
             </nav>
           </div>
           <div className="mt-auto p-0 sticky bottom-0 ">
-            <Card x-chunk="dashboard-02-chunk-0" className="bg-muted/40">
+            <Card x-chunk="dashboard-02-chunk-0" className="bg-yellow-400 border-none">
               <CardContent className="p-2 pt-0 md:p-4 ">
                 <Button size="sm" className="w-full" onClick={logOut}>
                   Logout
@@ -185,8 +181,8 @@ export default function AppIndex() {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="flex flex-col">
-              <nav className="grid gap-2 text-lg font-medium">
+            <SheetContent side="left" className="flex flex-col bg-yellow-400 ">
+              <nav className="grid gap-2 text-lg font-medium bg-yellow-400">
                 <Link
                   href="#"
                   className="flex items-center gap-2 text-lg font-semibold"
@@ -246,7 +242,7 @@ export default function AppIndex() {
                   }
                   return null; // Return null if the user doesn't have access
                 })}
-                <Link
+                {/* <Link
                   href="#"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
@@ -283,7 +279,7 @@ export default function AppIndex() {
                 >
                   <LineChart className="h-5 w-5" />
                   Analytics
-                </Link>
+                </Link> */}
               </nav>
               <div className="mt-auto">
                 <Card className="border-0">

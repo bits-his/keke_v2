@@ -1,29 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
-// import Modal from "react-modal";
-import QRCode from "react-qr-code";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Row,
-  Table,
-  Spinner,
-  NavLink,
-} from "reactstrap";
+// import QRCode from "react-qr-code";
+
 import { _get } from "../../../lib/Helper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import CustomTable from "../../Component/CustomTable";
 
 export default function TopUp() {
   // const navigate = useNavigate()
@@ -89,7 +71,7 @@ export default function TopUp() {
 
   return (
     <>
-      <Card className="app_card dashboard_card shadow m-2 mt-2">
+      {/* <Card className="app_card dashboard_card shadow m-2 mt-2">
         <Row>
           <Col md={12}>
             <div
@@ -230,241 +212,10 @@ export default function TopUp() {
             )}
           </div>
 
-          {/* <Modal
-            isOpen={modal}
-            toggle={toggleModal}
-            style={{
-              content: {
-                position: "relative",
-                top: "50%",
-                transform: "translateY(-50%)",
-              },
-            }}
-          >
-            <ModalHeader
-              toggle={toggleModal}
-              style={{ paddingTop: "6rem" }}
-              centered
-            >
-              <div style={{ float: "right" }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  viewBox="0 -960 960 960"
-                  width="24"
-                  onClick={() => toggleModal()}
-                >
-                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                </svg>
-              </div>
-            </ModalHeader>
-            <ModalBody>
-              <div style={{ textAlign: "center" }}>
-                <QRCode
-                  size={256}
-                  style={{
-                    height: "auto",
-                    maxWidth: "20%",
-                    width: "20%",
-                  }}
-                  value={userDetail.Reg_no}
-                  viewBox={`0 0 256 256`}
-                />
-              </div>
-              <div style={{ textAlign: "center", marginTop: "20px" }}>
-                <h3>Reg No: 00{currentItem.vehicle_id}</h3>
-                <h3>Plate No: {currentItem.plate_no}</h3>
-                <h3>Balance: ₦{parseFloat(currentItem.balance).toFixed(2)}</h3>
-              </div>
-              <Form>
-                <FormGroup>
-                  <Label for="topUpAmount">Amount</Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                  />
-                </FormGroup>
-                <div className="text-center">
-                  <Button
-                    color="warning"
-                    block
-                    style={{ marginTop: "10px", marginBottom: "10px" }}
-                    onClick={fund_us}
-                  >
-                    pay
-                  </Button>
-                </div>
-              </Form>
-            </ModalBody>
-          </Modal> */}
-
-          {/* {fund ? (
-            <div>
-              <Form
-                style={{
-                  position: "relative",
-                  top: "-40rem",
-                  left: "25rem",
-                  backgroundColor: "white",
-                  borderRadius: " 5px",
-                  height: "55rem",
-                  width: "50%",
-                  border: "1px solid black",
-                }}
-              >
-                <div
-                  style={{
-                    position: "relative",
-                    left: "40%",
-                    top: "15px",
-                    fontSize: "20px",
-                    fontWeight: "600",
-                  }}
-                >
-                  Top Up
-                </div>
-                <hr
-                  style={{ width: "95%", position: "relative", left: "12px" }}
-                />
-                <FormGroup>
-                  <div
-                    for="topUpAmount"
-                    style={{
-                      position: "relative",
-                      top: "25px",
-                      left: "20px",
-                      fontWeight: "600",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    Balance: 20000
-                  </div>
-                  <Label
-                    for="topUpAmount"
-                    style={{ position: "relative", top: "25px", left: "20px" }}
-                  >
-                    Enter Amount:
-                  </Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                    style={{
-                      position: "relative",
-                      width: "70%",
-                      left: "26%",
-                    }}
-                  />
-                  <Label
-                    for="topUpAmount"
-                    style={{ position: "relative", top: "25px", left: "20px" }}
-                  >
-                    Plate No:
-                  </Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                    style={{
-                      position: "relative",
-                      width: "70%",
-                      left: "26%",
-                    }}
-                  />
-                  <Label
-                    for="topUpAmount"
-                    style={{ position: "relative", top: "25px", left: "20px" }}
-                  >
-                    Class No:
-                  </Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                    style={{
-                      position: "relative",
-                      width: "70%",
-                      left: "26%",
-                    }}
-                  />
-                  <Label
-                    for="topUpAmount"
-                    style={{ position: "relative", top: "25px", left: "20px" }}
-                  >
-                    Last Pay Date:
-                  </Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                    style={{
-                      position: "relative",
-                      width: "70%",
-                      left: "26%",
-                    }}
-                  />
-                  <Label
-                    for="topUpAmount"
-                    style={{ position: "relative", top: "25px", left: "20px" }}
-                  >
-                    Payment From:
-                  </Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                    style={{
-                      position: "relative",
-                      width: "70%",
-                      left: "26%",
-                    }}
-                  />
-                  <Label
-                    for="topUpAmount"
-                    style={{ position: "relative", top: "25px", left: "20px" }}
-                  >
-                    Payment To:
-                  </Label>
-                  <Input
-                    type="text"
-                    name="topUpAmount"
-                    id="topUpAmount"
-                    placeholder="Enter amount here"
-                    style={{
-                      position: "relative",
-                      width: "70%",
-                      left: "26%",
-                    }}
-                  />
-                </FormGroup>
-                <div className="text-center">
-                  <Button
-                    color="warning"
-                    block
-                    style={{
-                      marginTop: "10px",
-                      marginBottom: "10px",
-                      width: "30%",
-                    }}
-                    onClick={fund_us}
-                  >
-                    pay
-                  </Button>
-                </div>
-              </Form>
-            </div>
-          ) : (
-            <></>
-          )} */}
+         
         </Row>
-      </Card>
+      </Card> */}
+      <CustomTable page={"Point Of Collections"} data={data}/>
     </>
   );
 }

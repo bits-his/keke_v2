@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import { Button, Card, Col, Row, Spinner } from "reactstrap";
+import  { useCallback, useEffect, useState } from "react";
+
+
 import { _get } from "../../lib/Helper";
+import CustomTable from "../Component/CustomTable";
 
 export default function CollectionPointData() {
   const [modal, setModal] = useState(false);
@@ -163,6 +164,7 @@ export default function CollectionPointData() {
           </Row>
         </div>
       </Card>
+      <CustomTable page={"point"}/>
     </>
   );
 }

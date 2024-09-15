@@ -14,7 +14,7 @@ function AgentDropDown({ handleChange, selectedAgentValue }) {
       if (resp.success && resp.results) {
         // Extract only the name and id properties from the response
         const formattedData = resp.results.map((agent) => ({
-          value: agent.agent_id,
+          value: agent.account,
           label: agent.name,
         }));
         setData(formattedData);

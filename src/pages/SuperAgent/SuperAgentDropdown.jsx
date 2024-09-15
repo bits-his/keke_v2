@@ -16,7 +16,7 @@ function SuperAgentDropdown({ handleChange, selectedSuperAgentValue }) {
       if (resp.success && resp.results) {
         // Extract only the name and id properties from the response
         const formattedData = resp.results.map((superagent) => ({
-          value: superagent.super_agent_id,
+          value: superagent.account_id,
           label: superagent.name,
         }));
         setData(formattedData);

@@ -23,6 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import CustomTable from "../Component/CustomTable";
 
 
 export default function AgentTable() {
@@ -221,49 +222,11 @@ export default function AgentTable() {
     //   </Row>
     // </Card>
     <>
-      <Card className="px-2">
-        <CardHeader className="flex justify-between flex-row align-center item-center">
-          <CardTitle>Owners List</CardTitle>
-          <Button onClick={() => navigate("new")}>Add Owner</Button>
-        </CardHeader>
-        <Table className="p-2">
-          <TableCaption className="pb-3">
-            A list of your All Agents.
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Agents ID</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>User Name</TableHead>
-              <TableHead className="">Email</TableHead>
-              <TableHead className="">Role</TableHead>
-              <TableHead className="">Status</TableHead>
-              <TableHead className="">Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.map((admin) => (
-              <TableRow key={admin.id}>
-                <TableCell className="font-medium">
-                  {admin.account_id}
-                </TableCell>
-                <TableCell>{admin.name}</TableCell>
-                <TableCell>{admin.username}</TableCell>
-                <TableCell className="">{admin.email}</TableCell>
-                <TableCell className="">{admin.role}</TableCell>
-                <TableCell className="">
-                  {" "}
-                  <Badge variant="outline"> {admin.status}</Badge>
-                </TableCell>
-                <TableCell className="">
-                  <Button>edit</Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter></TableFooter>
-        </Table>
-      </Card>
+
+      <CustomTable 
+      data={data}
+      page={"Agent"}
+      addLink={"/agent"}/>
     </>
   );
 }
