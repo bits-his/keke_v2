@@ -42,6 +42,7 @@ export default function RegistrationTable() {
     contact_email: "",
     contact_lga: "",
     contact_password: 123456,
+    step: 0,
   };
 
   const [form, setForm] = useState(_form);
