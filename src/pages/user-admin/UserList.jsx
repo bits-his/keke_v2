@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { _get } from "../../lib/Helper";
 import { Button } from "@/components/ui/button";
 import {
@@ -59,7 +59,13 @@ export default function AdminDashboard() {
           <CardTitle>User List</CardTitle>
           <Button onClick={() => navigate("new")}>Add User</Button>
         </CardHeader>
-        <Outlet />
+        <div className="">
+          <Input placeholder="Search User" onChange={(e) => {
+            console.log(e.target.value)
+            setData(data.filter(user => user.name === e.target.value))
+
+            }}/>
+        </div>
         <Table className="p-2">
           <TableCaption className="pb-3">A list of your All User.</TableCaption>
           <TableHeader>

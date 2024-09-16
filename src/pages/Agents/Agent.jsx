@@ -13,7 +13,7 @@ import {
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import SuperAgentDropdown from "../Component/SuperAgentDropdown";
-import { stateLga } from "../../lib/stateLga";
+import { stateLga } from "../../assets/stateLga";
 import useQuery, { _post } from "../../lib/Helper";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";

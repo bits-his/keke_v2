@@ -32,83 +32,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function CustomTable({page, addLink={},data=[]}) {
   const navigate = useNavigate();
 
+ 
+ const updateData = (e) =>{
+ data.filter((item) => item.email.includes(e.target.value))
+ }
   return (
-    //           onClick={() => navigate("/agent")}
 
-    //           <input
-    //             name="filter"
-    //             value={filter}
-    //             type="text"
-    //             className="app_input2"
-    //             onChange={({ target: { value } }) => setFilter(value)}
-    //             placeholder="Search Individual"
-    //           />
-
-    //     <div className="table_overflow">
-    //       {loading ? (
-    //         <Spinner
-    //           color="warning"
-    //           className="spinner"
-    //           type="grow"
-    //           style={{ margin: "20px auto" }}
-    //         >
     //           " "
-    //         </Spinner>
-    //       ) : data.length === 0 ? (
-    //         <Table
-    //           bordered
-    //           responsive
-    //           // style={{
-    //           //   position: "relative",
-    //           //   top: "10px",
-    //           //   width: "95.3%",
-    //           //   left: "32px",
-    //           //   marginTop: "4px",
-    //           // }}
-    //         >
-    //           <thead>
-    //             <tr>
-    //               <th>S/N</th>
-    //               <th>Name</th>
-    //               <th>Phone</th>
-    //               <th>Email</th>
-    //               <th>Balance</th>
-    //               <th className="text-center">Action</th>
-    //             </tr>
-    //           </thead>
-    //           <tbody>
-    //             <tr>
-    //               <td colSpan="6" className="text-center">
-    //                 No Agent {filter} found
-    //               </td>
-    //             </tr>
-    //           </tbody>
-    //         </Table>
-    //       ) : (
-    //         <Table
-    //           bordered
-    //           responsive
-    //           style={{
-    //             position: "relative",
 
-    //             width: "100%",
-    //             marginTop: "4px",
-    //           }}
-    //         >
-    //           <thead>
-    //             <tr>
-    //               <th>S/N</th>
-    //               <th>Name</th>
-    //               <th>Phone</th>
-    //               <th>Email</th>
-    //               <th>Balance</th>
-    //               <th className="text-center">Action</th>
-    //             </tr>
-    //           </thead>
     //
     //                   <Button
     //                     style={{ margin: "5px" }}
@@ -139,6 +75,15 @@ export default function CustomTable({page, addLink={},data=[]}) {
             </Button>
           </div>
         </CardHeader>
+        <div className="">
+          <Input
+            name="filter"
+            type="text"
+            className="app_input2"
+            onChange={updateData}
+            placeholder="Search Individual"
+          />
+        </div>
         <Table className="p-2">
           <TableCaption className="pb-3">
             A list of your All {page}.

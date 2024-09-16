@@ -32,7 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import VendorDropdown from "../Component/VendorDropdown";
-import { stateLga } from "../../lib/stateLga";
+import { stateLga } from "../../assets/stateLga";
 import { _post } from "../../lib/Helper";
 import { Loader2 } from "lucide-react";
 

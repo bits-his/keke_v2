@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import Select from "react-select";
 import { _get, _post, separator } from "../../lib/Helper";
 import VehicleDropDown from "./VehicleDropDown";
-import AgentDropDown from "../Component/AgentDropDown";
+import AgentDropDown from "./AgentDropDown";
 import { Button, Row, Col } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

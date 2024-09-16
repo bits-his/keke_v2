@@ -1,10 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Card, Col, Row, Button, Table, Badge } from "reactstrap";
+import {  Col, Row, Table, Badge } from "reactstrap";
 import { useSelector } from "react-redux";
 import { _get, _post } from "../../lib/Helper";
 import keke from "../../assets/keke_napep.png";
 import SuperAgentHistory from "./SuperAgentHistory";
+import ViewTable from "../Component/ViewTable";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function SuperAgentView() {
   const navigate = useNavigate();
@@ -25,85 +34,44 @@ export default function SuperAgentView() {
   useEffect(() => {
     getReg();
   }, [getReg]);
+ 
 
   const handleBackToTable = () => {
     navigate("/superagenttable");
   };
 
   return (
-    <Card className="app_card dashboard_card shadow p-4 m-2 mt-2">
-      <Row>
+    <>
+  
+      <Col md={12}>
         <Col md={12}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            {/* Back Button */}
-
-            <Button
-              className="app_button"
-              style={{
-                width: 150,
-                padding: 10,
-                marginLeft: 15,
-                color: "#000",
-                borderRadius: 10,
-              }}
-              onClick={handleBackToTable}
-            >
-              Back
-            </Button>
-
-            {/* Title */}
-            <h4 className="app_title">Account History</h4>
-
-            {/* User DP */}
-            <img
-              src={keke}
-              alt="User DP"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                marginRight: 10,
-              }}
-            />
-          </div>
-          <hr />
-        </Col>
-        <Col md={12}>
-          <Col md={12}>
-            <section style={{ marginBottom: "2rem" }}>
-              {/* {JSON.stringify(data)} */}
-              <div style={{ display: "flex" }}>
-                <div style={{ width: "50%", marginBottom: "20px" }}>
-                  <p>SuperAgent's Name: </p>
-                  <span>{data[0]?.name}</span>
-                </div>
-                <div style={{ width: "50%" }}>
-                  <p>Phone no. : </p>
-                  <span>{data[0]?.phone}</span>
-                </div>
+          <section style={{ marginBottom: "2rem" }}>
+            {/* {JSON.stringify(data)} */}
+            <div style={{ display: "flex" }}>
+              <div style={{ width: "50%", marginBottom: "20px" }}>
+                <p>SuperAgent's Name: </p>
+                <span>{data[0]?.name}</span>
               </div>
-
-              <div style={{ display: "flex" }}>
-                <div style={{ width: "50%" }}>
-                  <p>Address: </p>
-                  <span>{data[0]?.address}</span>
-                </div>
-                <div style={{ width: "50%" }}>
-                  <p>E-mail: </p>
-                  <span>{data[0]?.email}</span>
-                </div>
+              <div style={{ width: "50%" }}>
+                <p>Phone no. : </p>
+                <span>{data[0]?.phone}</span>
               </div>
-            </section>
-            <SuperAgentHistory />
-          </Col>
+            </div>
+
+            <div style={{ display: "flex" }}>
+              <div style={{ width: "50%" }}>
+                <p>Address: </p>
+                <span>{data[0]?.address}</span>
+              </div>
+              <div style={{ width: "50%" }}>
+                <p>E-mail: </p>
+                <span>{data[0]?.email}</span>
+              </div>
+            </div>
+          </section>
+ 
         </Col>
-      </Row>
-    </Card>
+      </Col>
+    </>
   );
 }

@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  FormFeedback,
-} from "reactstrap";
-import { stateLga } from "../../lib/stateLga";
+import { FormFeedback } from "reactstrap";
+import { stateLga } from "../../assets/stateLga";
 import { _post } from "../../lib/Helper";
-import {Button} from  "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -51,9 +49,9 @@ export default function RegistrationTable() {
   const handleChange = ({ target: { name, value } }) => {
     setForm((p) => ({ ...p, [name]: value }));
   };
-    const handleChangeSelect = (name, value) => {
-      setForm((p) => ({ ...p, [name]: value }));
-    };
+  const handleChangeSelect = (name, value) => {
+    setForm((p) => ({ ...p, [name]: value }));
+  };
 
   const navigate = useNavigate();
 

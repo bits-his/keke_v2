@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-FormFeedback
-} from "reactstrap";
-import { stateLga } from "../../lib/stateLga";
+import { FormFeedback } from "reactstrap";
+import { stateLga } from "../../assets/stateLga";
 import { useSelector } from "react-redux";
 import { _post } from "../../lib/Helper";
 import keke from "../../assets/keke_napep.png";
@@ -27,13 +25,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 
-
-
 export default function OwnerReg() {
   const navigate = useNavigate();
   const { user } = useSelector((s) => s.auth);
   const [showForm, setShowForm] = useState(false);
-    const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const _form = {
     query_type: "insert",
     agent_id: null,
@@ -41,11 +37,11 @@ export default function OwnerReg() {
   const [form, setForm] = useState(_form);
   const handleChange = ({ target: { name, value } }) => {
     setForm((p) => ({ ...p, [name]: value }));
-     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
-     const handleChangeSelect = (name, value) => {
-       setForm((p) => ({ ...p, [name]: value }));
-     };
+  const handleChangeSelect = (name, value) => {
+    setForm((p) => ({ ...p, [name]: value }));
+  };
 
   const handleShowForm = () => {
     setShowForm(true);
@@ -62,7 +58,7 @@ export default function OwnerReg() {
         toast.success(`A new Vehicle owner ${form.name} Created Successfully`);
         navigate("/vehicleowners");
       } else {
-      toast.error(res)
+        toast.error(res);
       }
     });
   };

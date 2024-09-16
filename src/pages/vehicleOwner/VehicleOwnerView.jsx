@@ -77,7 +77,7 @@ export default function VehicleOwnerView() {
             </Button>
 
             {/* Title */}
-            <h4 className="app_title">{data.name}</h4>
+            <h4 className="app_title">{data?.name}</h4>
 
             {/* User DP */}
             <img
@@ -100,19 +100,19 @@ export default function VehicleOwnerView() {
                 <span style={{ fontWeight: "600", marginRight: "20px" }}>
                   Owner's Name:
                 </span>
-                <p>{data.name}</p>
+                <p>{data?.name}</p>
               </div>
               <div style={{ display: "flex" }}>
                 <span style={{ fontWeight: "600", marginRight: "20px" }}>
                   Phone Number
                 </span>
-                <p>{data.phone}</p>
+                <p>{data?.phone}</p>
               </div>
               <div style={{ display: "flex" }}>
                 <span style={{ fontWeight: "600", marginRight: "20px" }}>
                   Address
                 </span>
-                <p>{data.address}</p>
+                <p>{data?.address}</p>
               </div>
               {/* <div style={{display: "flex"}}>
                   <span style={{fontWeight: '600', marginRight: '20px'}}>Registered Vehicle</span>
@@ -122,7 +122,7 @@ export default function VehicleOwnerView() {
                 <span style={{ fontWeight: "600", marginRight: "20px" }}>
                   Local Government Area
                 </span>
-                <p>{data.lga}</p>
+                <p>{data?.lga}</p>
               </div>
               <div style={{ display: "flex" }}>
                 <span style={{ fontWeight: "600", marginRight: "20px" }}>

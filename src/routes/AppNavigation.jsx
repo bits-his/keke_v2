@@ -35,6 +35,7 @@ import VehicleHistory from "../pages/vehicleOwner/VehicleHistory";
 import UserList from "../pages/user-admin/UserList";
 import NewUsers from "../pages/user-admin/NewUsers";
 import ReportStolen from "../pages/ReportStolen/ReportStolen";
+import SuperAgentHistory from "../pages/componentview/SuperAgentHistory";
 // import CollectionPointData from "../pages/SignIn/CollectionPointData";
 // import VendorSetup from "../pages/Vendor/VendorSetup";
 // import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
@@ -102,7 +103,7 @@ export default function AppNavigation() {
             },
             {
               path: "view/:id",
-              element: <SuperAgentView />,
+              element: <SuperAgentHistory />,
             },
           ],
         },
@@ -133,7 +134,7 @@ export default function AppNavigation() {
               element: <AgentTopUp />,
             },
             {
-              path: "history/:id",
+              path: "view/:id",
               element: <AgentHistory />,
             },
           ],
