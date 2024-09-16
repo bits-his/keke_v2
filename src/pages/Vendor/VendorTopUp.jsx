@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FormFeedback } from "reactstrap";
 import toast from "react-hot-toast";
 // import { Label } from "@/components/ui/label";
 // import { Input } from "@/components/ui/input";
@@ -29,6 +30,7 @@ function VendorTopUp({ selectedVendorValue }) {
   const [selectedVendor, setSelectedVendor] = useState(selectedVendorValue);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [form, setForm] = useState({
     vendor_id: "",

@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  // Card,
-  // Col,
-  // Row,
-  // Form,
-  // FormGroup,
-  // Label,
-  // Button,
-  // Input,
   FormFeedback,
 } from "reactstrap";
 import {
@@ -59,39 +51,42 @@ export default function SuperAgent() {
     setForm((p) => ({ ...p, [name]: value }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
-  const handleChange = ({ target: { name, value } }) => {
-    setForm((p) => ({ ...p, [name]: value }));
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-  };
+ const handleNextStep = () => {
+   const newErrors = validateForm(form);
+   setErrors(newErrors);
+   if (Object.keys(newErrors).length === 0) {
+     setForm((p) => ({ ...p, step: p.step + 1 }));
+   }
+ };
 
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    // console.log(form);
-    if (loading) return;
-    e.preventDefault();
+ const handleSubmit = (e) => {
+   e.preventDefault();
+   const newErrors = validateForm(form);
+   setErrors(newErrors);
+   if (Object.keys(newErrors).length === 0) {
+     if (form.step === 1) {
+       setLoading(true);
+       _post(
+         "vendors/create",
+         form,
+         (res) => {
+           setLoading(false);
+           if (res.success) {
+             toast.success("Vendor created successfully");
+             navigate("/vendorReg");
+           }
+         },
+         () => {
+           setLoading(false);
+           toast.error("An error occurred while creating Vendor");
+         }
+       );
+     } else {
+       handleNextStep();
+     }
+   }
+ };
 
-    const newErrors = validateForm(form);
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      setLoading(true);
-      _post(
-        "superagent/create",
-        form,
-        (res) => {
-          setLoading(false);
-          toast.success("super agent created successfully");
-          setSubmittedData([...submittedData, res]);
-          navigate("/superagenttable");
-        },
-        () => {
-          setLoading(false);
-          toast.error("An error occurred while creating super agent");
-        }
-      );
-    } else {
-      Object.values(newErrors).forEach((error) => {});
-    }
-  };
 
   const validateForm = (formData) => {
     let newErrors = {};
@@ -116,6 +111,9 @@ export default function SuperAgent() {
     }
     if (!formData.nin.trim()) {
       newErrors.nin = "NIN must be filled";
+    }
+    if (!formData.vendor.trim()) {
+      newErrors.vendor = "Vendor must be filled";
     }
 
     return newErrors;

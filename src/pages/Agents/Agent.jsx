@@ -121,6 +121,9 @@ export default function Agent() {
     if (!formData.service_location.trim()) {
       newErrors.service_location = "Service Location must be filled";
     }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone must be filled";
+    }
 
     return newErrors;
   };
@@ -183,10 +186,10 @@ export default function Agent() {
                   pattern="[0-9]{11}"
                   placeholder="081XXXXXXXX"
                   className="app_input"
-                  invalid={!!errors.phone_no}
+                  invalid={!!errors.phone}
                 />
                 <FormFeedback>
-                  <span style={{ color: "red" }}>{errors.phone_no}</span>
+                  <span style={{ color: "red" }}>{errors.phone}</span>
                 </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
