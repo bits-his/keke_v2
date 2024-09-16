@@ -36,9 +36,9 @@ import UserList from "../pages/user-admin/UserList";
 import NewUsers from "../pages/user-admin/NewUsers";
 import ReportStolen from "../pages/ReportStolen/ReportStolen";
 // import CollectionPointData from "../pages/SignIn/CollectionPointData";
-// import VendorSetup from "../pages/Vendor/VendorSetup";
-// import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
-// import AgentSetup from "../pages/SuperAgent/AgentSetup";
+import VendorSetup from "../pages/Vendor/VendorSetup";
+import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
+import AgentSetup from "../pages/Agents/AgentSetup";
 
 export default function AppNavigation() {
   let Pages = useRoutes([
@@ -82,6 +82,10 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <VendorDetail />,
             },
+            {
+              path: "setup",
+              element: <VendorSetup />,
+            },
           ],
         },
         {
@@ -103,6 +107,10 @@ export default function AppNavigation() {
             {
               path: "view/:id",
               element: <SuperAgentView />,
+            },
+            {
+              path: "setup",
+              element: <SuperAgentSetup />,
             },
           ],
         },
@@ -135,6 +143,10 @@ export default function AppNavigation() {
             {
               path: "history/:id",
               element: <AgentHistory />,
+            },
+            {
+              path: "setup",
+              element: <AgentSetup />,
             },
           ],
         },
@@ -171,19 +183,6 @@ export default function AppNavigation() {
         // {
         //   path: "agenttable/view/:id",
         //   element: <AgentView />,
-        // },
-
-        // {
-        //   path: "/vendorsetup",
-        //   element: <VendorSetup />,
-        // },
-        // {
-        //   path: "/superagentsetup",
-        //   element: <SuperAgentSetup />,
-        // },
-        // {
-        //   path: "/agentsetup",
-        //   element: <AgentSetup />,
         // },
 
         {

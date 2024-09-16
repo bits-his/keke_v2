@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 
-export default function CustomTable({page, addLink={},data=[]}) {
+export default function CustomTable({ page, addLink = {}, data = [] }) {
   const navigate = useNavigate();
 
   return (
@@ -214,10 +214,16 @@ export default function CustomTable({page, addLink={},data=[]}) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <Link to={`view/${admin.account_id}`}>View</Link>
-                        </DropdownMenuItem>
+                        <Link
+                          to={`view/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>View</DropdownMenuItem>
+                        </Link>
                         <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        <Link to={"setup"} className="neutral-900">
+                          <DropdownMenuItem>Setup</DropdownMenuItem>
+                        </Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : page == "Super Agent" ? (
@@ -234,10 +240,21 @@ export default function CustomTable({page, addLink={},data=[]}) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <Link to={`view/${admin.account_id}`}>View</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>Top Up 1</DropdownMenuItem>
+                        <Link
+                          to={`view/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>View</DropdownMenuItem>
+                        </Link>
+                        <Link
+                          to={`topup/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        </Link>
+                        <Link to={"setup"} className="neutral-900">
+                          <DropdownMenuItem>Setup</DropdownMenuItem>
+                        </Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : page == "Agent" ? (
@@ -255,9 +272,22 @@ export default function CustomTable({page, addLink={},data=[]}) {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem>
-                          <Link to={`view/${admin.account_id}`}>View</Link>
+                          <Link
+                            to={`view/${admin.account_id}`}
+                            className="neutral-900"
+                          >
+                            View
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        <Link
+                          to={`topup/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        </Link>
+                        <Link to={"setup"} className="neutral-900">
+                          <DropdownMenuItem>Setup</DropdownMenuItem>
+                        </Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (

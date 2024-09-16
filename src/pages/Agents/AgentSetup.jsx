@@ -3,9 +3,18 @@ import { _get, _post, separator } from "../../lib/Helper";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import SuperDropdown from "../Component/SuperDropdown";
-import AgentDropDown from "../vehicleOwner/AgentDropDown";
+import AgentDropDown from "../Component/AgentDropDown";
 import toast from "react-hot-toast";
 import PaymentType from "../Component/PaymentType";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 function AgentSetup() {
   const [form, setForm] = useState({});
@@ -50,98 +59,112 @@ function AgentSetup() {
 
   return (
     <>
-      {/* {JSON.stringify(form)} */}
-      <div className="app_card dashboard_card m-0 p-0">
-        <h3 className="text-center fw-bold">Agent Top-Up</h3>
-
-        <div>
-          <div className="account-info row">
-            <div className="info-input col-md-6">
-              <h4>Agent :</h4>
-              <AgentDropDown
-                handleChange={handleChange}
-                selectedAgentValue={form.agent_id}
-              />
-            </div>
-            <div className="info-input col-md-6">
-              <h4> Payment Type:</h4>
-              <PaymentType
-                handleChange={handleChange}
-                paymentValue={form.payment_value}
-              />
-            </div>
-            <div className="info-input col-md-6">
-              <h4>
-                {form.payment_value === "percentage"
-                  ? `Percentage (${form.percentValue ? form.percentValue : 0})`
-                  : `Amount (${form.amount ? separator(form.amount) : 0})`}{" "}
-                :
-              </h4>
-              {form.payment_value === "percentage" ? (
-                <input
-                  placeholder="Enter percentage here..."
-                  type="number"
-                  name="percentValue"
-                  value={form.percentValue}
-                  min="1"
-                  max="100"
-                  onChange={(e) => {
-                    const value = Math.max(1, Math.min(100, e.target.value));
-                    handleChange({ target: { name: e.target.name, value } });
-                  }}
-                  style={{
-                    width: "100%",
-                    borderColor: "#dedede",
-                    padding: "10px",
-                    borderRadius: "5px",
-                    border: "1px solid",
-                  }}
-                />
-              ) : (
-                <input
-                  placeholder="Enter amount here..."
-                  name="amount"
-                  value={form.amount}
-                  onChange={handleChange}
-                  style={{
-                    width: "100%",
-                    borderColor: "#dedede",
-                    padding: "10px",
-                    borderRadius: "5px",
-                    border: "1px solid",
-                  }}
-                />
-              )}
-            </div>
+      <Card>
+        <CardHeader>
+          <div className="flex flex-row justify-center">
+            <span className="p-6 mr-auto">
+              <Button onClick={() => navigate("/agenttable")}>Back</Button>
+            </span>
+            <CardHeader className=" flex-row">
+              <CardTitle className="text-center ">Agent Setup</CardTitle>
+            </CardHeader>
           </div>
-
-          <div className="transaction-details">
-            <h3>Transaction Details</h3>
-            <div className="details">
-              <div className="full-width">
-                <p>
-                  Agent: <span>{form.agent_name}</span>
-                </p>
+        </CardHeader>
+        <CardContent>
+          <div>
+            <div className="account-info row">
+              <div className="info-input col-md-6">
+                <h4>Agent :</h4>
+                <AgentDropDown
+                  handleChange={handleChange}
+                  selectedAgentValue={form.agent_id}
+                />
               </div>
-              <div className="full-width">
-                <p>
-                  Payment Type: <span>{form.payment_value}</span>
-                </p>
-                <p>
+              <div className="info-input col-md-6">
+                <h4> Payment Type:</h4>
+                <PaymentType
+                  handleChange={handleChange}
+                  paymentValue={form.payment_value}
+                />
+              </div>
+              <div className="info-input col-md-6">
+                <h4>
                   {form.payment_value === "percentage"
-                    ? `PERCENTAGE: ${
+                    ? `Percentage (${
                         form.percentValue ? form.percentValue : 0
-                      }%`
-                    : `AMOUNT: ${form.amount ? separator(form.amount) : 0} `}
-                </p>
+                      })`
+                    : `Amount (${
+                        form.amount ? separator(form.amount) : 0
+                      })`}{" "}
+                  :
+                </h4>
+                {form.payment_value === "percentage" ? (
+                  <Input
+                    placeholder="Enter percentage here..."
+                    type="number"
+                    name="percentValue"
+                    value={form.percentValue}
+                    min="1"
+                    max="100"
+                    onChange={(e) => {
+                      const value = Math.max(1, Math.min(100, e.target.value));
+                      handleChange({ target: { name: e.target.name, value } });
+                    }}
+                    style={{
+                      width: "100%",
+                      borderColor: "#dedede",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      border: "1px solid",
+                    }}
+                  />
+                ) : (
+                  <Input
+                    placeholder="Enter amount here..."
+                    name="amount"
+                    value={form.amount}
+                    onChange={handleChange}
+                    style={{
+                      width: "100%",
+                      borderColor: "#dedede",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      border: "1px solid",
+                    }}
+                  />
+                )}
               </div>
             </div>
+
+            <div className="transaction-details">
+              <h3>Transaction Details</h3>
+              <div className="details">
+                <div className="full-width">
+                  <p>
+                    Agent: <span>{form.agent_name}</span>
+                  </p>
+                </div>
+                <div className="full-width">
+                  <p>
+                    Payment Type: <span>{form.payment_value}</span>
+                  </p>
+                  <p>
+                    {form.payment_value === "percentage"
+                      ? `PERCENTAGE: ${
+                          form.percentValue ? form.percentValue : 0
+                        }%`
+                      : `AMOUNT: ${form.amount ? separator(form.amount) : 0} `}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="top-up-submit">
+              <Button onClick={submitTopUp}>Submit</Button>
+            </div>
           </div>
-          <div className="top-up-submit">
-            <Button onClick={submitTopUp}>Submit</Button>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
+      
     </>
   );
 }
