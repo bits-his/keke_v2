@@ -151,10 +151,10 @@ const QuickActivityWrap = () => {
     //   </Row>
     // </div>
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 pt-5">
-      <DashboardCard title={"Total No. of vendors"} Icon={Home} data={data.vendors_count} />
-      <DashboardCard title={"Total No. of Super Agent"} Icon={Home} data={data.super_agents_count} />
-      <DashboardCard title={"Total No. of vendors"} Icon={Home} data={data.agents_count} />
-      <DashboardCard title={"Total No. of vendors"} Icon={Home} data={data.vehicles_count} />
+      <DashboardCard title={"Total No. of Vendors"} Icon={Home} data={data.vendors_count} link={"vendors"} />
+      <DashboardCard title={"Total No. of Super Agent"} Icon={Home} data={data.super_agents_count} link={"superagenttable"} />
+      <DashboardCard title={"Total No. of Agents"} Icon={Home} data={data.agents_count} link={"agenttable"} />
+      <DashboardCard title={"Total No. of Vehicles"} Icon={Home} data={data.vehicles_count} link={"vehicles"} />
     </div>
   );
 };

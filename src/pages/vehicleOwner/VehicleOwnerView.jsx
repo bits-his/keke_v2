@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { _get, _post, separator } from "../../lib/Helper";
 import keke from "../../assets/keke_napep.png";
-import { Filter } from "@mui/icons-material";
 import { Button, ButtonGroup, Card, Col, Row, Badge, Table } from "reactstrap";
 
 export default function VehicleOwnerView() {
@@ -32,24 +31,7 @@ export default function VehicleOwnerView() {
         setVehicleCount(resp.data[0].vehicle_count);
       }
     });
-    //////////////////API to get only transaction history
-    // _post(
-    //   `top-up/create`,
-    //   {
-    //     source_id: owner_id,
-    //     type_of_top_up: "vehicle_top_up",
-    //     query_type: "select_vehicle",
-    //   },
-    //   (res) => {
-    //     //console.log(res, "see me")
-    //     if(res.success && res.results){
-    //      // console.log(res)
-    //     }
-    //   }
-    // )
-    // _get(`top-up/create/?query_type=vehicle&vehicle_id=${owner_id}`, (res) => {
-    //   console.log(res)
-    //   setVendorDetail(res.data[0])
+ 
     // })
   }, [owner_id]);
   useEffect(() => {

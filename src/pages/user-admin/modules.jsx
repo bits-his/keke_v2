@@ -17,7 +17,7 @@ export const sidebarModules = [
   },
   {
     title: "Vendors",
-    route: "/vendorReg",
+    route: "/vendors",
     icon: Package,
     // subMenu: [
     //   {
@@ -61,8 +61,8 @@ export const sidebarModules = [
     // ],
   },
   {
-    title: "Vehicles",
-    route: "/vehicleownertable",
+    title: "Vehicles Owners",
+    route: "/vehicleowners",
     icon: Package2,
     // subMenu: [
     //   {
@@ -76,11 +76,11 @@ export const sidebarModules = [
     route: "/vehicles",
     icon: Bell,
   },
-  {
-    title: "Collection Point Data",
-    route: "/collection-point",
-    icon: Search,
-  },
+  // {
+  //   title: "Collection Point Data",
+  //   route: "/collection-point",
+  //   icon: Search,
+  // },
   {
     title: "Report Stolen",
     route: "/report_stolen",

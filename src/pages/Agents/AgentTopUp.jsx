@@ -2,8 +2,8 @@ import React, { useState, useCallback, useEffect } from "react";
 import { _get, _post, separator } from "../../lib/Helper";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import SuperDropdown from "./SuperDropdown";
-import AgentDropDown from "../vehicleOwner/AgentDropDown";
+import SuperAgentDropdown from "../Component/SuperAgentDropdown";
+import AgentDropDown from "../Component/AgentDropDown";
 import toast from "react-hot-toast";
 
 function AgentTopUp() {
@@ -56,7 +56,7 @@ function AgentTopUp() {
           <div className="account-info row">
             <div className="info-input col-md-6">
               <h4>SuperAgent :</h4>
-              <SuperDropdown
+              <SuperAgentDropdown
                 handleChange={handleChange}
                 selectedSuperValue={form.super_agent_id}
               />

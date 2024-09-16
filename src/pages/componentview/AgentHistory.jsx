@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Table, Card, Row, Col, Button, Input } from "reactstrap";
-import keke from "../../../assets/keke_napep.png";
-import { _get, _post, separator } from "../../../lib/Helper";
+// import keke from "../../assets/keke_napep.png";
+import { _get, _post, separator } from "../../lib/Helper";
 import AgentVeiw from "./AgentView";
 
 export default function AgentHistory() {
@@ -61,7 +61,7 @@ export default function AgentHistory() {
 
             <h4 className="app_title">Account History</h4>
 
-            <img
+            {/* <img
               src={keke}
               alt="User DP"
               style={{
@@ -70,7 +70,7 @@ export default function AgentHistory() {
                 borderRadius: "50%",
                 marginRight: 10,
               }}
-            />
+            /> */}
           </div>
           <hr />
         </Col>

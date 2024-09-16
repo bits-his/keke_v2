@@ -328,7 +328,7 @@ export default function AppIndex() {
             </DropdownMenuContent>
           </DropdownMenu> */}
         </header>
-        <main className="sm:p-2 md:p-4">
+        <main className="sm:p-2 md:p-2">
           <Outlet />
         </main>
       </div>

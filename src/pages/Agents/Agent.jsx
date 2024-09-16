@@ -12,8 +12,8 @@ import {
 } from "reactstrap";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import SuperAgentDropdown from "./SuperAgentDropdown";
-import { stateLga } from "../../assets/stateLga";
+import SuperAgentDropdown from "../Component/SuperAgentDropdown";
+import { stateLga } from "../../lib/stateLga";
 import useQuery, { _post } from "../../lib/Helper";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -129,14 +129,17 @@ export default function Agent() {
     <>
       <Card>
         {/* {JSON.stringify({ form })} */}
-        <CardHeader>
-          {/* <Button
-
-          // onClick={() => navigate("/superagenttable")}
-          >
-            Back
-          </Button> */}
-          <CardTitle className="text-center">Agent Registration</CardTitle>
+        <CardHeader className="p-0">
+          <div className="flex flex-row justify-center">
+            <span className="p-6 mr-auto">
+              <Button onClick={() => navigate("/agenttable")}>Back</Button>
+            </span>
+            <CardHeader className=" flex-row">
+              <CardTitle className="text-center ">Create New Agent</CardTitle>
+              {/* <CardDescription>create new user</CardDescription> */}
+            </CardHeader>
+          </div>
+          {/* <CardTitle className="text-center">Agent Registration</CardTitle> */}
         </CardHeader>
         <CardContent>
           <form className="mx-auto">

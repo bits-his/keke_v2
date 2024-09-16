@@ -186,7 +186,7 @@ export default function VehicleOwnerTable() {
       </Row> */}
       <CustomTable 
        page={'Vehicle Owners'}
-       addLink={'/'}
+       addLink={{addnew: "newOwner", topup:"topup"}}
        data={data}
       />
     </>
