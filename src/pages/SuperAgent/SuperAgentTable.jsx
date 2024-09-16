@@ -4,28 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { _get, separator } from "../../lib/Helper";
 import { useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import CustomTable from "../Component/CustomTable";
 
 export default function SuperAgentTable() {
@@ -238,7 +217,9 @@ export default function SuperAgentTable() {
   
       <CustomTable data={data}
       page={"Super Agent"}
-      addLink={"/superagent"}/>
+      addLink={{addnew:"addsuperagent", topup:"topup"}}
+      
+      />
     </>
   );
 }

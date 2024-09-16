@@ -31,9 +31,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import VendorDropdown from "./VendorDropdown";
-import { stateLga } from "../../assets/stateLga";
+import VendorDropdown from "../Component/VendorDropdown";
+import { stateLga } from "../../lib/stateLga";
 import { _post } from "../../lib/Helper";
+import { Loader2 } from "lucide-react";
 
 export default function SuperAgent() {
   // const user = "nazif";
@@ -54,14 +55,14 @@ export default function SuperAgent() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
- const handleChangeSelect = (name, value) => {
-   setForm((p) => ({ ...p, [name]: value }));
-   setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
- };
- const handleChange = ({ target: { name, value } }) => {
-   setForm((p) => ({ ...p, [name]: value }));
-   setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
- };
+  const handleChangeSelect = (name, value) => {
+    setForm((p) => ({ ...p, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+  };
+  const handleChange = ({ target: { name, value } }) => {
+    setForm((p) => ({ ...p, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+  };
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -77,10 +78,10 @@ export default function SuperAgent() {
         "superagent/create",
         form,
         (res) => {
-          setLoading(true);
+          setLoading(false);
           toast.success("super agent created successfully");
           setSubmittedData([...submittedData, res]);
-          // navigate("/superagenttable");
+          navigate("/superagenttable");
         },
         () => {
           setLoading(false);
@@ -124,14 +125,16 @@ export default function SuperAgent() {
     <div>
       <Card>
         {/* {JSON.stringify({ form })} */}
-        <CardHeader>
-          {/* <Button
-
-          // onClick={() => navigate("/superagenttable")}
-          >
-            Back
-          </Button> */}
-          <CardTitle className="text-center">Create Super Agent</CardTitle>
+        <CardHeader className="p-0">
+          <div className="flex flex-row justify-center">
+            <span className="p-6 mr-auto">
+              <Button onClick={() => navigate("/superagenttable")}>Back</Button>
+            </span>
+            <CardHeader className=" flex-row">
+              <CardTitle className="text-center ">Create Super Agent</CardTitle>
+              {/* <CardDescription>create new user</CardDescription> */}
+            </CardHeader>
+          </div>
         </CardHeader>
         <CardContent>
           <form className="mx-auto">

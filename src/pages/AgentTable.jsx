@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { _get } from "../../lib/Helper";
+import { _get } from "../lib/Helper";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -23,8 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import CustomTable from "../Component/CustomTable";
-
+import CustomTable from "./Component/CustomTable";
 
 export default function AgentTable() {
   const navigate = useNavigate();
@@ -222,11 +221,11 @@ export default function AgentTable() {
     //   </Row>
     // </Card>
     <>
-
-      <CustomTable 
-      data={data}
-      page={"Agent"}
-      addLink={"/agent"}/>
+      <CustomTable
+        data={data}
+        page={"Agent"}
+        addLink={{ addnew: "addagent", topup: "topup" }}
+      />
     </>
   );
 }

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function DashboardCard({title, data, Icon,link, }) {
   return (
     <>
-      <Link to={link} style={{ textDecoration: "none" }}>
+      <Link to={`/${link}`} style={{ textDecoration: "none" }}>
         <Card
           x-chunk="dashboard-01-chunk-0"
           className="min-h-16 p h-40 bg-yellow-400"

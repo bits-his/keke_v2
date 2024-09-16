@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { stateLga } from "../../assets/stateLga";
+import { stateLga } from "../../lib/stateLga";
 import toast from "react-hot-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -115,12 +115,25 @@ export default function RegistrationTable() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-center">
+      <CardHeader className="p-0">
+        <div className="flex flex-row justify-center">
+          <span className="p-6 mr-auto">
+            <Button onClick={() => navigate("/vendors")}>Back</Button>
+          </span>
+          <CardHeader className=" flex-row">
+            <CardTitle className="text-center ">
+              {" "}
+              {form.step === 0
+                ? "Vendor Registration"
+                : "Vendor Contact Information"}
+            </CardTitle>
+          </CardHeader>
+        </div>
+        {/* <CardTitle className="text-center">
           {form.step === 0
             ? "Vendor Registration"
             : "Vendor Contact Information"}
-        </CardTitle>
+        </CardTitle> */}
       </CardHeader>
       <CardContent>
         <form className="mx-auto">

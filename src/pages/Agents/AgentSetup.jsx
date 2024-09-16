@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { _get, _post, separator } from "../../lib/Helper";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import SuperDropdown from "./SuperDropdown";
+import SuperDropdown from "../Component/SuperDropdown";
 import AgentDropDown from "../vehicleOwner/AgentDropDown";
 import toast from "react-hot-toast";
 import PaymentType from "../Component/PaymentType";

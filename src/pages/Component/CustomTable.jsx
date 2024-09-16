@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -22,8 +22,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
 
-export default function CustomTable({page, addLink,data=[]}) {
+export default function CustomTable({page, addLink={},data=[]}) {
   const navigate = useNavigate();
 
   return (
@@ -117,10 +127,17 @@ export default function CustomTable({page, addLink,data=[]}) {
     //                   </Button>
 
     <>
-      <Card className="px-2">
+      <Card className="px-2 rounded-sm min-h-full">
         <CardHeader className="flex justify-between flex-row align-center item-center">
           <CardTitle>{page} List</CardTitle>
-          <Button onClick={() => navigate(`${ addLink }`)}>Add {page}</Button>
+          <div className="flex gap-2">
+            <Button onClick={() => navigate(`${addLink.topup}`)}>
+              Top-Up {page === "Vehicle Owners" ? "Vehicles" : page}
+            </Button>
+            <Button onClick={() => navigate(`${addLink.addnew}`)}>
+              Add {page}
+            </Button>
+          </div>
         </CardHeader>
         <Table className="p-2">
           <TableCaption className="pb-3">
@@ -128,10 +145,15 @@ export default function CustomTable({page, addLink,data=[]}) {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">{page} ID</TableHead>
+              <TableHead className="w-[150px]">{page} ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead className="hidden md:table-cell">User Name</TableHead>
               <TableHead className="">Email</TableHead>
+              <TableHead
+                className={`${page == "Vehicle Owners" ? "hidden" : ""}`}
+              >
+                Balance
+              </TableHead>
               <TableHead className="hidden md:table-cell">Role</TableHead>
               <TableHead className="">Status</TableHead>
               <TableHead className="">Action</TableHead>
@@ -148,6 +170,11 @@ export default function CustomTable({page, addLink,data=[]}) {
                   {admin.username}
                 </TableCell>
                 <TableCell className="">{admin.email}</TableCell>
+                <TableCell
+                  className={`${page == "Vehicle Owners" ? "hidden" : ""}`}
+                >
+                  {admin.balance}
+                </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {admin.role}
                 </TableCell>
@@ -156,7 +183,86 @@ export default function CustomTable({page, addLink,data=[]}) {
                   <Badge variant="outline"> {admin.status}</Badge>
                 </TableCell>
                 <TableCell className="">
-                  <Button>edit</Button>
+                  {page == "Vehicle Owners" ? (
+                    <div className="flex">
+                      <Button
+                        onClick={() => {
+                          navigate(`view/${admin.account_id}`);
+                        }}
+                      >
+                        View
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          navigate(`vehicleregistration/${admin.account_id}`);
+                        }}
+                      >
+                        Add Vehicle
+                      </Button>
+                    </div>
+                  ) : page == "Vendor" ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <MoreHorizontal className="h-4 w-4" />
+                          <span className="sr-only">Toggle menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <Link to={`view/${admin.account_id}`}>View</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>Top Up</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : page == "Super Agent" ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <MoreHorizontal className="h-4 w-4" />
+                          <span className="sr-only">Toggle menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <Link to={`view/${admin.account_id}`}>View</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>Top Up 1</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : page == "Agent" ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <MoreHorizontal className="h-4 w-4" />
+                          <span className="sr-only">Toggle menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <Link to={`view/${admin.account_id}`}>View</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>Top Up</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
+                    ""
+                  )}
                 </TableCell>
               </TableRow>
             ))}

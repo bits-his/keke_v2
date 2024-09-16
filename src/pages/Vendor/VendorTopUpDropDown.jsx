@@ -13,8 +13,8 @@ function VendorTopUpDropDown({ handleChange, selectedVendorValue }) {
       setLoading(false);
       if (resp.success && resp.results) {
         const formattedData = resp.results.map((vendor) => ({
-          value: vendor.vendor_id,
-          label: vendor.vendor_name,
+          value: vendor.account_id,
+          label: vendor.name,
         }));
         setData(formattedData);
       }

@@ -319,7 +319,7 @@ console.log(form)
       <Card className="w-">
         <div className="flex flex-row justify-center">
           <span className="p-6 mr-auto">
-            <Button onClick={() => navigate()}>Back</Button>
+            <Button onClick={() => navigate('/user-admin')}>Back</Button>
           </span>
           <CardHeader className=" flex-row">
             <CardTitle className="text-center ">Create New User</CardTitle>

@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, Col, Row, Button, Table } from "reactstrap";
 import { useSelector } from "react-redux";
-import { _get, _post, separator } from "../../../lib/Helper";
-import keke from "../../../assets/keke_napep.png";
+import { _get, _post, separator } from "../../lib/Helper";
+import keke from "../../assets/keke_napep.png";
 
 export default function SuperAgentHistory() {
   const navigate = useNavigate();

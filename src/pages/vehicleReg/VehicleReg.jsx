@@ -1,19 +1,28 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  Card,
-  Col,
-  Row,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
   FormFeedback,
 } from "reactstrap";
-import { stateLga } from "../../assets/state_and_lgas";
+import { stateLga } from "../../lib/stateLga";
 import { _post } from "../../lib/Helper";
-import toast from "react-hot-toast";
+import {Button} from  "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function RegistrationTable() {
   const { id } = useParams();
@@ -36,12 +45,15 @@ export default function RegistrationTable() {
   };
 
   const [form, setForm] = useState(_form);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleChange = ({ target: { name, value } }) => {
     setForm((p) => ({ ...p, [name]: value }));
   };
+    const handleChangeSelect = (name, value) => {
+      setForm((p) => ({ ...p, [name]: value }));
+    };
 
   const navigate = useNavigate();
 
@@ -51,14 +63,14 @@ export default function RegistrationTable() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      setLoading(true);
+      // setLoading(true);
       console.log(form);
       // Submit the form data
       _post(
         "vehicles/registration",
         form,
         (res) => {
-          setLoading(false);
+          // setLoading(false);
           if (res.success) {
             toast.success("Vehicle added successfully");
             navigate("/vehicleownertable");
@@ -127,43 +139,17 @@ export default function RegistrationTable() {
     return newErrors;
   };
 
-  const handleCopyOwner = () => {};
+  // const handleCopyOwner = () => {};
 
   return (
-    <Card className="app_card dashboard_card shadow p-4 m-2 mt-2">
-      {/* {JSON.stringify({ form })} */}
-      <Row>
-        <Col md={12}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <button
-              className="app_button"
-              style={{
-                width: 150,
-                padding: 10,
-                color: "#000",
-                borderRadius: 10,
-              }}
-              onClick={() => navigate("/Vehicleownertable")}
-            >
-              Back
-            </button>
-            <h4 className="app_title">Vehicle Registeration </h4>
-          </div>
+    <>
+      {/* <Card className="app_card dashboard_card shadow p-4 m-2 mt-2">
+    
+          <form onSubmit={handleSubmit} className="mx-auto">
 
-          <hr />
-        </Col>
-        <Col md={12}>
-          <Form onSubmit={handleSubmit} className="mx-auto">
-            <>
-              <Row className="margin-bottom-input">
-                <Col md={4} className="first-col">
-                  <FormGroup>
+              <div className="margin-bottom-input">
+                <div className="first-col">
+                  <>
                     <Label for="plate_no">Plate No</Label>
                     <Input
                       onChange={handleChange}
@@ -179,11 +165,11 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}>{errors.plate_no}</span>
                     </FormFeedback>
-                    {/* {errors.expiry_date && <span style={{ color: 'red' }}>{errors.expiry_date}</span>} */}
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="">
-                  <FormGroup>
+                  
+                  </>
+                </div>
+                <div className="">
+                  <>
                     <Label for="pin">PIN</Label>
                     <Input
                       onChange={handleChange}
@@ -198,10 +184,10 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}>{errors.pin}</span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4}>
-                  <FormGroup>
+                  </>
+                </div>
+                <div >
+                  <>
                     <Label for="engine_no">Engine No.</Label>
                     <Input
                       onChange={handleChange}
@@ -216,12 +202,12 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}>{errors.engine_no}</span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row className="margin-bottom-input">
-                <Col md={4} className="first-col">
-                  <FormGroup>
+                  </>
+                </div>
+              </div>
+              <div className="margin-bottom-input">
+                <div md={4} className="first-col">
+                  <>
                     <Label for="vehicle_make">Vehicle make</Label>
                     <Input
                       onChange={handleChange}
@@ -238,10 +224,10 @@ export default function RegistrationTable() {
                         {errors.vehicle_make}
                       </span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="first-col">
-                  <FormGroup>
+                  </>
+                </div>
+                <div md={4} className="first-col">
+                  <>
                     <Label for="vehicle_model">Vehicle model</Label>
                     <Input
                       onChange={handleChange}
@@ -258,10 +244,10 @@ export default function RegistrationTable() {
                         {errors.vehicle_model}
                       </span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="first-col">
-                  <FormGroup>
+                  </>
+                </div>
+                <div md={4} className="first-col">
+                  <>
                     <Label for="date_issued">Date issued</Label>
                     <Input
                       onChange={handleChange}
@@ -275,12 +261,12 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}>{errors.date_issued}</span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row className="margin-bottom-input">
-                <Col md={4} className="first-col">
-                  <FormGroup>
+                  </>
+                </div>
+              </div>
+              <div className="margin-bottom-input">
+                <div  className="first-col">
+                  <>
                     <Label for="state_registered">State Registered</Label>
                     <Input
                       onChange={handleChange}
@@ -300,10 +286,10 @@ export default function RegistrationTable() {
                         {errors.state_registered}
                       </span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4}>
-                  <FormGroup>
+                  </>
+                </div>
+                <div >
+                  <>
                     <Label for="registered_lg">L.G.A. Registred</Label>
                     <Input
                       onChange={handleChange}
@@ -327,10 +313,10 @@ export default function RegistrationTable() {
                         {errors.registered_lg}
                       </span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4}>
-                  <FormGroup>
+                  </>
+                </div>
+                <div >
+                  <>
                     <Label for="lg_reg_no">L.G.A. Reg. No.</Label>
                     <Input
                       onChange={handleChange}
@@ -344,12 +330,12 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}></span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row className="margin-bottom-input">
-                <Col md={4} className="first-col">
-                  <FormGroup>
+               
+                </>
+              </div>
+              <div className="margin-bottom-input"></div>
+                <div md={4} className="first-col">
+          
                     <Label for="chasis_no">Chasis No</Label>
                     <Input
                       onChange={handleChange}
@@ -364,10 +350,10 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <spann style={{ color: "red" }}>{errors.chasis_no}</spann>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4}>
-                  <FormGroup>
+       
+                </div>
+                <div md={4}>
+   
                     <Label for="color">Color</Label>
                     <Input
                       onChange={handleChange}
@@ -382,10 +368,10 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}>{errors.color}</span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="first-col">
-                  <FormGroup>
+          
+                </div>
+                <div md={4} className="first-col">
+    
                     <Label for="engine_capacity">Engine Capacity</Label>
                     <Input
                       onChange={handleChange}
@@ -402,10 +388,10 @@ export default function RegistrationTable() {
                         {errors.engine_capacity}
                       </span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4}>
-                  <FormGroup>
+            
+                </div>
+                <div md={4}>
+    
                     <Label for="purchased_date">Transaction Date</Label>
                     <Input
                       onChange={handleChange}
@@ -422,10 +408,10 @@ export default function RegistrationTable() {
                         {errors.purchased_date}
                       </span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="first-col">
-                  <FormGroup>
+           
+                </div>
+                <div md={4} className="first-col">
+
                     <Label for="expiry_date">Expiry Date</Label>
                     <Input
                       onChange={handleChange}
@@ -440,11 +426,11 @@ export default function RegistrationTable() {
                     <FormFeedback>
                       <span style={{ color: "red" }}>{errors.expiry_date}</span>
                     </FormFeedback>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </>
-            <Row
+          
+                </div>
+           
+            </div>
+            <div
               className="mt-3"
               style={{
                 display: "flex",
@@ -453,7 +439,7 @@ export default function RegistrationTable() {
                 marginTop: 30,
               }}
             >
-              <Col className="text-right">
+              <div className="text-right">
                 <button
                   className="app_button"
                   style={{
@@ -467,11 +453,195 @@ export default function RegistrationTable() {
                 >
                   Submit
                 </button>
-              </Col>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </Card>
+              </div>
+            </div>
+          </form>
+    </Card> */}
+
+      <Card className="w-">
+        <div className="flex flex-row justify-center">
+          <span className="p-6 mr-auto">
+            <Button onClick={() => navigate("/vehicleowners")}>Back</Button>
+          </span>
+          <CardHeader className=" flex-row">
+            <CardTitle className="text-center ">New Vehicle</CardTitle>
+            {/* <CardDescription>create new user</CardDescription> */}
+          </CardHeader>
+        </div>
+        <CardContent>
+          <form onSubmit={handleSubmit}>
+            <div className="grid w-full items-center gap-4  md:grid-cols-2 md:gap-8 lg:grid-cols-2 pt-5">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="plate_no">Plate NO</Label>
+                <Input
+                  id="plate_no"
+                  name="plate_no"
+                  value={form.plate_no}
+                  placeholder="Plate NO"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="pin">PIN</Label>
+                <Input
+                  id="pin"
+                  name="pin"
+                  value={form.pin}
+                  placeholder="pin"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="engine_no">Engine No</Label>
+                <Input
+                  id="engine_no"
+                  name="engine_no"
+                  value={form.engine_no}
+                  placeholder="Engine Number"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="vehicle_make">Vehicle Make</Label>
+                <Input
+                  id="vehicle_make"
+                  name="vehicle_make"
+                  value={form.vehicle_make}
+                  placeholder="Phone"
+                  type="number"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="vehicle_modal">Vehicle Modal</Label>
+                <Input
+                  id="vehicle_modal"
+                  name="vehicle_modal"
+                  value={form.vehicle_modal}
+                  placeholder="Vehicle Modal"
+                  type="email"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="color">Color</Label>
+                <Input
+                  id="color"
+                  name="color"
+                  value={form.color}
+                  placeholder="Color"
+                  type="text"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="engine_capacity">Engine Capacity</Label>
+                <Input
+                  id="engine_capacity"
+                  name="engine_capacity"
+                  value={form.engine_capacity}
+                  type="text"
+                  placeholder="Engive Capacity"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label>State *</Label>
+                <Select
+                  onValueChange={(value) =>
+                    handleChangeSelect("vendor_state", value)
+                  }
+                  value={form.vendor_state}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select State" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {stateLga.map((item, idx) => (
+                        <SelectItem key={idx} value={item.state}>
+                          {item.state}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label>LGA *</Label>
+                <Select
+                  onValueChange={(value) =>
+                    handleChangeSelect("vendor_lga", value)
+                  }
+                  value={form.vendor_lga}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select LGA" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {stateLga
+                      .find((item) => item.state === form.vendor_state)
+                      ?.lgas.map((lga, idx) => (
+                        <SelectItem key={idx} value={lga}>
+                          {lga}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="date_issued">Date Issued</Label>
+                <Input
+                  id="date_issued"
+                  name="date_issued"
+                  value={form.date_issued}
+                  type="date"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="expiry_date">Expiry Date</Label>
+                <Input
+                  id="expiry_date"
+                  name="expiry_date"
+                  value={form.expiry_date}
+                  type="date"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <Card className="mt-3 ">
+              {/* {sidebarModules.map((item, index) => (
+              <div
+                key={index}
+                className="grid w-full items-center gap-4  md:grid-cols-2 md:gap-8 lg:grid-cols-4 pt-5"
+              >
+                <div className="flex flex-col space-y-1.5">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={form.accessTo.includes(item.title)}
+                      onChange={() => handleCheckboxChange(item)}
+                    />
+                    <b>{item.title}</b>
+                  </label>
+                </div>
+                {form.accessTo.includes(item.title)
+                  ? item.subMenu && renderSubMenu(item.subMenu)
+                  : ""}
+              </div>
+            ))} */}
+            </Card>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-end">
+          <Button onClick={handleSubmit}>Create</Button>
+        </CardFooter>
+      </Card>
+    </>
   );
 }

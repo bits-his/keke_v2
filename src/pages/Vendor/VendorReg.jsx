@@ -6,28 +6,7 @@ import { _get, _post, formatNumber, separator } from "../../lib/Helper";
 import moment from "moment";
 // import { PDFDownloadLink } from "@react-pdf/renderer";
 // import VendorInvoice from "../pdf/VendorInvoice";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import CustomTable from "../Component/CustomTable";
 
 function VendorReg() {
@@ -434,7 +413,7 @@ function VendorReg() {
     
       <CustomTable 
       page={'Vendor'}
-      addLink={"/vendor"}
+      addLink={{addnew:"addvendor" , topup:"topup"}}
       data={data}
       />
     </>
