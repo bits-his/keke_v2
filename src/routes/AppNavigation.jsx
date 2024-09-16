@@ -154,6 +154,10 @@ export default function AppNavigation() {
               path: "vehicleregistration/:id",
               element: <VehicleReg />,
             },
+            {
+              path: "topup",
+              element: <VehicleTopUp />,
+            },
             // {
             //   path: ":id",
             //   element: <VehicleView />,
@@ -182,9 +186,6 @@ export default function AppNavigation() {
         //   element: <AgentSetup />,
         // },
 
-   
-    
-
         {
           path: "report_stolen",
           element: <ReportStolen />,
@@ -209,10 +210,7 @@ export default function AppNavigation() {
               path: "",
               element: <TopUp />,
             },
-            {
-              path: "topup",
-              element: <VehicleTopUp />,
-            },
+
             {
               path: "view/:id",
               element: <VehicleHistory />,
