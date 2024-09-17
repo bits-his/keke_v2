@@ -275,7 +275,9 @@ export default function TopUp() {
                   <Badge variant="outline"> {vehicle.status}</Badge>
                 </TableCell> */}
                 <TableCell className="">
-                  <Button>Edit</Button>
+                  <Button
+                   onClick={()=> navigate("")}
+                  >View License</Button>
 
                 </TableCell>
               </TableRow>
