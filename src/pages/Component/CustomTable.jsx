@@ -34,7 +34,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function CustomTable({page, addLink={},data=[]}) {
+export default function CustomTable({ page, addLink = {}, data = [] }) {
   const navigate = useNavigate();
 
  
@@ -64,7 +64,7 @@ export default function CustomTable({page, addLink={},data=[]}) {
 
     <>
       <Card className="px-2 rounded-sm min-h-full">
-        <CardHeader className="flex justify-between flex-row align-center item-center">
+        <CardHeader className="px-2 py-4 flex justify-between flex-row align-center item-center">
           <CardTitle>{page} List</CardTitle>
           <div className="flex gap-2">
             <Button onClick={() => navigate(`${addLink.topup}`)}>
@@ -159,10 +159,16 @@ export default function CustomTable({page, addLink={},data=[]}) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <Link to={`view/${admin.account_id}`}>View</Link>
-                        </DropdownMenuItem>
+                        <Link
+                          to={`view/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>View</DropdownMenuItem>
+                        </Link>
                         <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        <Link to={"setup"} className="neutral-900">
+                          <DropdownMenuItem>Setup</DropdownMenuItem>
+                        </Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : page == "Super Agent" ? (
@@ -179,10 +185,21 @@ export default function CustomTable({page, addLink={},data=[]}) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <Link to={`view/${admin.account_id}`}>View</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>Top Up 1</DropdownMenuItem>
+                        <Link
+                          to={`view/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>View</DropdownMenuItem>
+                        </Link>
+                        <Link
+                          to={`topup/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        </Link>
+                        <Link to={"setup"} className="neutral-900">
+                          <DropdownMenuItem>Setup</DropdownMenuItem>
+                        </Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : page == "Agent" ? (
@@ -200,9 +217,22 @@ export default function CustomTable({page, addLink={},data=[]}) {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem>
-                          <Link to={`view/${admin.account_id}`}>View</Link>
+                          <Link
+                            to={`view/${admin.account_id}`}
+                            className="neutral-900"
+                          >
+                            View
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        <Link
+                          to={`topup/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>Top Up</DropdownMenuItem>
+                        </Link>
+                        <Link to={"setup"} className="neutral-900">
+                          <DropdownMenuItem>Setup</DropdownMenuItem>
+                        </Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (

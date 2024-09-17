@@ -51,8 +51,8 @@ export default function AppIndex() {
       const [activeDropdown, setActiveDropdown] = useState(null);
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <div className="hidden border-r bg-yellow-400 md:block">
-        <div className="flex h-full sticky top-0  flex-col gap-2">
+      <div className="hidden border-r bg-yellow-400 md:block fixed top-0 z-30 -ml-2 hidden h-[calc(100vh-0.1px)] w-full shrink-0 md:sticky md:block h-full">
+        <div className="flex h-full flex-col gap-2">
           <div className="flex h-14 items-center sticky top-0  border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <img src={keke} className="h-6 w-6" />
@@ -63,7 +63,7 @@ export default function AppIndex() {
               <span className="sr-only">Toggle notifications</span>
             </Button> */}
           </div>
-          <div className="flex-1 sticky top-0 ">
+          <div className="flex-1 ">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-2">
               {sidebarModules.map((module, index) => {
                 // Check if the user has access to the module
@@ -158,7 +158,10 @@ export default function AppIndex() {
             </nav>
           </div>
           <div className="mt-auto p-0 sticky bottom-0 ">
-            <Card x-chunk="dashboard-02-chunk-0" className="bg-yellow-400 border-none">
+            <Card
+              x-chunk="dashboard-02-chunk-0"
+              className="bg-yellow-400 border-none"
+            >
               <CardContent className="p-2 pt-0 md:p-4 ">
                 <Button size="sm" className="w-full" onClick={logOut}>
                   Logout

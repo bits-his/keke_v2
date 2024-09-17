@@ -3,7 +3,29 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { _get, _post, separator } from "../../lib/Helper";
 import keke from "../../assets/keke_napep.png";
-import { Button, ButtonGroup, Card, Col, Row, Badge, Table } from "reactstrap";
+import {  ButtonGroup, Col, Row,} from "reactstrap";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function VehicleOwnerView() {
   const navigate = useNavigate();
@@ -18,9 +40,9 @@ export default function VehicleOwnerView() {
     _get(`vehicle-owners?query_type=select-all&user_id=${owner_id}`, (resp) => {
       //console.log(resp)
       if (resp.success && resp.data) {
-        const ownerDetail = resp.data.find((item) => item.id == owner_id);
+        const ownerDetail = resp.data.filter((item) => item.account_id === owner_id);
         //console.log(ownerDetail)
-        setData(ownerDetail);
+        setData(ownerDetail[0]);
       }
     });
 
@@ -42,7 +64,7 @@ export default function VehicleOwnerView() {
     navigate("/Vehicleownertable");
   };
 
-  //console.log(data)
+  console.log(data)
   // const vehicledata = data.map((item) => {
   //   item.filter((itemId) => itemId === item.id)
   // })
@@ -50,49 +72,16 @@ export default function VehicleOwnerView() {
   // console.log(vehicledata)
 
   return (
-    <Card className=" shadow p-4 m-2 mt-2" style={{ padding: 15 }}>
+    <Card className="px-2 rounded-sm min-h-full">
       <Row>
-        <Col md={12}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            {/* Back Button */}
-
-            <Button
-              className="app_button"
-              style={{
-                width: 150,
-                padding: 10,
-                marginLeft: 15,
-                color: "#000",
-                borderRadius: 10,
-              }}
-              onClick={handleBackToTable}
-            >
-              Back
-            </Button>
-
-            {/* Title */}
-            <h4 className="app_title">{data?.name}</h4>
-
-            {/* User DP */}
-            <img
-              src={keke}
-              alt="User DP"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                marginRight: 10,
-              }}
-            />
-          </div>
-          <hr />
-        </Col>
+        <div className="flex flex-row justify-center">
+          <span className="p-3 px-2 mr-auto">
+            <Button onClick={() => navigate("/vehicleowners")}>Back</Button>
+          </span>
+          <CardHeader className=" flex-row">
+            <CardTitle className="text-center ">Vehicle Owner View</CardTitle>
+          </CardHeader>
+        </div>
         <Col md={12}>
           <Col md={12}>
             <div className="vehicleview">
@@ -135,55 +124,69 @@ export default function VehicleOwnerView() {
               <Badge color="primary">{vehicleCount}</Badge>{" "}
               <Button
                 className="btn btn-primary"
-                onClick={() => navigate(`/vehicleregistration/${owner_id}`)}
+                onClick={() => navigate(`/vehicleowners/vehicleregistration/${owner_id}`)}
               >
                 {" "}
                 Add +
               </Button>
             </div>
-
-            <Table striped>
-              <thead>
-                <tr>
-                  <th>Vehicle ID.</th>
-                  <th>Plate No.</th>
-                  <th>Chasis No.</th>
-                  {/* <th>Balance (₦)</th> */}
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {vehicles?.map((vehicle, idx) => (
-                  <tr key={idx}>
-                    <td>{vehicle.vehicle_id}</td>
-                    <td>{vehicle.plate_no}</td>
-                    <td>{vehicle.chasis_no}</td>
-
-                    <td className="text-center p-2">
-                      <ButtonGroup>
-                        {/* <Button
-                              onClick={() => {
-                                navigate(`${vehicle.vehicle_id}`)
-                                setCurrentItem(vehicle);
-                                //handlePay(id);
-                              }}
-                              color="success"
-                            >
-                              Transactions
-                            </Button> */}
-                        <Button
-                          color="info"
-                          onClick={() => {
-                            navigate(`/licens-pdf/${vehicle.vehicle_id}`);
-                          }}
-                        >
-                          View License
-                        </Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
+            <Table className="p-2">
+              <TableCaption className="pb-3">
+                A list of your All Vehicles.
+              </TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w">Vehicle ID</TableHead>
+                  <TableHead>Chasis No</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Plate No
+                  </TableHead>
+                  <TableHead className="">Vehicle Make</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Balance
+                  </TableHead>
+                  <TableHead className="">Status</TableHead>
+                  <TableHead className="">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {vehicles.map((vehicle) => (
+                  <TableRow key={vehicle.id}>
+                    <TableCell className="font-medium">
+                      {vehicle.vehicle_id}
+                    </TableCell>
+                    <TableCell>{vehicle.chasis_no}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {vehicle.plate_no}
+                    </TableCell>
+                    <TableCell className="">{vehicle.vehicle_make}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {vehicle.balance}
+                    </TableCell>
+                    <TableCell className="">
+                  <Badge variant="outline"> {vehicle.status}</Badge>
+                </TableCell>
+                    <TableCell className="">
+                      <Button
+                        onClick={() => {
+                          navigate(`/licens-pdf/${vehicle.vehicle_id}`);
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          navigate(`/licens-pdf/${vehicle.vehicle_id}`);
+                        }}
+                        className="ml-2"
+                      >
+                        View License
+                      </Button>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
+              </TableBody>
+              <TableFooter></TableFooter>
             </Table>
           </Col>
         </Col>

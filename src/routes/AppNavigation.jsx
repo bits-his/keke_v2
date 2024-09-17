@@ -37,9 +37,9 @@ import NewUsers from "../pages/user-admin/NewUsers";
 import ReportStolen from "../pages/ReportStolen/ReportStolen";
 import SuperAgentHistory from "../pages/componentview/SuperAgentHistory";
 // import CollectionPointData from "../pages/SignIn/CollectionPointData";
-// import VendorSetup from "../pages/Vendor/VendorSetup";
-// import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
-// import AgentSetup from "../pages/SuperAgent/AgentSetup";
+import VendorSetup from "../pages/Vendor/VendorSetup";
+import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
+import AgentSetup from "../pages/Agents/AgentSetup";
 
 export default function AppNavigation() {
   let Pages = useRoutes([
@@ -83,6 +83,10 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <VendorDetail />,
             },
+            {
+              path: "setup",
+              element: <VendorSetup />,
+            },
           ],
         },
         {
@@ -104,6 +108,10 @@ export default function AppNavigation() {
             {
               path: "view/:id",
               element: <SuperAgentHistory />,
+            },
+            {
+              path: "setup",
+              element: <SuperAgentSetup />,
             },
           ],
         },
@@ -137,6 +145,10 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <AgentHistory />,
             },
+            {
+              path: "setup",
+              element: <AgentSetup />,
+            },
           ],
         },
         {
@@ -155,6 +167,10 @@ export default function AppNavigation() {
               path: "vehicleregistration/:id",
               element: <VehicleReg />,
             },
+            {
+              path: "topup",
+              element: <VehicleTopUp />,
+            },
             // {
             //   path: ":id",
             //   element: <VehicleView />,
@@ -169,22 +185,6 @@ export default function AppNavigation() {
         //   path: "agenttable/view/:id",
         //   element: <AgentView />,
         // },
-
-        // {
-        //   path: "/vendorsetup",
-        //   element: <VendorSetup />,
-        // },
-        // {
-        //   path: "/superagentsetup",
-        //   element: <SuperAgentSetup />,
-        // },
-        // {
-        //   path: "/agentsetup",
-        //   element: <AgentSetup />,
-        // },
-
-   
-    
 
         {
           path: "report_stolen",
@@ -210,10 +210,7 @@ export default function AppNavigation() {
               path: "",
               element: <TopUp />,
             },
-            {
-              path: "topup",
-              element: <VehicleTopUp />,
-            },
+
             {
               path: "view/:id",
               element: <VehicleHistory />,

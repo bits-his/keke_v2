@@ -55,16 +55,18 @@ export default function AdminDashboard() {
   return (
     <>
       <Card className="px-2">
-        <CardHeader className="flex justify-between flex-row align-center item-center">
+        <CardHeader className="px-2 py-4 flex justify-between flex-row align-center item-center">
           <CardTitle>User List</CardTitle>
           <Button onClick={() => navigate("new")}>Add User</Button>
         </CardHeader>
         <div className="">
-          <Input placeholder="Search User" onChange={(e) => {
-            console.log(e.target.value)
-            setData(data.filter(user => user.name === e.target.value))
-
-            }}/>
+          <Input
+            placeholder="Search User"
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(data.filter((user) => user.name === e.target.value));
+            }}
+          />
         </div>
         <Table className="p-2">
           <TableCaption className="pb-3">A list of your All User.</TableCaption>
