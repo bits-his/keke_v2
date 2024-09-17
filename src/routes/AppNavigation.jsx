@@ -23,7 +23,7 @@ import Dashboard from "../pages/Dashboard/index";
 import Vehicle from "../pages/vehicleOwner/Vehicle";
 // import VehicleView from "../pages/vehicleOwner/VehicleView";
 import VehicleTopUp from "../pages/vehicleOwner/VehicleTopUp";
-// import LicensViever from "../pages/SignIn/signUp/LicensViever";
+import LicensViever from "../pages/SignIn/signUp/LicensViever";
 import VehicleOwnerView from "../pages/vehicleOwner/VehicleOwnerView";
 // import AgentView from "../pages/componentview/AgentView";
 import SuperAgentView from "../pages/componentview/SuperAgentView";
@@ -218,10 +218,10 @@ export default function AppNavigation() {
           ],
         },
 
-        // {
-        //   path: "/licens-pdf/:vehicle_id",
-        //   element: <LicensViever />,
-        // },
+        {
+          path: "vehicles/licens-pdf/:vehicle_id",
+          element: <LicensViever />,
+        },
 
         {
           path: "user-admin",
