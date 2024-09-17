@@ -59,7 +59,7 @@ export default function ViewTable({page, addLink={},data=[]}) {
             <TableHead>Type</TableHead>
             <TableHead className="hidden md:table-cell">Description</TableHead>
             <TableHead className="">Credit</TableHead>
-            <TableHead className="hidden md:table-cell">Status</TableHead>
+            <TableHead className="hidden md:table-cell">Debit</TableHead>
             <TableHead className="">Status</TableHead>
             <TableHead className="">Action</TableHead>
           </TableRow>
