@@ -69,39 +69,39 @@ function VendorTopUp({ selectedVendorValue }) {
     });
   };
 
-  const submitTopUp = () => {
-    // e.preventDefault();
-    // const obj = {
-    //   source_id: 0,
-    //   destination_id: form.vendor_id,
-    //   query_type: "vendor_top_up",
-    //   type_of_top_up: "vendor_top_up",
-    //   ...form,
-    // };
-    // _post(
-    //   "top-up/create",
-    //   obj,
-    //   (res) => {
-    //     if (res.success) {
-    //       setLoading(false);
-    //       toast.success("vendor top_up successfully");
-    //       navigate("/vendorReg");
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //     toast.error("Error occoured while creating top up ");
-    //     setLoading(false);
-    //   }
-    // );
+  const submitTopUp = (e) => {
+    e.preventDefault();
+    const obj = {
+      source_id: 0,
+      destination_id: form.vendor_id,
+      query_type: "vendor_top_up",
+      type_of_top_up: "vendor_top_up",
+      ...form,
+    };
+    _post(
+      "top-up/create",
+      obj,
+      (res) => {
+        if (res.success) {
+          setLoading(false);
+          toast.success("vendor top_up successfully");
+          navigate("/vendors");
+        }
+      },
+      (err) => {
+        console.log(err);
+        toast.error("Error occoured while creating top up ");
+        setLoading(false);
+      }
+    );
 
-    // if (form.amount <= 0) {
-    //   toast.error("Amount should be above 100.");
-    //   return;
-    // }
+    if (form.amount <= 0) {
+      toast.error("Amount should be above 100.");
+      return;
+    }
 
 
-    console.log(form);
+    // console.log(form);
   };
 
   return (

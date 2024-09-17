@@ -25,34 +25,35 @@ function AgentTopUp() {
       [name]: value,
     }));
   };
+  console.log(form)
 
   const submitTopUp = (e) => {
-    // e.preventDefault();
-    // const obj = {
-    //   source_id: form.super_agent_id,
-    //   destination_id: form.agent_id,
-    //   query_type: "top_up",
-    //   type_of_top_up: "agent_top_up",
-    //   out_type: "super_agent_top_up",
-    //   ...form,
-    // };
-    // _post(
-    //   "top-up/create",
-    //   obj,
-    //   (res) => {
-    //     setLoading(false); // Set loading to false when submission is successful
-    //     if (res.success) {
-    //       toast.success("agent top up created successfully");
-    //       // setSubmittedData([...submittedData, res]);
-    //       navigate("/agenttable");
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //     toast.error("An error occurred while creating agent top up");
-    //     setLoading(false);
-    //   }
-    // );
+    e.preventDefault();
+    const obj = {
+      source_id: form.super_agent,
+      destination_id: form.agent_id,
+      query_type: "top_up",
+      type_of_top_up: "agent_top_up",
+      out_type: "super_agent_top_up",
+      ...form,
+    };
+    _post(
+      "top-up/create",
+      obj,
+      (res) => {
+        setLoading(false); // Set loading to false when submission is successful
+        if (res.success) {
+          toast.success("agent top up created successfully");
+          // setSubmittedData([...submittedData, res]);
+          navigate("/agenttable");
+        }
+      },
+      (err) => {
+        console.log(err);
+        toast.error("An error occurred while creating agent top up");
+        setLoading(false);
+      }
+    );
     console.log(form);
   };
 

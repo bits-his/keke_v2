@@ -134,6 +134,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                         onClick={() => {
                           navigate(`view/${admin.account_id}`);
                         }}
+                        className='mr-3'
                       >
                         View
                       </Button>

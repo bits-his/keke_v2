@@ -43,7 +43,7 @@ export default function Agent() {
   const _form = {
     query_type: "create",
     name: "",
-    phone_no: "",
+    phone: "",
     nin: "",
     state: "",
     lga: "",
@@ -83,7 +83,7 @@ export default function Agent() {
           setLoading(false); // Set loading to false when submission is successful
           toast.success("Agent created successfully");
           // setSubmittedData([...submittedData, res]);
-          // navigate("/agenttable");
+          navigate("/agenttable");
         },
         (err) => {
           console.log(err);
@@ -91,6 +91,7 @@ export default function Agent() {
           setLoading(false);
         }
       );
+      console.log(form)
     } else {
       Object.values(newErrors).forEach((error) => {
         // toast.error(error);
@@ -181,7 +182,7 @@ export default function Agent() {
                   onChange={handleChange}
                   id="phone"
                   name="phone"
-                  value={form.phone_no}
+                  value={form.phone}
                   type="tel"
                   pattern="[0-9]{11}"
                   placeholder="081XXXXXXXX"

@@ -47,6 +47,7 @@ export default function RegistrationTable() {
 
   const [form, setForm] = useState(_form);
   const [loading, setLoading] = useState(false);
+    const [submittedData, setSubmittedData] = useState([]);
   const navigate = useNavigate();
 
   const handleChangeSelect = (name, value) => {
@@ -100,7 +101,7 @@ export default function RegistrationTable() {
             setLoading(false);
             toast.success("Vendor created successfully");
             setSubmittedData([...submittedData, res]);
-            // navigate("/vendorReg");
+            navigate("/vendors");
           }
         },
         () => {
@@ -401,9 +402,9 @@ const validateForm = (formData) => {
         </form>
       </CardContent>
 
-      <CardFooter>
+      <div className="p-6">
         {form.step > 0 ? (
-          <div className="flex justify-end">
+          <div className="flex justify-between">
             <Button onClick={() => setForm((p) => ({ ...p, step: 0 }))}>
               Prev
             </Button>
@@ -420,8 +421,10 @@ const validateForm = (formData) => {
             </Button>
           </div>
         ) : (
+          <div className="flex justify-end">
+
           <Button
-            className="float-right"
+            // className="float-right"
             type="submit"
             onClick={handleNextStep}
           >
@@ -434,8 +437,9 @@ const validateForm = (formData) => {
               "Next"
             )}
           </Button>
+          </div>
         )}
-      </CardFooter>
+      </div>
     </Card>
   );
 }
