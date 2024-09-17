@@ -179,6 +179,10 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <VehicleOwnerView />,
             },
+            {
+              path: "licens-pdf/:vehicle_id",
+              element: <LicensViever />,
+             },
           ],
         },
         // {
@@ -215,13 +219,14 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <VehicleHistory />,
             },
+              {
+          path: "licens-pdf/:vehicle_id",
+          element: <LicensViever />,
+        },
           ],
         },
 
-        {
-          path: "vehicles/licens-pdf/:vehicle_id",
-          element: <LicensViever />,
-        },
+      
 
         {
           path: "user-admin",
