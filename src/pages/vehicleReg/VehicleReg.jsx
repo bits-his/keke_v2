@@ -21,8 +21,10 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import toast from "react-hot-toast";
 
 export default function RegistrationTable() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const _form = {
     owner_id: id,
@@ -43,7 +45,7 @@ export default function RegistrationTable() {
   };
 
   const [form, setForm] = useState(_form);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleChange = ({ target: { name, value } }) => {
@@ -53,25 +55,23 @@ export default function RegistrationTable() {
     setForm((p) => ({ ...p, [name]: value }));
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = validateForm(form);
     setErrors(newErrors);
 
+    // console.log(form);
     if (Object.keys(newErrors).length === 0) {
-      // setLoading(true);
-      console.log(form);
+      setLoading(true);
       // Submit the form data
       _post(
         "vehicles/registration",
         form,
         (res) => {
-          // setLoading(false);
+          setLoading(false);
           if (res.success) {
             toast.success("Vehicle added successfully");
-            navigate("/vehicleownertable");
+            navigate("/vehicleowners");
             setForm(_form);
           }
         },
@@ -478,7 +478,12 @@ export default function RegistrationTable() {
                   placeholder="Plate NO"
                   type="text"
                   onChange={handleChange}
+                  invalid={!!errors.plate_no}
                 />
+                <span style={{ color: "red" }}></span>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.plate_no}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="pin">PIN</Label>
@@ -489,7 +494,11 @@ export default function RegistrationTable() {
                   placeholder="pin"
                   type="text"
                   onChange={handleChange}
+                  invalid={!!errors.pin}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.pin}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="engine_no">Engine No</Label>
@@ -500,7 +509,11 @@ export default function RegistrationTable() {
                   placeholder="Engine Number"
                   type="text"
                   onChange={handleChange}
+                  invalid={!!errors.engine_no}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.engine_no}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="vehicle_make">Vehicle Make</Label>
@@ -508,21 +521,43 @@ export default function RegistrationTable() {
                   id="vehicle_make"
                   name="vehicle_make"
                   value={form.vehicle_make}
-                  placeholder="Phone"
-                  type="number"
+                  placeholder="Vehicle Make"
+                  type="text"
                   onChange={handleChange}
+                  invalid={!!errors.vehicle_make}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.vehicle_make}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="vehicle_modal">Vehicle Modal</Label>
+                <Label htmlFor="chasis_no">Chasis No</Label>
                 <Input
-                  id="vehicle_modal"
-                  name="vehicle_modal"
-                  value={form.vehicle_modal}
+                  id="chasis_no"
+                  name="chasis_no"
+                  value={form.chasis_no}
+                  placeholder="Chasis No"
+                  type="text"
+                  onChange={handleChange}
+                  invalid={!!errors.chasis_no}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.chasis_no}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="vehicle_model">Vehicle Modal</Label>
+                <Input
+                  id="vehicle_model"
+                  name="vehicle_model"
+                  value={form.vehicle_model}
                   placeholder="Vehicle Modal"
-                  type="email"
+                  type="text"
                   onChange={handleChange}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.vehicle_model}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="color">Color</Label>
@@ -533,7 +568,11 @@ export default function RegistrationTable() {
                   placeholder="Color"
                   type="text"
                   onChange={handleChange}
+                  invalid={!!errors.color}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.color}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="engine_capacity">Engine Capacity</Label>
@@ -542,7 +581,7 @@ export default function RegistrationTable() {
                   name="engine_capacity"
                   value={form.engine_capacity}
                   type="text"
-                  placeholder="Engive Capacity"
+                  placeholder="Engine Capacity"
                   onChange={handleChange}
                 />
               </div>
@@ -550,9 +589,10 @@ export default function RegistrationTable() {
                 <Label>State *</Label>
                 <Select
                   onValueChange={(value) =>
-                    handleChangeSelect("vendor_state", value)
+                    handleChangeSelect("state_registered", value)
                   }
-                  value={form.vendor_state}
+                  invalid={!!errors.state_registered}
+                  value={form.state_registered}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select State" />
@@ -567,21 +607,27 @@ export default function RegistrationTable() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>
+                    {errors.state_registered}
+                  </span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label>LGA *</Label>
                 <Select
                   onValueChange={(value) =>
-                    handleChangeSelect("vendor_lga", value)
+                    handleChangeSelect("registered_lg", value)
                   }
-                  value={form.vendor_lga}
+                  value={form.registered_lg}
+                  invalid={!!errors.registered_lg}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select LGA" />
                   </SelectTrigger>
                   <SelectContent>
                     {stateLga
-                      .find((item) => item.state === form.vendor_state)
+                      .find((item) => item.state === form.state_registered)
                       ?.lgas.map((lga, idx) => (
                         <SelectItem key={idx} value={lga}>
                           {lga}
@@ -589,6 +635,25 @@ export default function RegistrationTable() {
                       ))}
                   </SelectContent>
                 </Select>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.registered_lg}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="lg_reg_no">L.G.A NO.</Label>
+                <Input
+                  id="lg_reg_no"
+                  name="lg_reg_no"
+                  value={form.lg_reg_no}
+                  placeholder=""
+                  type="text"
+                  onChange={handleChange}
+                  invalid={!!errors.lg_reg_no}
+                />
+                <span style={{ color: "red" }}></span>
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.lg_reg_no}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="date_issued">Date Issued</Label>
@@ -598,7 +663,25 @@ export default function RegistrationTable() {
                   value={form.date_issued}
                   type="date"
                   onChange={handleChange}
+                  invalid={!!errors.date_issued}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.date_issued}</span>
+                </FormFeedback>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="purchased_date">Purchased Date</Label>
+                <Input
+                  id="purchased_date"
+                  name="purchased_date"
+                  value={form.purchased_date}
+                  type="date"
+                  onChange={handleChange}
+                  invalid={!!errors.purchased_date}
+                />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.purchased_date}</span>
+                </FormFeedback>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="expiry_date">Expiry Date</Label>
@@ -608,7 +691,11 @@ export default function RegistrationTable() {
                   value={form.expiry_date}
                   type="date"
                   onChange={handleChange}
+                  invalid={!!errors.expiry_date}
                 />
+                <FormFeedback>
+                  <span style={{ color: "red" }}>{errors.expiry_date}</span>
+                </FormFeedback>
               </div>
             </div>
 

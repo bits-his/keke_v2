@@ -22,8 +22,11 @@ export default function LicensViever() {
     getVehicles();
   }, [getVehicles]);
 
+  // alert("Vehicle")
+
   return (
     <div>
+    {/* <h1>hello world</h1>   */}
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
         <LicensPDF data={data[0]} />
       </PDFViewer>

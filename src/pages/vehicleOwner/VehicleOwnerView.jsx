@@ -176,7 +176,7 @@ export default function VehicleOwnerView() {
                       </Button>
                       <Button
                         onClick={() => {
-                          navigate(`/licens-pdf/${vehicle.vehicle_id}`);
+                          navigate(`/vehicleowners/licens-pdf/${vehicle.vehicle_id}`);
                         }}
                         className="ml-2"
                       >

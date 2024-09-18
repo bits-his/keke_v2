@@ -270,7 +270,7 @@ export default function TopUp() {
                 </TableCell> */}
                 <TableCell className="">
                   <Button
-                   onClick={()=> navigate("")}
+                   onClick={()=> navigate(`licens-pdf/${vehicle.vehicle_id}`)}
                   >View License</Button>
 
                 </TableCell>

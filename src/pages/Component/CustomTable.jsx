@@ -37,12 +37,10 @@ import { useEffect, useState } from "react";
 export default function CustomTable({ page, addLink = {}, data = [] }) {
   const navigate = useNavigate();
 
- 
- const updateData = (e) =>{
- data.filter((item) => item.email.includes(e.target.value))
- }
+  const updateData = (e) => {
+    data.filter((item) => item.email.includes(e.target.value));
+  };
   return (
-
     //           " "
 
     //
@@ -63,7 +61,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
     //                   </Button>
 
     <>
-      <Card className="px-2 rounded-sm min-h-full">
+      <Card className="px-2 rounded-sm min-h-full overflow-x-auto">
         <CardHeader className="px-2 py-4 flex justify-between flex-row align-center item-center">
           <CardTitle>{page} List</CardTitle>
           <div className="flex gap-2">
@@ -134,7 +132,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                         onClick={() => {
                           navigate(`view/${admin.account_id}`);
                         }}
-                        className='mr-3'
+                        className="mr-3"
                       >
                         View
                       </Button>
@@ -164,7 +162,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                           to={`view/${admin.account_id}`}
                           className="neutral-900"
                         >
-                          <DropdownMenuItem>View</DropdownMenuItem>
+                          <DropdownMenuItem>View History</DropdownMenuItem>
                         </Link>
                         <DropdownMenuItem>Top Up</DropdownMenuItem>
                         <Link to={"setup"} className="neutral-900">
@@ -190,10 +188,10 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                           to={`view/${admin.account_id}`}
                           className="neutral-900"
                         >
-                          <DropdownMenuItem>View</DropdownMenuItem>
+                          <DropdownMenuItem>View History</DropdownMenuItem>
                         </Link>
                         <Link
-                          to={`topup/${admin.account_id}`}
+                          to={`topup`}
                           className="neutral-900"
                         >
                           <DropdownMenuItem>Top Up</DropdownMenuItem>
@@ -217,16 +215,14 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <Link
-                            to={`view/${admin.account_id}`}
-                            className="neutral-900"
-                          >
-                            View
-                          </Link>
-                        </DropdownMenuItem>
                         <Link
-                          to={`topup/${admin.account_id}`}
+                          to={`view/${admin.account_id}`}
+                          className="neutral-900"
+                        >
+                          <DropdownMenuItem>View History</DropdownMenuItem>
+                        </Link>
+                        <Link
+                          to={`topup`}
                           className="neutral-900"
                         >
                           <DropdownMenuItem>Top Up</DropdownMenuItem>
