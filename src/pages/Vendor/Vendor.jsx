@@ -113,55 +113,54 @@ export default function RegistrationTable() {
       handleNextStep();
     }
   };
-const validateForm = (formData) => {
-  let newErrors = {};
+  const validateForm = (formData) => {
+    let newErrors = {};
 
-  if (!formData.vendor_name.trim()) {
-    newErrors.vendor_name = "Vendor Name must be filled";
-  }
-  if (!formData.vendor_phone.trim()) {
-    newErrors.vendor_phone = "Vendor Phone Number must be filled";
-  }
-  if (!formData.vendor_email.trim()) {
-    newErrors.vendor_email = "Vendor Email must be filled";
-  }
-  if (!formData.vendor_state.trim()) {
-    newErrors.vendor_state = "Vendor State must be filled";
-  }
-  if (!formData.vendor_lga.trim()) {
-    newErrors.vendor_lga = "Vendor L.G.A.  must be filled";
-  }
-  if (!formData.vendor_tin.trim()) {
-    newErrors.vendor_office = "Vendor Address must be filled";
-  }
-  if (!formData.vendor_tin.trim()) {
-    newErrors.vendor_tin = "Vendor TIN must be filled";
-  }
-  if (!formData.vendor_bn_rc.trim()) {
-    newErrors.vendor_bn_rc = "Vendor must be filled";
-  }
-  if (!formData.contact_name.trim()) {
-    newErrors.vendor_name = "contact Name must be filled";
-  }
-  if (!formData.contact_phone.trim()) {
-    newErrors.contact_phone = "contact Phone Number must be filled";
-  }
-  if (!formData.contact_email.trim()) {
-    newErrors.contact_email = "contact Email must be filled";
-  }
-  if (!formData.contact_state.trim()) {
-    newErrors.contact_state = "contact State must be filled";
-  }
-  if (!formData.contact_lga.trim()) {
-    newErrors.contact_lga = "contact L.G.A.  must be filled";
-  }
-  if (!formData.contact_tin.trim()) {
-    newErrors.contact_office_address = "contact Address must be filled";
-  }
- 
+    if (!formData.vendor_name.trim()) {
+      newErrors.vendor_name = "Vendor Name must be filled";
+    }
+    if (!formData.vendor_phone.trim()) {
+      newErrors.vendor_phone = "Vendor Phone Number must be filled";
+    }
+    if (!formData.vendor_email.trim()) {
+      newErrors.vendor_email = "Vendor Email must be filled";
+    }
+    if (!formData.vendor_state.trim()) {
+      newErrors.vendor_state = "Vendor State must be filled";
+    }
+    if (!formData.vendor_lga.trim()) {
+      newErrors.vendor_lga = "Vendor L.G.A.  must be filled";
+    }
+    if (!formData.vendor_tin.trim()) {
+      newErrors.vendor_office = "Vendor Address must be filled";
+    }
+    if (!formData.vendor_tin.trim()) {
+      newErrors.vendor_tin = "Vendor TIN must be filled";
+    }
+    if (!formData.vendor_bn_rc.trim()) {
+      newErrors.vendor_bn_rc = "Vendor must be filled";
+    }
+    if (!formData.contact_name.trim()) {
+      newErrors.vendor_name = "contact Name must be filled";
+    }
+    if (!formData.contact_phone.trim()) {
+      newErrors.contact_phone = "contact Phone Number must be filled";
+    }
+    if (!formData.contact_email.trim()) {
+      newErrors.contact_email = "contact Email must be filled";
+    }
+    if (!formData.contact_state.trim()) {
+      newErrors.contact_state = "contact State must be filled";
+    }
+    if (!formData.contact_lga.trim()) {
+      newErrors.contact_lga = "contact L.G.A.  must be filled";
+    }
+    if (!formData.contact_tin.trim()) {
+      newErrors.contact_office_address = "contact Address must be filled";
+    }
 
-  return newErrors;
-};
+    return newErrors;
+  };
   return (
     <Card>
       <CardHeader className="p-0">
