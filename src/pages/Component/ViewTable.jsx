@@ -58,10 +58,10 @@ export default function ViewTable({page, addLink={},data=[]}) {
             <TableHead className="w-[150px]">Date</TableHead>
             <TableHead>Type</TableHead>
             <TableHead className="hidden md:table-cell">Description</TableHead>
+            <TableHead className="">Status</TableHead>
             <TableHead className="">Credit</TableHead>
             <TableHead className="hidden md:table-cell">Debit</TableHead>
-            <TableHead className="">Status</TableHead>
-            <TableHead className="">Action</TableHead>
+            {/* <TableHead className="">Action</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -74,14 +74,14 @@ export default function ViewTable({page, addLink={},data=[]}) {
               <TableCell className="hidden md:table-cell">
                 {transaction.description}
               </TableCell>
+              <TableCell className="">
+                {" "}
+                <Badge variant="outline"> {transaction.status}</Badge>
+              </TableCell>
               <TableCell className="">{transaction.credit}</TableCell>
 
               <TableCell className="hidden md:table-cell">
                 {transaction.debit}
-              </TableCell>
-              <TableCell className="">
-                {" "}
-                <Badge variant="outline"> {transaction.status}</Badge>
               </TableCell>
             </TableRow>
           ))}

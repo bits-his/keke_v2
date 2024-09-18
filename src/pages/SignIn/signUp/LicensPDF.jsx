@@ -10,11 +10,11 @@ import {
   Link,
 } from "@react-pdf/renderer";
 import React, { useEffect, useState } from "react";
-import DM_SANS_NORMAL from "../../../assets/DM_Sans/DM_Sans/static/DMSans_24pt-SemiBold.ttf";
-import DM_SANS_BOLD from "../../../assets/DM_Sans/DM_Sans/static/DMSans_24pt-Bold.ttf";
-import DM_SANS_ITALIC from "../../../assets/DM_Sans/DM_Sans/static/DMSans-Italic.ttf";
-import ahmad from "../../../Images/download.png";
-import coat from "../../../Images/th.jpeg";
+// import DM_SANS_NORMAL from "../../../assets/DM_Sans/DM_Sans/static/DMSans_24pt-SemiBold.ttf";
+// import DM_SANS_BOLD from "../../../assets/DM_Sans/DM_Sans/static/DMSans_24pt-Bold.ttf";
+// import DM_SANS_ITALIC from "../../../assets/DM_Sans/DM_Sans/static/DMSans-Italic.ttf";
+// import ahmad from "../../../Images/download.png";
+// import coat from "../../../Images/th.jpeg";
 import moment from "moment";
 import QRCode from "qrcode";
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   header: {
-    fontFamily: "DM_SANS",
+    // fontFamily: "DM_SANS", 
     fontWeight: "bold",
     fontSize: 20,
     textTransform: "uppercase",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     marginLeft: -60,
     marginTop: 75,
     fontSize: 20,
-    fontFamily: "DM_SANS",
+    // fontFamily: "DM_SANS",
     fontWeight: "bold",
     letterSpacing: 1,
   },

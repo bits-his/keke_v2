@@ -23,7 +23,7 @@ import Dashboard from "../pages/Dashboard/index";
 import Vehicle from "../pages/vehicleOwner/Vehicle";
 // import VehicleView from "../pages/vehicleOwner/VehicleView";
 import VehicleTopUp from "../pages/vehicleOwner/VehicleTopUp";
-// import LicensViever from "../pages/SignIn/signUp/LicensViever";
+import LicensViever from "../pages/SignIn/signUp/LicensViever";
 import VehicleOwnerView from "../pages/vehicleOwner/VehicleOwnerView";
 // import AgentView from "../pages/componentview/AgentView";
 import SuperAgentView from "../pages/componentview/SuperAgentView";
@@ -40,6 +40,7 @@ import SuperAgentHistory from "../pages/componentview/SuperAgentHistory";
 import VendorSetup from "../pages/Vendor/VendorSetup";
 import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
 import AgentSetup from "../pages/Agents/AgentSetup";
+import NotFound from "../../NotFound";
 // import SuperAgentTopUp_v2 from "../pages/SuperAgent/SuperAgentTopup2";
 // import AgentTopUp_v2 from "../pages/Agents/AgentTopUp2";
 // import VehicleTopUp_v2 from "../pages/vehicleOwner/VehicleTopUp2";
@@ -55,7 +56,7 @@ export default function AppNavigation() {
     //   element: <Funding />
     // },
     {
-      path: "/*",
+      // path: "/*",
       element: <AppIndex />,
       children: [
         {
@@ -182,6 +183,10 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <VehicleOwnerView />,
             },
+            {
+              path: "licens-pdf/:vehicle_id",
+              element: <LicensViever />,
+            },
           ],
         },
         // {
@@ -218,13 +223,12 @@ export default function AppNavigation() {
               path: "view/:id",
               element: <VehicleHistory />,
             },
+            {
+              path: "licens-pdf/:vehicle_id",
+              element: <LicensViever />,
+            },
           ],
         },
-
-        // {
-        //   path: "/licens-pdf/:vehicle_id",
-        //   element: <LicensViever />,
-        // },
 
         {
           path: "user-admin",
@@ -239,6 +243,10 @@ export default function AppNavigation() {
         //   element: <CollectionPointData />,
         // },
       ],
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
   return Pages;

@@ -63,10 +63,9 @@ export default function RegistrationTable() {
           if (res.success) {
             setLoading(false);
             toast.success("Report submitted successfully");
-            console.log(res)
-
+            console.log(res);
             //setSubmittedData([...submittedData, res]);
-            // navigate("/vendorReg");
+            navigate("/dashboard");
           }
         },
         () => {
@@ -75,17 +74,7 @@ export default function RegistrationTable() {
           toast.error("An error occurred while creating Vendor");
         }
       );
-      setForm({
-        query_type: "insert",
-        owners_name: "",
-        owners_phone: "",
-        plate_no: "",
-        engine_no: "",
-        chasis_no: "",
-        vehicle_model: "",
-        color: "",
-        details: "",
-      });
+      setForm(_form);
     }
   };
 

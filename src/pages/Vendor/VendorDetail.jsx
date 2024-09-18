@@ -61,7 +61,7 @@ export default function VendorDetail() {
     <Card className="px-2 rounded-sm min-h-full">
       <div className="flex flex-row justify-center">
         <span className="p-6 pr-0 mr-auto">
-          <Button onClick={() => navigate("/vendor")}>Back</Button>
+          <Button onClick={() => navigate("/vendors")}>Back</Button>
         </span>
         <CardHeader className=" flex-row">
           <CardTitle className="text-center ">Vendor</CardTitle>
