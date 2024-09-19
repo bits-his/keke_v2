@@ -121,7 +121,7 @@ export default function VehicleOwnerView() {
               </div>
             </div>
             <div>
-              <Badge color="primary">{vehicleCount}</Badge>{" "}
+              <Badge color="primary">{vehicles.length}</Badge>{" "}
               <Button
                 className="btn btn-primary"
                 onClick={() => navigate(`/vehicleowners/vehicleregistration/${owner_id}`)}
