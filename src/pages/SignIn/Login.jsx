@@ -7,16 +7,12 @@ import { login } from "../../redux/actions/auth";
 import { sidebarModules } from "../user-admin/modules";
 import { useDispatch, useSelector } from "react-redux";
 import { toParagraph } from "../../lib/Helper";
-import keke from "../../assets/keke_napep.png";
-import street from "../../assets/street.jpeg";
+// import keke from "../../assets/keke_napep.png";
+// import street from "../../assets/street.jpeg";
 import road from "../../assets/road.jpeg";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
 export const description =
@@ -53,7 +49,7 @@ export default function Login() {
 
     return foundRoute;
   };
-  console.log(form, user);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,8 +61,8 @@ export default function Login() {
           setLoading(false);
           console.log("gfsdasgasdgasdgfa", res);
 
-          const firstItem = res.user.functionalities.split(",")[0];
-          const route = getDefaultRoute(firstItem);
+          // const firstItem = res.user?.functionalities.split(",")[0];
+          const route = getDefaultRoute("Agents Top Up");
 
           if (route) {
             // if (route.route) {
@@ -79,6 +75,7 @@ export default function Login() {
             navigate("/dashboard");
           } else {
             navigate("/dashboard");
+            console.log("navigate")
           }
         },
         (err) => {

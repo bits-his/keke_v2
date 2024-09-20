@@ -5,7 +5,9 @@ import { useLocation } from "react-router-dom";
 // export const server_url = 'http://localhost:34568'
 //  export const server_url = "http://localhost:44405";
 // export const server_url = "http://192.168.43.123:44405"
-export const server_url = "http://localhost:44405";
+// export const server_url = "http://localhost:44405";
+// export const server_url = "http://62.72.0.209:3001";
+export const server_url = "http://62.72.0.209:4400";
 // export const server_url = "https://galaxybis.ebudgetkano.ng/keke-api";
 
 export const _post = (url, data, success = (f) => f, error = (f) => f) => {

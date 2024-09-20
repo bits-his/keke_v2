@@ -74,12 +74,6 @@ export default function TopUp() {
         // console.log(resp);
       }
     });
-    // _get(`vendors?query_type=select-all&plate_no=${filter}`, (resp) => {
-    //   setLoading(false); // Set loading to false after receiving response
-    //   if (resp.success && resp.results) {
-    //     setVendorData(resp.results);
-    //   }
-    // });
   }, [query]);
   useEffect(() => {
     if (!filter) {
