@@ -22,57 +22,76 @@ export function login({ username, password, history }, success, error) {
       .then((data) => {
         console.log(data);
         if (data.success) {
-          const { token } = data;
-          // console.log(token);
+          const { token ,user } = data;
+          dispatch({ type: LOADING_APP });
           if (token) {
             localStorage.setItem("@@token", token);
+              if (user.role === "user") {
+                dispatch({
+                  type: AUTH,
+                  payload: {
+                    user,
+                    // tax_account: tax_accounts ? tax_accounts[0] : [],
+                  },
+                });
+                success(data);
+              } else {
+                dispatch({
+                  type: AUTH,
+                  payload: {
+                    user,
+                  },
+                });
+                success(data);
+              }
           }
 
-          getUserProfile(token)
-            .then((userData) => {
-              // console.log(userData, data, "KKDKDKDDK");
-              if (data.success) {
-                /**
-                 * Token is valid
-                 * navigate user to dashboard */
-                // callback();
-                dispatch({ type: LOADING_APP });
-                const { user, tax_accounts } = userData;
-                if (user.role === "user") {
-                  dispatch({
-                    type: AUTH,
-                    payload: {
-                      user,
-                      tax_account: tax_accounts ? tax_accounts[0] : [],
-                    },
-                  });
-                  success(data);
-                } else {
-                  dispatch({
-                    type: AUTH,
-                    payload: {
-                      user,
-                    },
-                  });
-                  success(data);
-                }
+          // getUserProfile(token)
+          //   .then((userData) => {
+          //     console.log(userData, data, "KKDKDKDDK");
+          //     if (data.success) {
+          //       console.log(data)
+          //       /**
+          //        * Token is valid
+          //        * navigate user to dashboard */
+          //       // callback();
+          //       dispatch({ type: LOADING_APP });
+          //       const { user } = userData;
+          //       if (user.role === "user") {
+          //         dispatch({
+          //           type: AUTH,
+          //           payload: {
+          //             user,
+          //             // tax_account: tax_accounts ? tax_accounts[0] : [],
+          //           },
+          //         });
+          //         success(data);
+          //       } else {
+          //         dispatch({
+          //           type: AUTH,
+          //           payload: {
+          //             user,
+          //           },
+          //         });
+          //         success(data);
+          //       }
 
-                // history("/selection");
-              } else {
-                // callback();
-                localStorage.removeItem("@@token");
-                // history("/");
+          //       // history("/selection");
+          //     } else {
+          //       // callback();
+          //       localStorage.removeItem("@@token");
+          //       // history("/");
 
-                dispatch(logout(history));
-              }
-            })
-            .catch((error) => {
-              dispatch(logout(history));
-              dispatch({
-                type: ERRORS,
-                payload: { msg: "Authentication failed", error },
-              });
-            });
+          //       dispatch(logout(history));
+          //     }
+          //   })
+          //   .catch((error) => {
+          //     dispatch(logout(history));
+          //     dispatch({
+          //       type: ERRORS,
+          //       payload: { msg: "Authentication failed", error },
+          //     });
+          //   });
         } else {
           dispatch({ type: ERRORS, payload: data.msg });
           error(data);
@@ -96,7 +115,7 @@ export async function getUserProfile(_token) {
 
     let data = await response.json();
 
-    console.log(data);
+    console.log(data , "dfghjjhgfds");
 
     if (data.success) {
       return data;

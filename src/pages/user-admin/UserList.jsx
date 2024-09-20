@@ -72,9 +72,9 @@ export default function AdminDashboard() {
           <TableCaption className="pb-3">A list of your All User.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">User ID</TableHead>
+              <TableHead className="w-[100px]">Account ID</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead>User Name</TableHead>
+              <TableHead>UserName</TableHead>
               <TableHead className="">Email</TableHead>
               <TableHead className="">Role</TableHead>
               <TableHead className="">Status</TableHead>
@@ -84,14 +84,14 @@ export default function AdminDashboard() {
           <TableBody>
             {data.map((admin) => (
               <TableRow key={admin.id}>
-                <TableCell className="font-medium">{admin.id}</TableCell>
+                <TableCell className="font-medium">{admin.account_id}</TableCell>
                 <TableCell>{admin.name}</TableCell>
                 <TableCell>{admin.username}</TableCell>
                 <TableCell className="">{admin.email}</TableCell>
                 <TableCell className="">{admin.role}</TableCell>
                 <TableCell className="">{admin.status}</TableCell>
                 <TableCell className="">
-                  <Button>edit</Button>
+                  <Button>Edit</Button>
                 </TableCell>
               </TableRow>
             ))}

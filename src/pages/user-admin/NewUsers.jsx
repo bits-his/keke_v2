@@ -80,41 +80,41 @@ export default function NewUsers() {
       return;
     }
 console.log(form)
-    // setLoading(true);
-    // _post(
-    //   `admin-user/create`,
-    //   {
-    //     ...form,
-    //     accessTo: form.accessTo.join(","),
-    //     functionalities: form.functionalities.join(","),
-    //     password: form.contact_password,
-    //   },
-    //   (resp) => {
-    //     setLoading(false);
-    //     if (resp.success) {
-    //       setForm({
-    //         contact_name: "",
-    //         user_name: "",
-    //         contact_email: "",
-    //         contact_phone: "",
-    //         contact_password: "",
-    //         vendor_id: "",
-    //         accessTo: [],
-    //         functionalities: [],
-    //       });
-    //       toast.success("Submit Successful");
-    //       navigate("/user-admin");
-    //     } else {
-    //       toast.success("Submit Successful");
-    //       navigate("/user-admin");
-    //     }
-    //   },
-    //   (error) => {
-    //     setLoading(false);
-    //     toast.error("Error submitting data");
-    //     console.error("Submit error:", error);
-    //   }
-    // );
+    setLoading(true);
+    _post(
+      `admin-user/create`,
+      {
+        ...form,
+        accessTo: form.accessTo.join(","),
+        functionalities: form.functionalities.join(","),
+        password: form.contact_password,
+      },
+      (resp) => {
+        setLoading(false);
+        if (resp.success) {
+          setForm({
+            contact_name: "",
+            user_name: "",
+            contact_email: "",
+            contact_phone: "",
+            contact_password: "",
+            vendor_id: "",
+            accessTo: [],
+            functionalities: [],
+          });
+          toast.success("Submit Successful");
+          navigate("/user-admin");
+        } else {
+          toast.success("Submit Successful");
+          navigate("/user-admin");
+        }
+      },
+      (error) => {
+        setLoading(false);
+        toast.error("Error submitting data");
+        console.error("Submit error:", error);
+      }
+    );
   };
 
   const renderSubMenu = (subMenu) => {
@@ -137,6 +137,7 @@ console.log(form)
       </div>
     ));
   };
+  console.log(form)
 
   return (
     // <Card className="app_card dashboard_card shadow p-4 m-2 mt-2">
@@ -341,12 +342,12 @@ console.log(form)
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="user_name">User Name</Label>
+                <Label htmlFor="user_name">UserName</Label>
                 <Input
                   id="user_name"
                   name="user_name"
                   value={form.user_name}
-                  placeholder="Usern ame"
+                  placeholder="Username"
                   type="text"
                   onChange={handleChange}
                 />
@@ -394,7 +395,7 @@ console.log(form)
                   type={passwordVisible ? "text" : "password"}
                   onChange={handleChange}
                 />
-                <span
+                {/* <span
                   onClick={togglePasswordVisibility}
                   style={{
                     position: "absolute",
@@ -404,11 +405,11 @@ console.log(form)
                     cursor: "pointer",
                   }}
                 >
-                  a
-                </span>
+                  
+                </span> */}
               </div>
             </div>
-            <Card>
+            <Card className="mt-4 pl-3 pb-4">
 
             {sidebarModules.map((item, index) => (
               <div
