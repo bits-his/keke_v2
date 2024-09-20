@@ -33,22 +33,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import { sidebarModules } from "../pages/user-admin/modules";
-import keke from "../assets/keke_napep.png"
+import keke from "../assets/keke_napep.png";
 // import DropdownLink from "../pages/UI/DropDownLink";
-
 
 export const description =
   "A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.";
 export default function AppIndex() {
-    const user = useSelector((state) => state.auth.user);
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const logOut = () => {
-      dispatch(logout(navigate));
-    };
+  const user = useSelector((state) => state.auth.user);
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logOut = () => {
+    dispatch(logout(navigate));
+  };
 
-      const [activeDropdown, setActiveDropdown] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-yellow-400 md:block fixed top-0 z-30 -ml-2 hidden h-[calc(100vh-0.1px)] w-full shrink-0 md:sticky md:block h-full">
@@ -67,7 +66,7 @@ export default function AppIndex() {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-2">
               {sidebarModules.map((module, index) => {
                 // Check if the user has access to the module
-                if (true) {
+                if (user.accessTo && user.accessTo.includes(module.title)) {
                   // If the module has a submenu
                   if (module.subMenu) {
                     return (
@@ -338,4 +337,3 @@ export default function AppIndex() {
     </div>
   );
 }
-
