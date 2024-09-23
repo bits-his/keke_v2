@@ -1,5 +1,5 @@
 import { useState } from "react";
-import keke from "../../assets/keke_napep.png";
+// import keke from "../../assets/keke_napep.png";
 import { useNavigate } from "react-router-dom";
 import { sidebarModules } from "./modules";
 import { _post } from "../../lib/Helper";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -104,9 +104,10 @@ console.log(form)
           });
           toast.success("Submit Successful");
           navigate("/user-admin");
-        } else {
-          toast.success("Submit Successful");
-          navigate("/user-admin");
+        } else if (resp.error){
+          // console.log(resp.error.errors[0].message);
+          toast.error(resp.error.errors[0].message);
+          // navigate("/user-admin");
         }
       },
       (error) => {
@@ -435,7 +436,7 @@ console.log(form)
           </form>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button onClick={createUser}>Create</Button>
+          <Button onClick={createUser}>{loading ? 'Creating' : 'Create'}</Button>
         </CardFooter>
       </Card>
     </>

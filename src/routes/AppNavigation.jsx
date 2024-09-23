@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import AppIndex from "./AppIndex";
 // import Registration from "../pages/Registration";
@@ -41,23 +41,32 @@ import VendorSetup from "../pages/Vendor/VendorSetup";
 import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
 import AgentSetup from "../pages/Agents/AgentSetup";
 import NotFound from "../../NotFound";
-// import SuperAgentTopUp_v2 from "../pages/SuperAgent/SuperAgentTopup2";
+import Protected from "./Protected";
+import { useDispatch, useSelector } from "react-redux";
+import SuperAgentTopUp_v2 from "../pages/SuperAgent/SuperAgentTopup2";
+import { init } from "../redux/actions/auth";
+import { useCallback, useEffect } from "react";
 // import AgentTopUp_v2 from "../pages/Agents/AgentTopUp2";
 // import VehicleTopUp_v2 from "../pages/vehicleOwner/VehicleTopUp2";
 
 export default function AppNavigation() {
+     const isAuthenticated = useSelector((state) => state.auth.authenticated);
+     
+
+
   let Pages = useRoutes([
     {
       path: "/login",
-      element: <Login />,
+      element: 
+        <Login />
+    
     },
-    // {
-    //   path: '/top-up/funding',
-    //   element: <Funding />
-    // },
     {
-      // path: "/*",
-      element: <AppIndex />,
+      element: (
+
+          <AppIndex />
+  
+      ),
       children: [
         {
           path: "dashboard",
@@ -107,7 +116,7 @@ export default function AppNavigation() {
             },
             {
               path: "topup",
-              element: <SuperAgentTopUp />,
+              element: <SuperAgentTopUp_v2 />,
             },
             {
               path: "view/:id",
@@ -243,6 +252,14 @@ export default function AppNavigation() {
         //   element: <CollectionPointData />,
         // },
       ],
+    },
+    {
+      path: "/",
+      element: isAuthenticated ? (
+        <Navigate to="/dashboard" replace />
+      ) : (
+        <Navigate to="/login" replace />
+      ),
     },
     {
       path: "*",

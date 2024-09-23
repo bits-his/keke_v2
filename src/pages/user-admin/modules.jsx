@@ -76,11 +76,11 @@ export const sidebarModules = [
     route: "/vehicles",
     icon: Bell,
   },
-  // {
-  //   title: "Collection Point Data",
-  //   route: "/collection-point",
-  //   icon: Search,
-  // },
+  {
+    title: "Vehicles",
+    route: "/vehicle-list",
+    icon: Search,
+  },
   {
     title: "Report Stolen",
     route: "/report_stolen",
