@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
+import { separator } from "../../lib/Helper";
 
 export default function CustomTable({ page, addLink = {}, data = [] }) {
   const navigate = useNavigate();
@@ -114,9 +115,9 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                 </TableCell>
                 <TableCell className="">{admin.email}</TableCell>
                 <TableCell
-                  className={`${page == "Vehicle Owners" ? "hidden" : ""}`}
+                  className={`${page == "Vehicle Owners" ? "hidden" : ""} text-center`}
                 >
-                  {admin.balance}
+                  {separator(admin.balance)}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   {admin.role}
@@ -190,10 +191,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                         >
                           <DropdownMenuItem>View History</DropdownMenuItem>
                         </Link>
-                        <Link
-                          to={`topup`}
-                          className="neutral-900"
-                        >
+                        <Link to={`topup`} className="neutral-900">
                           <DropdownMenuItem>Top Up</DropdownMenuItem>
                         </Link>
                         <Link to={"setup"} className="neutral-900">
@@ -221,10 +219,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                         >
                           <DropdownMenuItem>View History</DropdownMenuItem>
                         </Link>
-                        <Link
-                          to={`topup`}
-                          className="neutral-900"
-                        >
+                        <Link to={`topup`} className="neutral-900">
                           <DropdownMenuItem>Top Up</DropdownMenuItem>
                         </Link>
                         <Link to={"setup"} className="neutral-900">

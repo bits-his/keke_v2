@@ -77,8 +77,8 @@ export const sidebarModules = [
     icon: Bell,
   },
   {
-    title: "Vehicles",
-    route: "/vehicle-list",
+    title: "VehicleList",
+    route: "/vehicleslist",
     icon: Search,
   },
   {

@@ -34,7 +34,7 @@ function SuperAgentTopUp_v2() {
   const submitTopUp = (e) => {
     e.preventDefault();
     const obj = {
-      source_id: user.id,
+      source_id: user.account_id,
       destination_id: form.super_agent_id,
       query_type: "top_up",
       type_of_top_up: "super_agent_top_up",
@@ -123,7 +123,7 @@ function SuperAgentTopUp_v2() {
                 </p>
 
                 <p>
-                  ID : <span>{user.id}</span>
+                  ID : <span>{user.account_id}</span>
                 </p>
                 <p>
                   Amount:{" "}

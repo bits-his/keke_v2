@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { _get } from "../../lib/Helper";
 
 import DashboardCard from "./Card";
@@ -18,7 +17,6 @@ import { useSelector } from "react-redux";
 const QuickActivityWrap = () => {
   const [data, setData] = useState(false);
 
-  const [superAgentMax, setSuperAgentMax] = useState([]);
 
   useEffect(() => {
     _get(

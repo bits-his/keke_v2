@@ -46,7 +46,7 @@ function VehicleTopUp_v2({ selectedAgentValue, selectedVehicleValue }) {
   const submitTopUp = (e) => {
     e.preventDefault();
     const obj = {
-      source_id: user.id,
+      source_id: user.account_id,
       destination_id: form.vehicle_id,
       query_type: "top_up",
       type_of_top_up: "vehicle_top_up",
@@ -58,7 +58,7 @@ function VehicleTopUp_v2({ selectedAgentValue, selectedVehicleValue }) {
     setLoading(true);
     _post(`top-up/create`, obj, (res) => {
       if (res.success) {
-        navigate("/vehicles"); /////////where?
+        navigate(-1); /////////where?
       } else {
         setLoading(false);
         toast.error(`failed to top up vehicle`);
@@ -75,19 +75,18 @@ function VehicleTopUp_v2({ selectedAgentValue, selectedVehicleValue }) {
   return (
     <>
       <Card>
-        <CardHeader>
+        <CardHeader className="p-4">
           <div className="flex flex-row justify-center">
-            <span className="p-6 mr-auto">
+            <span className="p-0 mr-auto">
               <Button onClick={() => navigate("/vehicleowners")}>Back</Button>
             </span>
-            <CardHeader className=" flex-row">
+  
               <CardTitle className="text-center ">Vehicle Topup</CardTitle>
-            </CardHeader>
+
           </div>
         </CardHeader>
         <CardContent>
           <div style={{ margin: "auto" }}>
-            {JSON.stringify(user)}
             {/* <div className="agent app_card " style={{ padding: "50px" }}> */}
             <div className="account-info row">
               {/* <div className="info-input col-md-6">
@@ -125,7 +124,7 @@ function VehicleTopUp_v2({ selectedAgentValue, selectedVehicleValue }) {
                   FROM : <span>{user.username}</span>
                 </p>
                 <p>
-                  ID : <span>{user.id}</span>
+                  ID : <span>{user.account_id}</span>
                 </p>
                 <p>
                   TO : <span>{form.Plate_no}</span>

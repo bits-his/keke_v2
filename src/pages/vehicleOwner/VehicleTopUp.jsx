@@ -56,7 +56,7 @@ function VehicleTopUp({ selectedAgentValue, selectedVehicleValue }) {
     setLoading(true);
     _post(`top-up/create`, obj, (res) => {
       if (res.success) {
-        navigate("/vehicles"); /////////where?
+        navigate(-1); /////////where?
       } else {
         setLoading(false);
         toast.error(`failed to top up vehicle`);
@@ -73,14 +73,14 @@ function VehicleTopUp({ selectedAgentValue, selectedVehicleValue }) {
   return (
     <>
       <Card>
-        <CardHeader>
-          <div className="flex flex-row justify-center">
-            <span className="p-6 mr-auto">
-              <Button onClick={() => navigate("/vehicleowners")}>Back</Button>
+        <CardHeader className="p-4">
+          <div className="flex flex-row justify-center ">
+            <span className="p-0 mr-auto">
+              <Button onClick={() => navigate(-1)}>Back</Button>
             </span>
-            <CardHeader className=" flex-row">
-              <CardTitle className="text-center ">Vehicle Topup</CardTitle>
-            </CardHeader>
+
+              <CardTitle className="text-center p-0">Vehicle Topup</CardTitle>
+            {/* </CardHeader> */}
           </div>
         </CardHeader>
         <CardContent>

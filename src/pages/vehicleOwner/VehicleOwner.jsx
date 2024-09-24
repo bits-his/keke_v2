@@ -43,12 +43,6 @@ export default function OwnerReg() {
     setForm((p) => ({ ...p, [name]: value }));
   };
 
-  const handleShowForm = () => {
-    setShowForm(true);
-  };
-  const handleBackToTable = () => {
-    navigate("/vehicleowners");
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
@@ -58,7 +52,7 @@ export default function OwnerReg() {
         toast.success(`A new Vehicle owner ${form.name} Created Successfully`);
         navigate("/vehicleowners");
       } else {
-        toast.error(res);
+         toast.error(res.error.errors[0].message);
       }
     });
   };
@@ -258,7 +252,7 @@ export default function OwnerReg() {
           </CardHeader>
         </div>
         <CardContent>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="grid w-full items-center gap-4  md:grid-cols-2 md:gap-8 lg:grid-cols-2 pt-5">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="OwnerName">Owners Name</Label>
@@ -366,7 +360,7 @@ export default function OwnerReg() {
               </div>
             </div>
             <CardFooter className="flex justify-end">
-              <Button type="submit">Submit</Button>
+              <Button onClick={handleSubmit}>Submit</Button>
             </CardFooter>
           </form>
         </CardContent>

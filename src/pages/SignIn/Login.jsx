@@ -97,9 +97,9 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="flex items-center justify-center py-12">
-        <Card className="h-[450px] flex items-center justify-center ">
+    <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
+      <div className="flex items-center justify-center py-12 md:min-h-[100vh] sm:min-h-[100vh]">
+        <Card className="h-[450px]  flex items-center justify-center ">
           <CardContent>
             <div className="mx-auto grid w-[450px] gap-6">
               <div className="grid gap-2 text-center">

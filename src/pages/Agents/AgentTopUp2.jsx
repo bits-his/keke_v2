@@ -31,7 +31,7 @@ function AgentTopUp_v2() {
   const submitTopUp = (e) => {
     e.preventDefault();
     const obj = {
-      source_id: user.id,
+      source_id: user.account_id,
       destination_id: form.agent_id,
       query_type: "top_up",
       type_of_top_up: "agent_top_up",
@@ -60,7 +60,6 @@ function AgentTopUp_v2() {
 
   return (
     <>
-      {JSON.stringify(user)}
       <Card>
         <CardHeader className="p-2">
           <div className="flex flex-row justify-center">
@@ -113,11 +112,11 @@ function AgentTopUp_v2() {
                     TO : <span>{form.agent_name}</span>
                   </p>
                   <p>
-                    ID : <span>{user.id}</span>
+                    ID : <span>{user.account_id}</span>
                   </p>
 
                   <p>
-                    ID : <span>{form.super_agent}</span>
+                    ID : <span>{form.agent_id}</span>
                   </p>
                   <p>
                     Amount:{" "}
