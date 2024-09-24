@@ -115,7 +115,7 @@ export async function getUserProfile(_token) {
 
     let data = await response.json();
 
-    console.log(data , "dfghjjhgfds");
+    // console.log(data , "dfghjjhgfds");
 
     if (data.success) {
       return data;

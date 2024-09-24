@@ -43,7 +43,6 @@ export default function Login() {
     if (isAuthenticated) {
       return null;
     }
- console.log(user)
   const getDefaultRoute = (func) => {
     let allRoutes = [];
 

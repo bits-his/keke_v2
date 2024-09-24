@@ -5,66 +5,18 @@ import { _get } from "../../lib/Helper";
 import DashboardCard from "./Card";
 import {
   Home,
-  LineChart,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
+  // LineChart,
+  // Menu,
+  // Package,
+  // Package2,
+  // Search,
+  // ShoppingCart,
+  // Users,
 } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const QuickActivityWrap = () => {
   const [data, setData] = useState(false);
-  const columnMarginBottom = {
-    marginBottom: "2rem",
-  };
-
-  const totalIncomeStyle = {
-    backgroundColor: "#f5c005 ",
-    borderRadius: "15px",
-    padding: "20px",
-    height: "100%",
-    color: "#fff",
-    transition: "background-color 0.3s ease !important",
-    cusor: "pointer",
-  };
-
-  const totalExpensesStyle = {
-    backgroundColor: "#f5c005 ",
-    borderRadius: "15px",
-    padding: "20px",
-    height: "100%",
-    color: "#fff",
-    transition: "background-color 0.3s ease !important",
-    cusor: "pointer",
-  };
-
-  const cashOnHandStyle = {
-    backgroundColor: "#f5c005 ",
-    borderRadius: "15px",
-    padding: "20px",
-    height: "100%",
-    color: "#fff",
-    transition: "background-color 0.3s ease !important",
-    cusor: "pointer",
-  };
-
-  const netProfitMarginStyle = {
-    backgroundColor: "#f5c005 ",
-    borderRadius: "15px",
-    padding: "20px",
-    height: "100%",
-    color: "#fff",
-    transition: "background-color 0.3s ease !important",
-    cusor: "pointer",
-  };
-  const iconStyle = {
-    fontSize: "50px",
-    display: "flex",
-    justifyContent: "end",
-    alignItems: "start",
-  };
 
   const [superAgentMax, setSuperAgentMax] = useState([]);
 
@@ -79,7 +31,7 @@ const QuickActivityWrap = () => {
       }
     );
   }, []);
-  // const data = data.length ? data[0] : {}
+  const user = useSelector((state => state.auth.user ))
   return (
     // <div className="quick_activity_wrap">
     //   {/* {JSON.stringify(data)} */}
@@ -150,30 +102,53 @@ const QuickActivityWrap = () => {
     //   </Row>
     // </div>
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 pt-5">
-      <DashboardCard
-        title={"Total No. of Vendors"}
-        Icon={Home}
-        data={data ? data.vendors_count : 0}
-        link={"vendors"}
-      />
-      <DashboardCard
-        title={"Total No. of Super Agent"}
-        Icon={Home}
-        data={data ? data.super_agents_count : 0}
-        link={"superagenttable"}
-      />
-      <DashboardCard
-        title={"Total No. of Agents"}
-        Icon={Home}
-        data={data ? data.agents_count : 0}
-        link={"agenttable"}
-      />
-      <DashboardCard
-        title={"Total No. of Vehicles"}
-        Icon={Home}
-        data={data ? data.vehicles_count : 0}
-        link={"vehicles"}
-      />
+      {user.account_type === "admin" ? (
+        <DashboardCard
+          title={"Total No. of Vendors"}
+          Icon={Home}
+          data={data ? data.vendors_count : 0}
+          link={"vendors"}
+        />
+      ) : (
+        <></>
+      )}
+      {user.account_type === "vendor" || user.account_type === "admin" ? (
+        <DashboardCard
+          title={"Total No. of Super Agent"}
+          Icon={Home}
+          data={data ? data.super_agents_count : 0}
+          link={"superagenttable"}
+        />
+      ) : (
+        <></>
+      )}
+      {user.account_type === "vendor" ||
+      user.account_type === "super_agent" ||
+      user.account_type === "admin" ? (
+        <DashboardCard
+          title={"Total No. of Agents"}
+          Icon={Home}
+          data={data ? data.agents_count : 0}
+          link={"agenttable"}
+        />
+      ) : (
+        <></>
+      )}
+      {user.account_type === "vehicle_owner" ? (
+        <DashboardCard
+          title={"My of Vehicles"}
+          Icon={Home}
+          data={data ? data.vehicles_count : 0}
+          link={"vehiclelist"}
+        />
+      ) : (
+        <DashboardCard
+          title={"Total No. of Vehicles"}
+          Icon={Home}
+          data={data ? data.vehicles_count : 0}
+          link={"vehicles"}
+        />
+      )}
     </div>
   );
 };

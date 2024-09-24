@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
   Home,
@@ -9,6 +9,9 @@ import {
   Search,
   ShoppingCart,
   Users,
+  CircleUser,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,24 +24,27 @@ import {
 } from "@/components/ui/card";
 import {
   DropdownMenu,
-  // DropdownMenuContent,
-  // DropdownMenuItem,
-  // DropdownMenuLabel,
-  // DropdownMenuSeparator,
-  // DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import { sidebarModules } from "../pages/user-admin/modules";
 import keke from "../assets/keke_napep.png";
+import { _get, separator } from "../lib/Helper";
 // import DropdownLink from "../pages/UI/DropDownLink";
 
 export const description =
   "A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.";
 export default function AppIndex() {
+  const [balance,setBalance] = useState(0);
+   const [showBalance, setShowBalance] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -46,6 +52,21 @@ export default function AppIndex() {
   const logOut = () => {
     dispatch(logout(navigate));
   };
+   const getBalance = useCallback(() => {
+     _get(
+       `balance?query_type=balance&source_id=${user.account_id}`,
+       (resp) => {
+        //  console.log(resp.results[0]);
+         setBalance(resp.results[0].balance);
+       },
+       (err) => {
+         console.log(err);
+       }
+     );
+   }, [user]);
+   useEffect(() => {
+     getBalance();
+   }, [showBalance,getBalance]);
 
   const [activeDropdown, setActiveDropdown] = useState(null);
   return (
@@ -171,7 +192,7 @@ export default function AppIndex() {
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 ">
+        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 text-black ">
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -301,19 +322,33 @@ export default function AppIndex() {
               </div>
             </SheetContent>
           </Sheet>
-          {/* <div className="w-full flex-1">
+          <div className="w-full flex-1">
             <form>
               <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
+                {/* <Input
                   type="search"
                   placeholder="Search products..."
                   className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
+                /> */}
+                <h4>Welcome {user.username}</h4>
               </div>
             </form>
           </div>
-          <DropdownMenu>
+          <h4>
+            Balance :{" "}
+            {showBalance ? balance != null ? separator(balance) : 0 : <span style={{marginTop:10,fontWeight:'bold'}}>***</span>}{" "}
+          </h4>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="shrink-0 bg-transparent"
+            onClick={() => {
+              setShowBalance(!showBalance);
+            }}
+          >
+            {showBalance ? <EyeOff color="black" /> : <Eye />}
+          </Button>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
                 <CircleUser className="h-5 w-5" />
