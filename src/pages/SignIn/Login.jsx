@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +32,18 @@ export default function Login() {
     setForm((p) => ({ ...p, [name]: value }));
   };
 
+    const isAuthenticated = useSelector((state) => state.auth.authenticated);
+
+    useEffect(() => {
+      if (isAuthenticated) {
+        navigate("/dashboard", { replace: true }); 
+      }
+    }, [isAuthenticated, navigate]);
+
+    if (isAuthenticated) {
+      return null;
+    }
+ console.log(user)
   const getDefaultRoute = (func) => {
     let allRoutes = [];
 
@@ -57,9 +69,8 @@ export default function Login() {
     dispatch(
       login(
         { username: form.email, password: form.password },
-        (res) => {
+        () => {
           setLoading(false);
-          console.log("gfsdasgasdgasdgfa", res);
 
           // const firstItem = res.user?.functionalities.split(",")[0];
           const route = getDefaultRoute("Agents Top Up");
@@ -87,9 +98,9 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="flex items-center justify-center py-12">
-        <Card className="h-[450px] flex items-center justify-center ">
+    <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
+      <div className="flex items-center justify-center py-12 md:min-h-[100vh] sm:min-h-[100vh]">
+        <Card className="h-[450px]  flex items-center justify-center ">
           <CardContent>
             <div className="mx-auto grid w-[450px] gap-6">
               <div className="grid gap-2 text-center">

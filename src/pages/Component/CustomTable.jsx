@@ -190,10 +190,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                         >
                           <DropdownMenuItem>View History</DropdownMenuItem>
                         </Link>
-                        <Link
-                          to={`topup`}
-                          className="neutral-900"
-                        >
+                        <Link to={`topup`} className="neutral-900">
                           <DropdownMenuItem>Top Up</DropdownMenuItem>
                         </Link>
                         <Link to={"setup"} className="neutral-900">
@@ -221,10 +218,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
                         >
                           <DropdownMenuItem>View History</DropdownMenuItem>
                         </Link>
-                        <Link
-                          to={`topup`}
-                          className="neutral-900"
-                        >
+                        <Link to={`topup`} className="neutral-900">
                           <DropdownMenuItem>Top Up</DropdownMenuItem>
                         </Link>
                         <Link to={"setup"} className="neutral-900">

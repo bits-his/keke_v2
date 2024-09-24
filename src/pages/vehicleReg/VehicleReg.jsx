@@ -71,7 +71,7 @@ export default function RegistrationTable() {
           setLoading(false);
           if (res.success) {
             toast.success("Vehicle added successfully");
-            navigate("/vehicleowners");
+            navigate(-1);
             setForm(_form);
           }
         },
@@ -459,7 +459,7 @@ export default function RegistrationTable() {
       <Card className="w-">
         <div className="flex flex-row justify-center">
           <span className="p-6 mr-auto">
-            <Button onClick={() => navigate("/vehicleowners")}>Back</Button>
+            <Button onClick={() => navigate(-1)}>Back</Button>
           </span>
           <CardHeader className=" flex-row">
             <CardTitle className="text-center ">New Vehicle</CardTitle>
