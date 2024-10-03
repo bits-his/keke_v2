@@ -24,15 +24,13 @@ import {
 } from "@/components/ui/table";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
-import { useEffect, useState } from "react";
+
 import { separator } from "../../lib/Helper";
 
 export default function CustomTable({ page, addLink = {}, data = [] }) {
@@ -42,24 +40,6 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
     data.filter((item) => item.email.includes(e.target.value));
   };
   return (
-    //           " "
-
-    //
-    //                   <Button
-    //                     style={{ margin: "5px" }}
-    //                     color="info"
-    //                     onClick={() => navigate(`/agenttopup`)}
-    //                   >
-    //                     Top up
-    //                   </Button>
-    //                   <Button
-    //                     color="success"
-    //                     onClick={() =>
-    //                       navigate(`/agenthistory/history/${agent.agent_id}`)
-    //                     }
-    //                   >
-    //                     View history
-    //                   </Button>
 
     <>
       <Card className="px-2 rounded-sm min-h-full overflow-x-auto">
@@ -67,7 +47,7 @@ export default function CustomTable({ page, addLink = {}, data = [] }) {
           <CardTitle>{page} List</CardTitle>
           <div className="flex gap-2">
             <Button onClick={() => navigate(`${addLink.topup}`)}>
-              Top-Up {page === "Vehicle Owners" ? "Vehicles" : page}
+              Top-Up {page === "Vehicle Owners" ? "Owners" : page}
             </Button>
             <Button onClick={() => navigate(`${addLink.addnew}`)}>
               Add {page}

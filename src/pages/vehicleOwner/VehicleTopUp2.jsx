@@ -78,7 +78,7 @@ function VehicleTopUp_v2({ selectedAgentValue, selectedVehicleValue }) {
         <CardHeader className="p-4">
           <div className="flex flex-row justify-center">
             <span className="p-0 mr-auto">
-              <Button onClick={() => navigate("/vehicleowners")}>Back</Button>
+              <Button onClick={() => navigate(-1)}>Back</Button>
             </span>
   
               <CardTitle className="text-center ">Vehicle Topup</CardTitle>

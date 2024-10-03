@@ -1,12 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect} from "react";
 import {  useNavigate } from "react-router-dom";
 import { _get } from "../../lib/Helper";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -28,7 +25,7 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +39,8 @@ export default function AdminDashboard() {
           }
         });
       } catch (err) {
-        setError("Failed to fetch data");
+        console.error(err,loading);
+        // setError("Failed to fetch data");
       } finally {
         setLoading(false);
       }
@@ -68,36 +66,46 @@ export default function AdminDashboard() {
             }}
           />
         </div>
-        <Table className="p-2">
-          <TableCaption className="pb-3">A list of your All User.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Account ID</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>UserName</TableHead>
-              <TableHead className="">Email</TableHead>
-              <TableHead className="">Role</TableHead>
-              <TableHead className="">Status</TableHead>
-              <TableHead className="">Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.map((admin) => (
-              <TableRow key={admin.id}>
-                <TableCell className="font-medium">{admin.account_id}</TableCell>
-                <TableCell>{admin.name}</TableCell>
-                <TableCell>{admin.username}</TableCell>
-                <TableCell className="">{admin.email}</TableCell>
-                <TableCell className="">{admin.role}</TableCell>
-                <TableCell className="">{admin.status}</TableCell>
-                <TableCell className="">
-                  <Button>Edit</Button>
-                </TableCell>
+        {/* <div className="overflow-x-auto"> */}
+          <Table className="p-2 w-full text-sm text-left rtl:text-right dark:text-gray-400">
+            <TableCaption className="pb-3">
+              A list of your All User.
+            </TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">Account ID</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead className="hidden sm:visible">UserName</TableHead>
+                <TableHead className="">Email</TableHead>
+                <TableHead className="">Role</TableHead>
+                <TableHead className="hidden sm:visible">Status</TableHead>
+                <TableHead className="">Action</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter></TableFooter>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {data.map((admin) => (
+                <TableRow key={admin.id}>
+                  <TableCell className="font-medium">
+                    {admin.account_id}
+                  </TableCell>
+                  <TableCell>{admin.name}</TableCell>
+                  <TableCell className="hidden sm:visible">
+                    {admin.username}
+                  </TableCell>
+                  <TableCell className="">{admin.email}</TableCell>
+                  <TableCell className="">{admin.role}</TableCell>
+                  <TableCell className="hidden sm:visible">
+                    {admin.status}
+                  </TableCell>
+                  <TableCell className="">
+                    <Button>Edit</Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter></TableFooter>
+          </Table>
+        {/* </div> */}
       </Card>
     </>
   );

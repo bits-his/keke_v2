@@ -1,15 +1,6 @@
 
-import { Link, useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -20,19 +11,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoreHorizontal } from "lucide-react";
+
 
 export default function ViewTable({page, addLink={},data=[]}) {
-    const navigate = useNavigate()
   return (
     <>
       {/* <Card className="px-2 rounded-sm min-h-full"> */}
@@ -65,8 +46,8 @@ export default function ViewTable({page, addLink={},data=[]}) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((transaction) => (
-            <TableRow key={transaction.id}>
+          {data.map((transaction,idx) => (
+            <TableRow key={idx}>
               <TableCell className="font-medium">
                 {transaction.t_date}
               </TableCell>

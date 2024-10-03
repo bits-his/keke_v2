@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 // export const server_url = "https://galaxybis.ebudgetkano.ng/karota";
 // export const server_url = 'https://hotelserver-production.up.railway.app'
 // export const server_url = 'http://localhost:34568'
-//  export const server_url = "http://localhost:44405";
+ export const server_url = "http://localhost:44405";
 // export const server_url = "http://192.168.43.123:44405"
-export const server_url = "http://localhost:44405";
-// export const server_url = "http://62.72.0.209:3001";
+// export const server_url = "http://localhost:3000";
+// export const server_url = "https://server.brainstorm.ng/karota";
 // export const server_url = "http://62.72.0.209:4400";
 // export const server_url = "https://galaxybis.ebudgetkano.ng/keke-api";
 

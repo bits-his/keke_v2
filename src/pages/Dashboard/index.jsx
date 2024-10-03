@@ -146,12 +146,12 @@ const chartConfig = {
 }
   return (
     <>
-      <Tabs defaultValue="daily">
-        <TabsList className='p-1'>
+      <Tabs defaultValue="daily" className="sm:w-full ">
+        <TabsList className="p-1">
           <TabsTrigger value="daily">Daily</TabsTrigger>
           <TabsTrigger value="weekly">Weekly</TabsTrigger>
           <TabsTrigger value="monthly">Monthly</TabsTrigger>
-          <TabsTrigger value="quaterly">Quaterly</TabsTrigger>
+          <TabsTrigger value="quaterly" className="hidden sm:visible">Quaterly</TabsTrigger>
           <TabsTrigger value="annually">Annually</TabsTrigger>
           <TabsTrigger value="custom">Custom</TabsTrigger>
           <TabsTrigger value="archived" className="hidden sm:flex">
@@ -162,7 +162,7 @@ const chartConfig = {
           <DashboardCard />
         </div>
         <div className="pt-5 grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-2">
-          <Card>
+          <Card className="sm:w-full w">
             <CardHeader>
               <CardTitle>Bar Chart</CardTitle>
               <CardDescription>January - June 2024</CardDescription>
@@ -200,7 +200,7 @@ const chartConfig = {
               </div>
             </CardFooter>
           </Card>
-          <Card>
+          <Card className="sm:w-full w">
             <CardHeader>
               <CardTitle>Line Chart - Dots</CardTitle>
               <CardDescription>January - June 2024</CardDescription>

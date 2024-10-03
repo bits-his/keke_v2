@@ -234,7 +234,7 @@ export default function TopUp() {
       <Card className="px-2 rounded-sm min-h-full">
         <CardHeader className="px-2 py-4 flex justify-between flex-row align-center item-center">
           <CardTitle> Point Of Collection</CardTitle>
-          {/* <Button onClick={() => navigate(`${addLink}`)}></Button> */}
+          <Button onClick={() => navigate(`topup`)}>Top Up Vehicles</Button>
         </CardHeader>
         <Table className="p-2">
           <TableCaption className="pb-3">
@@ -269,10 +269,21 @@ export default function TopUp() {
                   <Badge variant="outline"> {vehicle.status}</Badge>
                 </TableCell> */}
                 <TableCell className="">
-                  <Button
-                   onClick={()=> navigate(`licens-pdf/${vehicle.vehicle_id}`)}
-                  >View License</Button>
-
+                  <div className="flex">
+                    <Button
+                      className="mr-3"
+                      onClick={() =>
+                        navigate(`licens-pdf/${vehicle.vehicle_id}`)
+                      }
+                    >
+                      View License
+                    </Button>
+                    <Button
+                      onClick={() => navigate(`view/${vehicle.vehicle_id}`)}
+                    >
+                      View
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

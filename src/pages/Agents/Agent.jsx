@@ -80,10 +80,15 @@ export default function Agent() {
         "agents/create",
         form,
         (res) => {
-          setLoading(false); // Set loading to false when submission is successful
-          toast.success("Agent created successfully");
-          // setSubmittedData([...submittedData, res]);
-          navigate("/agenttable");
+          if (res.status === "success") {
+            setLoading(false); 
+            toast.success("Agent created successfully");
+            navigate("/agenttable");
+          }
+          else{
+            setLoading(false); 
+            toast.error(res.error.errors[0].message);
+          }
         },
         (err) => {
           console.log(err);

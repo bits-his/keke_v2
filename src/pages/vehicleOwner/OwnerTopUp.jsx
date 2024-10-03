@@ -1,21 +1,15 @@
 import { useState } from "react";
-import {  _post, separator } from "../../lib/Helper";
+import { _post, separator } from "../../lib/Helper";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 // import SuperAgentDropdown from "../Component/SuperAgentDropdown";
 import AgentDropDown from "../Component/AgentDropDown";
-import {
-  Card,
-  CardContent,
-
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-function AgentTopUp_v2() {
+function OwnerTopUp() {
   const { user } = useSelector((p) => p.auth);
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(false);
@@ -33,8 +27,8 @@ function AgentTopUp_v2() {
       source_id: user.account_id,
       destination_id: form.agent_id,
       query_type: "top_up",
-      type_of_top_up: "agent_top_up",
-      out_type: "super_agent_top_up",
+      type_of_top_up: "owner_top_up",
+      out_type: "agent_top_up",
       ...form,
     };
     _post(
@@ -82,7 +76,7 @@ function AgentTopUp_v2() {
                   />
                 </div> */}
                 <div className="info-input col-md-6">
-                  <h4> Select Agent:</h4>
+                  <h4> Select owner:</h4>
                   <AgentDropDown
                     handleChange={handleChange}
                     selectedAgentValue={form.account_id}
@@ -103,7 +97,10 @@ function AgentTopUp_v2() {
 
               <div className="transaction-details">
                 <h3>Transaction Details</h3>
-                <div className="details" style={{textTransform: "capitalize"}}>
+                <div
+                  className="details"
+                  style={{ textTransform: "capitalize" }}
+                >
                   <p>
                     FROM : <span>{user.username}</span>
                   </p>
@@ -150,4 +147,4 @@ function AgentTopUp_v2() {
   );
 }
 
-export default AgentTopUp_v2;
+export default OwnerTopUp;

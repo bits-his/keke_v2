@@ -1,21 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { _get, _post, separator } from "../../lib/Helper";
-import keke from "../../assets/keke_napep.png";
-import {  ButtonGroup, Col, Row,} from "reactstrap";
+import {  Col, Row,} from "reactstrap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -29,7 +25,7 @@ import {
 
 export default function VehicleOwnerView() {
   const navigate = useNavigate();
-  const { user } = useSelector((s) => s.auth);
+  // const { user } = useSelector((s) => s.auth);
   const [data, setData] = useState({});
   const [vehicles, setVehicles] = useState([]);
   const [vehicleCount, setVehicleCount] = useState([]);
@@ -60,16 +56,6 @@ export default function VehicleOwnerView() {
     getReg();
   }, [getReg]);
 
-  const handleBackToTable = () => {
-    navigate("/Vehicleownertable");
-  };
-
-  console.log(data)
-  // const vehicledata = data.map((item) => {
-  //   item.filter((itemId) => itemId === item.id)
-  // })
-
-  // console.log(vehicledata)
 
   return (
     <Card className="px-2 rounded-sm min-h-full">
@@ -103,10 +89,6 @@ export default function VehicleOwnerView() {
                 </span>
                 <p>{data?.address}</p>
               </div>
-              {/* <div style={{display: "flex"}}>
-                  <span style={{fontWeight: '600', marginRight: '20px'}}>Registered Vehicle</span>
-                  <p>245678rty</p>
-                </div> */}
               <div style={{ display: "flex" }}>
                 <span style={{ fontWeight: "600", marginRight: "20px" }}>
                   Local Government Area
@@ -150,8 +132,8 @@ export default function VehicleOwnerView() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {vehicles.map((vehicle) => (
-                  <TableRow key={vehicle.id}>
+                {vehicles.map((vehicle,idx) => (
+                  <TableRow key={idx}>
                     <TableCell className="font-medium">
                       {vehicle.vehicle_id}
                     </TableCell>
@@ -169,10 +151,10 @@ export default function VehicleOwnerView() {
                     <TableCell className="">
                       <Button
                         onClick={() => {
-                          navigate(`/licens-pdf/${vehicle.vehicle_id}`);
+                          navigate(`/vehicleowners/${vehicle.vehicle_id}`);
                         }}
                       >
-                        Edit
+                        View
                       </Button>
                       <Button
                         onClick={() => {

@@ -26,7 +26,7 @@ import VehicleOwnerTable from "../pages/vehicleOwner/VehicleOwnerTable";
 import TopUp from "../pages/SignIn/signUp/CollectionPoint";
 import Dashboard from "../pages/Dashboard/index";
 import Vehicle from "../pages/vehicleOwner/Vehicle";
-// import VehicleView from "../pages/vehicleOwner/VehicleView";
+import VehicleView from "../pages/vehicleOwner/VehicleView";
 import VehicleTopUp from "../pages/vehicleOwner/VehicleTopUp";
 import LicensViever from "../pages/SignIn/signUp/LicensViever";
 import VehicleOwnerView from "../pages/vehicleOwner/VehicleOwnerView";
@@ -46,14 +46,13 @@ import VendorSetup from "../pages/Vendor/VendorSetup";
 import SuperAgentSetup from "../pages/SuperAgent/SuperAgentSetup";
 import AgentSetup from "../pages/Agents/AgentSetup";
 import NotFound from "../../NotFound";
-import Protected from "./Protected";
 import { useDispatch, useSelector } from "react-redux";
 import SuperAgentTopUp_v2 from "../pages/SuperAgent/SuperAgentTopup2";
 import { init } from "../redux/actions/auth";
-import { useCallback, useEffect } from "react";
 import VehicleList from "../pages/Vehiclelist/VehicleList";
 import AgentTopUp_v2 from "../pages/Agents/AgentTopUp2";
 import VehicleTopUp_v2 from "../pages/vehicleOwner/VehicleTopUp2";
+import OwnerTopUp from "../pages/vehicleOwner/OwnerTopUp";
 
 export default function AppNavigation() {
   const isAuthenticated = useSelector((state) => state.auth.authenticated);
@@ -180,12 +179,12 @@ export default function AppNavigation() {
             },
             {
               path: "topup",
-              element: <VehicleTopUp />,
+              element: <OwnerTopUp />,
             },
-            // {
-            //   path: ":id",
-            //   element: <VehicleView />,
-            // },
+            {
+              path: ":id",
+              element: <VehicleHistory />,
+            },
             {
               path: "view/:id",
               element: <VehicleOwnerView />,
@@ -243,12 +242,16 @@ export default function AppNavigation() {
         },
         {
           path: "vehicles",
+          element: <Vehicle />,
           children: [
             {
               path: "",
               element: <TopUp />,
             },
-
+            {
+              path: "topup",
+              element: <VehicleTopUp_v2 />,
+            },
             {
               path: "view/:id",
               element: <VehicleHistory />,

@@ -65,7 +65,6 @@ function SuperAgentTopUp_v2() {
 
   return (
     <>
-      {JSON.stringify(user)}
       <Card>
         <CardHeader className="p-2">
           <div className="flex flex-row justify-center">

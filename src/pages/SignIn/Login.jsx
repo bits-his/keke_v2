@@ -25,7 +25,7 @@ export default function Login() {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const handleChange = ({ target: { name, value } }) => {
@@ -98,10 +98,10 @@ export default function Login() {
 
   return (
     <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
-      <div className="flex items-center justify-center py-12 md:min-h-[100vh] sm:min-h-[100vh]">
+      <div className="flex items-center justify-center py-48 sm:py-12 py-auto md:min-h-[100vh] sm:min-h-[100vh]">
         <Card className="h-[450px]  flex items-center justify-center ">
-          <CardContent>
-            <div className="mx-auto grid w-[450px] gap-6">
+          <CardContent className="px-5">
+            <div className="mx-auto grid md:w-[450px] gap-6">
               <div className="grid gap-2 text-center">
                 <h1 className="text-3xl font-bold">Login</h1>
                 <p className="text-balance text-muted-foreground">

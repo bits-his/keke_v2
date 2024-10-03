@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 // import { CiSearch } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { _get } from "../../lib/Helper";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+// import { Button } from "@/components/ui/button";
+// import { Badge } from "@/components/ui/badge";
 
 
 import CustomTable from "../Component/CustomTable";
 
 export default function VehicleOwnerTable() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("");

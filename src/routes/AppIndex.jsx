@@ -24,13 +24,8 @@ import {
 } from "@/components/ui/card";
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -49,6 +44,8 @@ export default function AppIndex() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false)
+  const closeSheet = () => setIsOpen(false)
   const logOut = () => {
     dispatch(logout(navigate));
   };
@@ -137,44 +134,6 @@ export default function AppIndex() {
                 }
                 return null; // Return null if the user doesn't have access
               })}
-              {/* <Link
-                to="#"
-                className="flex items-center gap-4 rounded-lg bg-muted p-4 text-primary transition-all hover:text-primary hover:bg-muted"
-              >
-                <Home className="h-4 w-4" />
-                Dashboard
-              </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg p-4 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
-              >
-                <ShoppingCart className="h-4 w-4" />
-                Orders
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  6
-                </Badge>
-              </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg bg-muted p-4 text-primary transition-all hover:text-primary"
-              >
-                <Package className="h-4 w-4" />
-                Products{" "}
-              </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg p-4 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Users className="h-4 w-4" />
-                Customers
-              </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg p-4 text-muted-foreground transition-all hover:text-primary"
-              >
-                <LineChart className="h-4 w-4" />
-                Analytics
-              </Link> */}
             </nav>
           </div>
           <div className="mt-auto p-0 sticky bottom-0 ">
@@ -191,9 +150,9 @@ export default function AppIndex() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-x-auto">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 text-black ">
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="outline"
@@ -215,7 +174,7 @@ export default function AppIndex() {
                 </Link>
                 {sidebarModules.map((module, index) => {
                   // Check if the user has access to the module
-                  if (true) {
+                  if (user.accessTo && user.accessTo.includes(module.title)) {
                     // If the module has a submenu
                     if (module.subMenu) {
                       return (
@@ -241,10 +200,11 @@ export default function AppIndex() {
                           key={index}
                           to={module.route}
                           className={({ isActive }) =>
-                            `flex items-center gap-4 rounded-lg p-4 transition-all hover:text-primary hover:bg-muted ${
+                            `flex items-center gap-4 rounded-lg p-2 transition-all hover:text-primary hover:bg-muted ${
                               isActive ? "bg-muted text-primary" : "text-muted"
                             }`
                           }
+                          onClick={closeSheet}
                         >
                           {module.icon && <module.icon />}
                           {module.title}
@@ -265,44 +225,6 @@ export default function AppIndex() {
                   }
                   return null; // Return null if the user doesn't have access
                 })}
-                {/* <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  Orders
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Products
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <LineChart className="h-5 w-5" />
-                  Analytics
-                </Link> */}
               </nav>
               <div className="mt-auto">
                 <Card className="border-0">
@@ -313,8 +235,8 @@ export default function AppIndex() {
                       support team.
                     </CardDescription>
                   </CardHeader> */}
-                  <CardContent className="p-4">
-                    <Button size="sm" className="w-full">
+                  <CardContent className="p-4 bg-yellow-400 border-none">
+                    <Button size="sm" className="w-full" onClick={logOut}>
                       Logout
                     </Button>
                   </CardContent>
@@ -336,7 +258,15 @@ export default function AppIndex() {
           </div>
           <h4>
             Balance :{" "}
-            {showBalance ? balance != null ? separator(balance) : 0 : <span style={{marginTop:10,fontWeight:'bold'}}>***</span>}{" "}
+            {showBalance ? (
+              balance != null ? (
+                separator(balance)
+              ) : (
+                0
+              )
+            ) : (
+              <span style={{ marginTop: 10, fontWeight: "bold" }}>***</span>
+            )}{" "}
           </h4>
           <Button
             variant="ghost"
@@ -365,7 +295,7 @@ export default function AppIndex() {
             </DropdownMenuContent>
           </DropdownMenu> */}
         </header>
-        <main className="sm:p-2 md:p-2">
+        <main className="sm:p-2 p-4">
           <Outlet />
         </main>
       </div>

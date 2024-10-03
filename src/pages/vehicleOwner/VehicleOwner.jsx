@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormFeedback } from "reactstrap";
 import { stateLga } from "../../assets/stateLga";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { _post } from "../../lib/Helper";
-import keke from "../../assets/keke_napep.png";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,8 +26,8 @@ import toast from "react-hot-toast";
 
 export default function OwnerReg() {
   const navigate = useNavigate();
-  const { user } = useSelector((s) => s.auth);
-  const [showForm, setShowForm] = useState(false);
+  // const { user } = useSelector((s) => s.auth);
+  // const [showForm, setShowForm] = useState(false);
   const [errors, setErrors] = useState({});
   const _form = {
     query_type: "insert",
